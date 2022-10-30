@@ -19,18 +19,36 @@
     <Filter Include="ヘッダー ファイル\MAP">
       <UniqueIdentifier>{ca95c162-e819-49b1-a2ef-2f4cdd426a25}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Character">
+      <UniqueIdentifier>{1a4e6d63-0eed-4a81-a846-007bb36dc821}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Character">
+      <UniqueIdentifier>{bfa949d3-e0f7-4089-bc68-5585a05280b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="MapChip.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\MAP</Filter>
+    </ClCompile>
+    <ClCompile Include="MapLoader.cpp">
+      <Filter>ソース ファイル\MAP</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル\Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MapChip.h">
       <Filter>ヘッダー ファイル\MAP</Filter>
+    </ClInclude>
+    <ClInclude Include="MapLoader.h">
+      <Filter>ヘッダー ファイル\MAP</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ヘッダー ファイル\Character</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

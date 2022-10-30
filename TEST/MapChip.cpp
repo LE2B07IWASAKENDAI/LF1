@@ -7,47 +7,24 @@ MapChip::MapChip()
 MapChip::~MapChip()
 {
 	//ÉÅÉÇÉäÇÃâï˙
-	//vector<vector<int>>().swap(mapData);
-	////ÉÅÉÇÉäÇÃâï˙
-	//vector<vector<int>>().swap(mapData);
+	for (size_t i = 0; i < mapData[0].data.size(); i++) {
+		for (size_t j = 0; j < mapData[0].data.size(); j++) {
+			vector<vector<int>>().swap(mapData[i].data);
+		}
+	}
 }
 
 void MapChip::Initialize()
 {
-	mapData/*[MAP_COUNT]*/ = 
-    {
-		10,
-		8,
-		{
-			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } ,
-			{ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 } ,
-			{ 0, 1, 0, 1, 1, 1, 1, 1, 1, 0 } ,
-			{ 0, 1, 0, 1, 1, 0, 0, 0, 1, 0 } ,
-			{ 0, 1, 1, 1, 1, 0, 0, 0, 1, 0 } ,
-			{ 0, 1, 0, 1, 0, 0, 0, 0, 1, 0 } ,
-			{ 0, 1, 1, 1, 1, 1, 1, 1, 1, 0 } ,
-			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
-		}
-    };
-	//mapData = 
- //   {
-	//	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } ,
-	//	{ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 } ,
-	//	{ 0, 1, 0, 1, 1, 1, 1, 1, 1, 0 } ,
-	//	{ 0, 1, 0, 1, 1, 0, 0, 0, 1, 0 } ,
-	//	{ 0, 1, 1, 1, 1, 0, 0, 0, 1, 0 } ,
-	//	{ 0, 1, 0, 1, 0, 0, 0, 0, 1, 0 } ,
-	//	{ 0, 1, 1, 1, 1, 1, 1, 1, 1, 0 } ,
-	//	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
- //   };
+	LoadMap();
 }
+
 
 void MapChip::Update()
 {
-
-	for (size_t i = 0; i < mapData.data.size(); i++) {
-		for (size_t j = 0; j < mapData.data.size(); j++) {
-			if (mapData.data[i][j] == 0) {
+	for (size_t i = 0; i < mapData[GetMapNumber()].data.size(); i++) {
+		for (size_t j = 0; j < mapData[GetMapNumber()].data.size(); j++) {
+			if (mapData[GetMapNumber()].data[i][j] == 0) {
 				DrawBox(j * MAP_SIZE, i * MAP_SIZE,
 					j * MAP_SIZE + MAP_SIZE, i * MAP_SIZE + MAP_SIZE,
 					GetColor(255, 255, 255), FALSE);
@@ -68,3 +45,40 @@ void MapChip::Update()
 void MapChip::Draw()
 {
 }
+
+void MapChip::LoadMap()
+{
+	mapData[0] =
+	{
+		10,
+		8,
+		{
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } ,
+			{ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 } ,
+			{ 0, 1, 0, 1, 1, 1, 1, 1, 1, 0 } ,
+			{ 0, 1, 0, 1, 1, 0, 0, 0, 1, 0 } ,
+			{ 0, 1, 1, 1, 1, 0, 0, 0, 1, 0 } ,
+			{ 0, 1, 0, 1, 0, 0, 0, 0, 1, 0 } ,
+			{ 0, 1, 1, 1, 1, 1, 1, 1, 1, 0 } ,
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+		}
+	};
+
+	mapData[1] =
+	{
+		10,
+		8,
+		{
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } ,
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } ,
+			{ 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 } ,
+			{ 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 } ,
+			{ 0, 0, 1, 1, 1, 0, 0, 0, 0, 0 } ,
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 } ,
+			{ 0, 1, 1, 1, 1, 1, 1, 1, 1, 0 } ,
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+		}
+	};
+
+}
+
