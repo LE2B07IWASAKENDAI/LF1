@@ -29,17 +29,21 @@ private:
 
 	MAPDATA mapData[MAP_COUNT];
 
-//private:
-//	vector<vector<int>> mapData;
+	//グラフィックハンドル
+	int gHandle;
 
 public:
 	MapChip();
 	~MapChip();
 
 	void Initialize();
-	void LoadMap();
 	void Update();
 	void Draw();
+
+	//マップチップ番号読み込み
+	void LoadMap();
+	//画像読み込み
+	void LoadTexture();
 
 	void SetMapNumber(int nowMapNumber) { mapNumber = nowMapNumber; }
 	int GetMapNumber() { return mapNumber; }
