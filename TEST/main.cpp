@@ -14,8 +14,8 @@ int WINAPI WinMain(
 
     const char TITLE[] = "title01";
 
-    const int WIN_HEIGHT = 600;
-    const int WIN_WITDH = 900;
+    const int WIN_HEIGHT = 900;
+    const int WIN_WITDH = 1800;
 
 
     // ウィンドウのタイトル
