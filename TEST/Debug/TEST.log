@@ -1,4 +1,5 @@
 ﻿  Player.cpp
-D:\FL1\TEST\Player.cpp(10,24): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\Player.cpp(10,12): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  TEST.vcxproj -> D:\FL1\TEST\Debug\TEST.exe
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Player.cpp(4,1): error C2600: 'Player::Player': コンパイラで生成された特殊メンバー関数を定義できません (クラスで最初に宣言されなければなりません)
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Player.cpp(8,1): error C2600: 'Player::~Player': コンパイラで生成された特殊メンバー関数を定義できません (クラスで最初に宣言されなければなりません)
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Player.cpp(19,24): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Player.cpp(19,12): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。

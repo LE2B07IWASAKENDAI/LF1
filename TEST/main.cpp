@@ -47,7 +47,7 @@ int WINAPI WinMain(
     Enemy* enemy = new Enemy();
     mapChip->Initialize();
     player->Initialize();
-
+    enemy->Initialize();
 
     while (1)
     {
@@ -58,6 +58,7 @@ int WINAPI WinMain(
 
         mapChip->Update();
         player->Update();
+        enemy->Update();
 
         //ゲームロジック
 

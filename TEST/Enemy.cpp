@@ -1,24 +1,32 @@
 #include "Enemy.h"
 
-Enemy::Enemy()
-{
-
-}
-
-Enemy::~Enemy()
-{
-
-}
-
+//Enemy::Enemy()
+//{
+//}
+//
+//Enemy::~Enemy()
+//{
+//}
 
 void Enemy::Initialize()
 {
 	LoadTexture();
+	float position_X = 1000.0f;
+	float position_Y = 700.0f;
+	count = 0;
 }
 
 void Enemy::Update()
 {
 	DrawGraph(position_X, position_Y, Etexture, FALSE);
+	count++;
+	position_X += speed;
+
+	if (count == 64)
+	{
+		speed *= -1;
+		count = 0;
+	}
 }
 
 void Enemy::Draw()

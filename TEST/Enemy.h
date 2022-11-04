@@ -20,4 +20,7 @@ public:
 	int Etexture;
 	float position_X = 1000.0f;
 	float position_Y = 700.0f;
+private:
+	float speed = 5;
+	int count = 0;
 };
