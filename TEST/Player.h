@@ -17,8 +17,8 @@ public:
 
 
 public:
-	int texture;
-	float poisitio_X = 0.0f;
+	int Ptexture;
+	float position_X = 0.0f;
 	float position_Y = 700.0f;
 };
 

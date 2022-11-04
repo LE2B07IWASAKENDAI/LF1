@@ -1,6 +1,7 @@
 #include "DxLib.h" 
 #include "MapChip.h"
 #include "Player.h"
+#include "Enemy.h"
 
 
 int WINAPI WinMain(
@@ -43,6 +44,7 @@ int WINAPI WinMain(
 
     MapChip* mapChip = new MapChip();
     Player* player = new Player();
+    Enemy* enemy = new Enemy();
     mapChip->Initialize();
     player->Initialize();
 

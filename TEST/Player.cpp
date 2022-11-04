@@ -1,5 +1,16 @@
 #include "Player.h"
 
+Player::Player()
+{
+
+}
+
+Player::~Player()
+{
+
+}
+
+
 void Player::Initialize()
 {
 	LoadTexture();
@@ -7,7 +18,7 @@ void Player::Initialize()
 
 void Player::Update()
 {
-	DrawGraph(poisitio_X, position_Y, texture, FALSE);
+	DrawGraph(position_X, position_Y, Ptexture, FALSE);
 }
 
 void Player::Draw()
@@ -16,5 +27,5 @@ void Player::Draw()
 
 void Player::LoadTexture()
 {
-	texture = LoadGraph("Resources/Player/green.png");
+	Ptexture = LoadGraph("Resources/Player/green.png");
 }
