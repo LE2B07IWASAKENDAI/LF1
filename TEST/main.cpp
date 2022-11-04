@@ -1,5 +1,6 @@
 #include "DxLib.h" 
 #include "MapChip.h"
+#include "Player.h"
 
 
 int WINAPI WinMain(
@@ -41,7 +42,9 @@ int WINAPI WinMain(
     }
 
     MapChip* mapChip = new MapChip();
+    Player* player = new Player();
     mapChip->Initialize();
+    player->Initialize();
 
 
     while (1)
@@ -52,6 +55,7 @@ int WINAPI WinMain(
         ClearDrawScreen();
 
         mapChip->Update();
+        player->Update();
 
         //ゲームロジック
 
