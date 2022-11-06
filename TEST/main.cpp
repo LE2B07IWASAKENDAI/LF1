@@ -56,7 +56,7 @@ int WINAPI WinMain(
         //— ‰æ–Ê‚ðÁ‚·
         ClearDrawScreen();
 
-        mapChip->Update();
+        mapChip->Draw();
         player->Update();
         enemy->Update();
 

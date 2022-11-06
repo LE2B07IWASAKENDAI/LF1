@@ -31,6 +31,7 @@ private:
 
 	//グラフィックハンドル
 	int gHandle;
+	int gHandle2;
 
 public:
 	MapChip();
@@ -40,11 +41,21 @@ public:
 	void Update();
 	void Draw();
 
+
+	void MapDraw();
+
 	//マップチップ番号読み込み
 	void LoadMap();
 	//画像読み込み
 	void LoadTexture();
 
-	void SetMapNumber(int nowMapNumber) { mapNumber = nowMapNumber; }
+	//マップ番号の更新
+	void UpdateMapNumber(int nowMapNumber);
+
+	//マップ情報の削除
+	void DeleteMap();
+
+	//外部で使う関数
+	void SetMapNumber(int mapNumber) { this->mapNumber = mapNumber; }
 	int GetMapNumber() { return mapNumber; }
 };

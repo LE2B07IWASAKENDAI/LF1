@@ -7,10 +7,8 @@ MapChip::MapChip()
 MapChip::~MapChip()
 {
 	//メモリの解放
-	for (size_t i = 0; i < mapData[0].data.size(); i++) {
-		for (size_t j = 0; j < mapData[0].data.size(); j++) {
+	for (size_t i = 0; i < MAP_COUNT; i++) {
 			vector<vector<int>>().swap(mapData[i].data);
-		}
 	}
 }
 
@@ -23,6 +21,23 @@ void MapChip::Initialize()
 
 void MapChip::Update()
 {
+}
+
+void MapChip::Draw()
+{
+	if (CheckHitKey(KEY_INPUT_L) == 1) {
+		UpdateMapNumber(0);
+		MapDraw();
+	}
+	if (CheckHitKey(KEY_INPUT_P) == 1) {
+		UpdateMapNumber(1);
+		MapDraw();
+	}
+	MapDraw();
+}
+
+void MapChip::MapDraw()
+{
 	for (size_t i = 0; i < mapData[GetMapNumber()].data.size(); i++) {
 		for (size_t j = 0; j < mapData[GetMapNumber()].data.size(); j++) {
 			if (mapData[GetMapNumber()].data[i][j] == 0) {
@@ -30,7 +45,7 @@ void MapChip::Update()
 				//	j * MAP_SIZE + MAP_SIZE, i * MAP_SIZE + MAP_SIZE,
 				//	GetColor(255, 255, 255), FALSE);
 
-				DrawGraph(j*MAP_SIZE, i*MAP_SIZE, gHandle, FALSE);
+				DrawGraph(j * MAP_SIZE, i * MAP_SIZE, gHandle, FALSE);
 			}
 		}
 	}
@@ -43,10 +58,7 @@ void MapChip::Update()
 	//		}
 	//	}
 	//}
-}
 
-void MapChip::Draw()
-{
 }
 
 void MapChip::LoadMap()
@@ -87,6 +99,19 @@ void MapChip::LoadMap()
 
 void MapChip::LoadTexture()
 {
-	gHandle = LoadGraph("flor.png");
+	gHandle = LoadGraph("Resources/Map/flor.png");
+}
+
+void MapChip::UpdateMapNumber(int nowMapNumber)
+{
+	//マップ番号の更新
+	mapNumber = nowMapNumber;
+}
+
+void MapChip::DeleteMap()
+{
+	for (size_t i = 0; i < MAP_COUNT; i++) {
+		vector<vector<int>>().swap(mapData[i].data);
+	}
 }
 
