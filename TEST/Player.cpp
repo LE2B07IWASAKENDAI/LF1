@@ -13,6 +13,10 @@ Player::~Player()
 void Player::Initialize()
 {
 	LoadTexture();
+	position_X = 0.0f;
+	position_Y = 700.0f;
+	death = 0;
+	hide = 0;
 }
 
 void Player::Update()
@@ -58,15 +62,27 @@ int Player::SetHide(int sethide)
 	return 0;
 }
 
-float Player::getPosition_X()
+float Player::GetPosition_X()
 {
 	return position_X;
 }
 
-float Player::setPosition(float x, float y)
+float Player::SetPosition(float x, float y)
 {
 	position_X = x;
 	position_Y = y;
+
+	return 0;
+}
+
+int Player::GetDeath()
+{
+	return death;
+}
+
+int Player::SetDeath(int d)
+{
+	death = d;
 
 	return 0;
 }

@@ -2,6 +2,7 @@
 #include "MapChip.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Collision.h"
 
 
 int WINAPI WinMain(
@@ -45,6 +46,7 @@ int WINAPI WinMain(
     MapChip* mapChip = new MapChip();
     Player* player = new Player();
     Enemy* enemy = new Enemy();
+    Collision* collision = new Collision();
     mapChip->Initialize();
     player->Initialize();
     enemy->Initialize();
@@ -74,6 +76,11 @@ int WINAPI WinMain(
         switch (GameState)
         {
         case Title:
+            //初期化
+            mapChip->Initialize();
+            player->Initialize();
+            enemy->Initialize();
+
             StartTime = GetNowCount();
             //タイトル画面描画
             DrawGraph(0, 0, titlescene, FALSE);
@@ -88,10 +95,16 @@ int WINAPI WinMain(
             mapChip->Draw();
             player->Update();
             enemy->Update();
+            player->SetDeath( collision->Found(player->GetPosition_X(), enemy->GetPosition_X()));
 
-            //(※テスト用)ゲームオーバー画面へ
-            //5秒経過で移動
-            if (GetNowCount() - StartTime > 5000)
+            ////(※テスト用)ゲームオーバー画面へ
+            ////5秒経過で移動
+            //if (GetNowCount() - StartTime > 5000)
+            //{
+            //    GameState = GameOver;
+            //}
+
+            if (player->death == 1)
             {
                 GameState = GameOver;
             }
