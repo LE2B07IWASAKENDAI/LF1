@@ -3,7 +3,7 @@
 
 #define MAP_SIZE	64			// マップチップ一つのドットサイズ
 
-#define MAP_WIDTH	83			// マップの幅
+#define MAP_WIDTH	84			// マップの幅
 #define MAP_HEIGHT	14			// マップの縦長さ// マップのデータ
 
 #define MAP_COUNT 2			//マップの総数
@@ -31,8 +31,7 @@ private:
 	MAPDATA mapData[MAP_COUNT];
 
 	//グラフィックハンドル
-	int gHandle;
-	int gHandle2;
+	int gHandle[10];
 
 public:
 	MapChip();
