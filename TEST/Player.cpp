@@ -54,6 +54,8 @@ int Player::GetHide()
 int Player::SetHide(int sethide)
 {
 	hide = sethide;
+
+	return 0;
 }
 
 float Player::getPosition_X()
@@ -65,6 +67,8 @@ float Player::setPosition(float x, float y)
 {
 	position_X = x;
 	position_Y = y;
+
+	return 0;
 }
 
 void Player::LoadTexture()

@@ -33,6 +33,28 @@ void Enemy::Draw()
 {
 }
 
+float Enemy::GetPosition_X()
+{
+	return position_X;
+}
+
+float Enemy::Getposition_Y()
+{
+	return position_Y;
+}
+
+int Enemy::GetDeath()
+{
+	return death;
+}
+
+int Enemy::SetDeath(int d)
+{
+	death = d;
+
+	return 0;
+}
+
 void Enemy::LoadTexture()
 {
 	Etexture = LoadGraph("Resources/Enemy/Enemy.png");
