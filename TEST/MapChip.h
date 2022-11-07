@@ -25,6 +25,7 @@ private:
 	int map_width = 10;
 	int map_height = 8;
 
+	//マップ番号
 	int mapNumber = 0;
 
 	MAPDATA mapData[MAP_COUNT];
@@ -42,6 +43,7 @@ public:
 	void Draw();
 
 
+	//マップ描画
 	void MapDraw();
 
 	//マップチップ番号読み込み
@@ -55,7 +57,7 @@ public:
 	//マップ情報の削除
 	void DeleteMap();
 
-	//外部で使う関数
+	//外部などで使うマップ番号を変えるときに使う関数
 	void SetMapNumber(int mapNumber) { this->mapNumber = mapNumber; }
 	int GetMapNumber() { return mapNumber; }
 };

@@ -6,7 +6,7 @@ MapChip::MapChip()
 
 MapChip::~MapChip()
 {
-	//メモリの解放
+	//メモリの解放（マップチップデータの破棄）
 	for (size_t i = 0; i < MAP_COUNT; i++) {
 			vector<vector<int>>().swap(mapData[i].data);
 	}
@@ -25,19 +25,23 @@ void MapChip::Update()
 
 void MapChip::Draw()
 {
+	//キー押下でマップ番号変更
 	if (CheckHitKey(KEY_INPUT_L) == 1) {
-		UpdateMapNumber(0);
-		MapDraw();
+		//マップ番号の指定
+		mapNumber = 0;
 	}
 	if (CheckHitKey(KEY_INPUT_P) == 1) {
-		UpdateMapNumber(1);
-		MapDraw();
+		mapNumber = 1;
 	}
+	//現在のマップ番号更新
+	UpdateMapNumber(GetMapNumber());
+	
 	MapDraw();
 }
 
 void MapChip::MapDraw()
 {
+	//現在のマップ番号を取得し、描画する
 	for (size_t i = 0; i < mapData[GetMapNumber()].data.size(); i++) {
 		for (size_t j = 0; j < mapData[GetMapNumber()].data.size(); j++) {
 			if (mapData[GetMapNumber()].data[i][j] == 0) {
@@ -63,6 +67,7 @@ void MapChip::MapDraw()
 
 void MapChip::LoadMap()
 {
+	//マップチップ一覧
 	mapData[0] =
 	{
 		10,
@@ -106,12 +111,5 @@ void MapChip::UpdateMapNumber(int nowMapNumber)
 {
 	//マップ番号の更新
 	mapNumber = nowMapNumber;
-}
-
-void MapChip::DeleteMap()
-{
-	for (size_t i = 0; i < MAP_COUNT; i++) {
-		vector<vector<int>>().swap(mapData[i].data);
-	}
 }
 
