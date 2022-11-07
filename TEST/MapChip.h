@@ -3,10 +3,10 @@
 
 #define MAP_SIZE	64			// マップチップ一つのドットサイズ
 
-#define MAP_WIDTH	10			// マップの幅
-#define MAP_HEIGHT	8			// マップの縦長さ// マップのデータ
+#define MAP_WIDTH	83			// マップの幅
+#define MAP_HEIGHT	14			// マップの縦長さ// マップのデータ
 
-#define MAP_COUNT 10			//マップの総数
+#define MAP_COUNT 2			//マップの総数
 
 using namespace std;
 
@@ -22,8 +22,8 @@ class MapChip
 {
 
 private:
-	int map_width = 10;
-	int map_height = 8;
+	int map_width;
+	int map_height;
 
 	//マップ番号
 	int mapNumber = 0;
