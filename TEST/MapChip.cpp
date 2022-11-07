@@ -104,6 +104,7 @@ void MapChip::LoadMap()
 
 void MapChip::LoadTexture()
 {
+	//•Ï” ‰æ‘œƒf[ƒ^Ši”[
 	gHandle = LoadGraph("Resources/Map/flor.png");
 }
 
