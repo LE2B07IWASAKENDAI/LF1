@@ -22,6 +22,6 @@ public:
 	int ptexture = 0;
 	float position_X = 0.0f;   //X座標
 	float position_Y = 700.0f; //Y座標
-	float speed = 1.0f;        //移動速度
+	float speed = 7.5f;        //移動速度
 };
 
