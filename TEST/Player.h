@@ -14,6 +14,12 @@ public:
 	void Update();
 	void Draw();
 
+	int GetHide();
+	int SetHide(int sethide);
+
+	float getPosition_X();
+	float setPosition(float x, float y);
+
 	//‰æ‘œ“Ç‚İ‚İ
 	void LoadTexture();
 
@@ -23,5 +29,6 @@ public:
 	float position_X = 0.0f;   //XÀ•W
 	float position_Y = 700.0f; //YÀ•W
 	float speed = 7.5f;        //ˆÚ“®‘¬“x
+	int hide = 0;//‰B‚ê‚é 0:‰B‚ê‚È‚¢ 1:‰B‚ê‚é@
 };
 

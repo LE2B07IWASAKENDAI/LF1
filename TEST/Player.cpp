@@ -29,13 +29,42 @@ void Player::Update()
 	{
 		position_X = position_X + speed;
 	}
-
+	//‰B‚ê‚é
+	if (CheckHitKey(KEY_INPUT_LSHIFT))
+	{
+		hide = 1;
+	}
+	else
+	{
+		hide = 0;
+	}
 
 
 }
 
 void Player::Draw()
 {
+}
+
+int Player::GetHide()
+{
+	return hide;
+}
+
+int Player::SetHide(int sethide)
+{
+	hide = sethide;
+}
+
+float Player::getPosition_X()
+{
+	return position_X;
+}
+
+float Player::setPosition(float x, float y)
+{
+	position_X = x;
+	position_Y = y;
 }
 
 void Player::LoadTexture()
