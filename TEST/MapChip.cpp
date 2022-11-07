@@ -48,7 +48,8 @@ void MapChip::MapDraw()
 				//DrawBox(j * MAP_SIZE, i * MAP_SIZE,
 				//	j * MAP_SIZE + MAP_SIZE, i * MAP_SIZE + MAP_SIZE,
 				//	GetColor(255, 255, 255), FALSE);
-
+				
+				//ï`âÊèàóù
 				DrawGraph(j * MAP_SIZE, i * MAP_SIZE, gHandle, FALSE);
 			}
 		}
