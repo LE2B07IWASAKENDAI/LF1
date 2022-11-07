@@ -19,8 +19,9 @@ public:
 
 
 public:
-	int Ptexture;
-	float position_X = 0.0f;
-	float position_Y = 700.0f;
+	int ptexture = 0;
+	float position_X = 0.0f;   //XÀ•W
+	float position_Y = 700.0f; //YÀ•W
+	float speed = 1.0f;        //ˆÚ“®‘¬“x
 };
 

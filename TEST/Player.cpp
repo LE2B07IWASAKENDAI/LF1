@@ -2,6 +2,7 @@
 
 Player::Player()
 {
+
 }
 
 Player::~Player()
@@ -16,7 +17,21 @@ void Player::Initialize()
 
 void Player::Update()
 {
-	DrawGraph(position_X, position_Y, Ptexture, FALSE);
+	//âÊëúì«Ç›çûÇ›
+	DrawGraph(position_X, position_Y, ptexture, FALSE);
+
+	//à⁄ìÆèàóù
+	if (CheckHitKey(KEY_INPUT_A))
+	{
+		position_X = position_X - speed;
+	}
+	if (CheckHitKey(KEY_INPUT_D))
+	{
+		position_X = position_X + speed;
+	}
+
+
+
 }
 
 void Player::Draw()
@@ -25,5 +40,5 @@ void Player::Draw()
 
 void Player::LoadTexture()
 {
-	Ptexture = LoadGraph("Resources/Player/green.png");
+	ptexture = LoadGraph("Resources/Player/green.png");
 }
