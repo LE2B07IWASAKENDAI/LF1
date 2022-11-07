@@ -24,6 +24,12 @@ void Enemy::Update()
 
 	if (count == 64)
 	{
+		beforSpeed = speed;
+		speed = 0;
+	}
+	else if (count == 128)
+	{
+		speed = beforSpeed;
 		speed *= -1;
 		count = 0;
 	}

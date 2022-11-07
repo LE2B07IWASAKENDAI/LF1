@@ -22,5 +22,6 @@ public:
 	float position_Y = 700.0f;
 private:
 	float speed = 5;
+	float beforSpeed = 0;
 	int count = 0;
 };
