@@ -1,2 +1,13 @@
-﻿  MapChip.cpp
-  TEST.vcxproj -> C:\後期チーム卒業制作_No11\TEST\Debug\TEST.exe
+﻿  Enemy.cpp
+C:\Users\K019G1412\Desktop\FL1\TEST\Enemy.cpp(21,24): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Enemy.cpp(21,12): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  KeyInput.cpp
+  main.cpp
+  MapChip.cpp
+  MapLoader.cpp
+  Player.cpp
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(21,24): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(21,12): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  コードを生成中...
+  LINK : 前回のインクリメンタル リンクで C:\Users\K019G1412\Desktop\FL1\TEST\Debug\TEST.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
+  TEST.vcxproj -> C:\Users\K019G1412\Desktop\FL1\TEST\Debug\TEST.exe

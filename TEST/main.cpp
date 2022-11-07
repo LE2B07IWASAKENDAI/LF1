@@ -49,16 +49,65 @@ int WINAPI WinMain(
     player->Initialize();
     enemy->Initialize();
 
+    //ゲームループ
+    int GameState;
+    enum GameState
+    {
+        Title,
+        GamePlay,
+        GameOver
+    };
+
+    GameState = Title;
+    int titlescene = LoadGraph("Resources/Scene/title.png");
+    int gameoverscene = LoadGraph("Resources/Scene/GameOver.png");
+
+    int StartTime;
+
     while (1)
     {
         //ゲームロジック
-
         //裏画面を消す
         ClearDrawScreen();
 
-        mapChip->Draw();
-        player->Update();
-        enemy->Update();
+        //ゲームループ
+        switch (GameState)
+        {
+        case Title:
+            StartTime = GetNowCount();
+            //タイトル画面描画
+            DrawGraph(0, 0, titlescene, FALSE);
+
+            //(テスト用)スペースキー押下でゲーム開始
+            if (CheckHitKey(KEY_INPUT_SPACE))
+            {
+                GameState = GamePlay;
+            }
+            break;
+        case GamePlay:
+            mapChip->Draw();
+            player->Update();
+            enemy->Update();
+
+            //(※テスト用)ゲームオーバー画面へ
+            //5秒経過で移動
+            if (GetNowCount() - StartTime > 5000)
+            {
+                GameState = GameOver;
+            }
+
+            break;
+        case GameOver:
+            //ゲームオーバー画面描画
+            DrawGraph(0, 0, gameoverscene, FALSE);
+
+            //(テスト用)エンター押下でタイトルへ戻る
+            if (CheckHitKey(KEY_INPUT_RETURN))
+            {
+                GameState = Title;
+            }
+            break;
+        }
 
         //ゲームロジック
 
