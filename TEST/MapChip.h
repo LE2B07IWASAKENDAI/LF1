@@ -33,6 +33,8 @@ private:
 	//グラフィックハンドル
 	int gHandle[11];
 
+	//隠れているかどうか
+	bool hide;
 
 public:
 	MapChip();
@@ -53,6 +55,10 @@ public:
 
 	//マップ番号の更新
 	void UpdateMapNumber(int nowMapNumber);
+
+	//ドアに隠れているか否かのSetterとGetter
+	void SetHideTrigger(bool hide) { this->hide = hide; }
+	bool GetHideTrigger() { return hide; }
 
 	/// <summary>
 	/// 扉との当たり判定

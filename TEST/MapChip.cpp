@@ -14,6 +14,7 @@ MapChip::~MapChip()
 
 void MapChip::Initialize()
 {
+	hide = false;
 	LoadMap();
 	LoadTexture();
 }
@@ -136,7 +137,7 @@ void MapChip::LoadTexture()
 	gHandle[4] = LoadGraph("Resources/Map/door_open.png");
 	gHandle[5] = LoadGraph("Resources/Map/door_close.png");
 
-	gHandle[10] = LoadGraph("Resources/Map/hitting.png");
+	gHandle[10] = LoadGraph("Resources/Map/hide_door_message.png");
 }
 
 void MapChip::UpdateMapNumber(int nowMapNumber)
@@ -154,7 +155,13 @@ void MapChip::Collision(float x,float y, int sizeX, int sizeY)
 				if(CheckHit(j * MAP_SIZE,i * MAP_SIZE,MAP_SIZE, MAP_SIZE,
 									x,y,sizeX,sizeY))
 				{ 
+					SetHideTrigger(true);
 					DrawGraph(0,0, gHandle[10], FALSE);
+				}
+				//“–‚½‚Á‚Ä‚¢‚È‚¢‚Æ‚«‚Íhide = false;
+				else
+				{
+					SetHideTrigger(false);
 				}
 			}
 		}

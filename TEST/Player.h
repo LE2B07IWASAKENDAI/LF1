@@ -14,8 +14,15 @@ public:
 	void Update();
 	void Draw();
 
-	int GetHide();
-	int SetHide(int sethide);
+
+	//隠れている時
+	void Hidding();
+	//画像読み込み
+	void LoadTexture();
+
+/*Getter,Setter*/
+	bool GetHide();
+	void SetHide(bool sethide);
 
 	float GetPosition_X();
 	float GetPosition_Y();
@@ -27,16 +34,25 @@ public:
 	int GetDeath();
 	int SetDeath(int d);
 
-	//画像読み込み
-	void LoadTexture();
+	//プレイヤーの行動制限（隠れているときは移動が出来ない）
+	void SetkeyPermission(bool keyPermission) {	this->keyPermission = keyPermission; }
+	bool GetkeyPermission() { return keyPermission; }
 
+//Debugモードのみで使うもの(予定)
+	void DrawPlayerPos();
 
-public:
+private:
 	int ptexture = 0;
+	int hidetext = 0;
+	int keyCounter = 0;//キーを押した瞬間を取るためのカウンター
+	int size_x = 200, size_y = 200;//プレイヤー画像のサイズ(11/10に津村が追加 ※後で消去)
 	float position_X = 0.0f;   //X座標
 	float position_Y = 700.0f; //Y座標
-	int size_x = 200, size_y = 200;//プレイヤー画像のサイズ(11/10に津村が追加 ※後で消去)
 	float speed = 7.5f;        //移動速度
-	int hide = 0;//隠れる 0:隠れない 1:隠れる
+	bool hide = false;//隠れる
+	bool notDrawPlayer = false;//隠れているときは描画しない
+	bool keyPermission = false;//扉の中にいるときは、移動出来ないようにする。
+
+public:
 	int death = 0; //生死　0:生きてる 1:死んでる
 };

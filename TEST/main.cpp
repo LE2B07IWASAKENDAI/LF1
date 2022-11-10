@@ -98,8 +98,12 @@ int WINAPI WinMain(
             enemy->Update();
             player->SetDeath( collision->Found(player->GetPosition_X(), enemy->GetPosition_X()));
 
+            //扉⇔プレイヤー　の当たり判定
             mapChip->Collision(player->GetPosition_X(), player->GetPosition_Y(),
                 player->GetPlayerSizeX(),player->GetPlayerSizeY());
+
+            //マップチップ.csのhideの値と連動
+            player->SetHide(mapChip->GetHideTrigger());
             ////(※テスト用)ゲームオーバー画面へ
             ////5秒経過で移動
             //if (GetNowCount() - StartTime > 5000)

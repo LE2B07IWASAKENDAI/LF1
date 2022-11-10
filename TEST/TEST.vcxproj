@@ -154,6 +154,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="DebugClass.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="KeyInput.cpp" />
     <ClCompile Include="main.cpp" />
@@ -163,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="DebugClass.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="KeyInput.h" />
     <ClInclude Include="MapChip.h" />
