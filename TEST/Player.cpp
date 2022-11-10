@@ -14,7 +14,7 @@ void Player::Initialize()
 {
 	LoadTexture();
 	position_X = 0.0f;
-	position_Y = 700.0f;
+	position_Y = 600.0f;
 	death = 0;
 	hide = 0;
 }
@@ -65,6 +65,11 @@ int Player::SetHide(int sethide)
 float Player::GetPosition_X()
 {
 	return position_X;
+}
+
+float Player::GetPosition_Y()
+{
+	return position_Y;
 }
 
 float Player::SetPosition(float x, float y)

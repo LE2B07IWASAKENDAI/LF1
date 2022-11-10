@@ -135,11 +135,44 @@ void MapChip::LoadTexture()
 	gHandle[3] = LoadGraph("Resources/Map/.png");
 	gHandle[4] = LoadGraph("Resources/Map/door_open.png");
 	gHandle[5] = LoadGraph("Resources/Map/door_close.png");
+
+	gHandle[10] = LoadGraph("Resources/Map/hitting.png");
 }
 
 void MapChip::UpdateMapNumber(int nowMapNumber)
 {
 	//マップ番号を現在の番号に変更する
 	mapNumber = nowMapNumber;
+}
+
+void MapChip::Collision(float x,float y, int sizeX, int sizeY)
+{
+	for (int i = 0; i < 14; i++) {
+		for (int j = 0; j < 82; j++) {
+			//プレイヤーが扉の前に来たら当たりの判定を入れる
+			if (mapData[GetMapNumber()].data[i][j] == 4) {
+				if(CheckHit(j * MAP_SIZE,i * MAP_SIZE,MAP_SIZE, MAP_SIZE,
+									x,y,sizeX,sizeY))
+				{ 
+					DrawGraph(0,0, gHandle[10], FALSE);
+				}
+			}
+		}
+	}
+}
+
+int MapChip::CheckHit(int x1, int y1, int w1, int h1, 
+	int x2, int y2, int w2, int h2)
+{
+	int L1 = x1;
+	int R1 = x1 + w1;
+	int L2 = x2;
+	int R2 = x2 + w2;
+
+	if (R1 < L2)return 0;
+	if (R2 < L1)return 0;
+
+	//上記以外は当たっている
+	return 1;
 }
 

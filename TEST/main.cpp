@@ -91,12 +91,15 @@ int WINAPI WinMain(
                 GameState = GamePlay;
             }
             break;
+
         case GamePlay:
             mapChip->Draw();
             player->Update();
             enemy->Update();
             player->SetDeath( collision->Found(player->GetPosition_X(), enemy->GetPosition_X()));
 
+            mapChip->Collision(player->GetPosition_X(), player->GetPosition_Y(),
+                player->GetPlayerSizeX(),player->GetPlayerSizeY());
             ////(※テスト用)ゲームオーバー画面へ
             ////5秒経過で移動
             //if (GetNowCount() - StartTime > 5000)
@@ -110,6 +113,7 @@ int WINAPI WinMain(
             }
 
             break;
+
         case GameOver:
             //ゲームオーバー画面描画
             DrawGraph(0, 0, gameoverscene, FALSE);
