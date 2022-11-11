@@ -115,11 +115,13 @@ int WINAPI WinMain(
             mapChip->Draw();
             player->Update();
             enemy->Update();
-            player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X()));
+            if (player->GetkeyPermission() == false) {
+                player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X(), enemy->GetFlont()));
+            }
 
             //扉⇔プレイヤー　の当たり判定
             mapChip->Collision(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY());
+            player->GetPlayerSizeX(), player->GetPlayerSizeY());
 
             //マップチップ.csのhideの値と連動
             player->SetHide(mapChip->GetHideTrigger());

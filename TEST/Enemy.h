@@ -28,7 +28,7 @@ public:
 
 public:
 	int Etexture;
-	float position_X = 1000.0f;
+	float position_X = 900.0f;
 	float position_Y = 600.0f;
 	int death = 0; //¶€@0:¶‚«‚Ä‚é 1:€‚ñ‚Å‚é
 	int flont = 0;//0:‘O@1:Œã‚ë
