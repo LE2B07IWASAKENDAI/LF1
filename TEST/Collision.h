@@ -8,7 +8,7 @@ public:
 	 ~Collision();
 
 public:
-	float Found(float player, float enemy,int flont); //“G‚Ìõ“G”ÍˆÍ‚É“ü‚Á‚½‚©
+	float Found(float player, float enemy); //“G‚Ìõ“G”ÍˆÍ‚É“ü‚Á‚½‚©
 
 
 public:

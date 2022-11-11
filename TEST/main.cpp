@@ -115,9 +115,8 @@ int WINAPI WinMain(
             mapChip->Draw();
             player->Update();
             enemy->Update();
-            if (player->GetkeyPermission() == false) {
-                player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X(),enemy->GetFlont()));
-            }
+            player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X()));
+
             //扉⇔プレイヤー　の当たり判定
             mapChip->Collision(player->GetPosition_X(), player->GetPosition_Y(),
                 player->GetPlayerSizeX(), player->GetPlayerSizeY());
