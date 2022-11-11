@@ -130,8 +130,9 @@ int WINAPI WinMain(
             mapChip->Draw();
             player->Update();
             enemy->Update();
-            player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X(), enemy->GetFlont()));
-
+            if (player->GetkeyPermission() == false) {
+                player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X(), enemy->GetFlont()));
+            }
 
 
             //扉⇔プレイヤー　の当たり判定
@@ -168,11 +169,12 @@ int WINAPI WinMain(
             //ゲーム画面描画(プロト)
             DrawGraph(0, 0, bgscene2, FALSE);
 
-            mapChip->Draw();
+            //mapChip->Draw();
             player->Update();
             enemy->Update();
-            player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X(), enemy->GetFlont()));
-
+            if (player->GetkeyPermission() == false) {
+                player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X(), enemy->GetFlont()));
+            }
 
 
             //扉⇔プレイヤー　の当たり判定
@@ -201,11 +203,12 @@ int WINAPI WinMain(
             //ゲーム画面描画(プロト)
             DrawGraph(0, 0, bgscene3, FALSE);
 
-            mapChip->Draw();
+            //mapChip->Draw();
             player->Update();
             enemy->Update();
-            player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X(), enemy->GetFlont()));
-
+            if (player->GetkeyPermission() == false) {
+                player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X(), enemy->GetFlont()));
+            }
             //扉⇔プレイヤー　の当たり判定
             mapChip->Collision(player->GetPosition_X(), player->GetPosition_Y(),
                 player->GetPlayerSizeX(), player->GetPlayerSizeY());
