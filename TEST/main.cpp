@@ -127,10 +127,10 @@ int WINAPI WinMain(
             //ゲーム画面描画(プロト)
             DrawGraph(0, 0, bgscene1, FALSE);
 
-            //mapChip->Draw();
+            mapChip->Draw();
             player->Update();
             enemy->Update();
-            player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X()));
+            player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X(), enemy->GetFlont()));
 
 
 
@@ -155,7 +155,7 @@ int WINAPI WinMain(
             }
 
             //ステージ2へ(テスト用)
-            if (player->GetPosition_X() > 500.f)
+            if (player->GetPosition_X() > 650.f)
             {
                 GameState = GamePlay2;
                 player->Initialize();
@@ -168,10 +168,10 @@ int WINAPI WinMain(
             //ゲーム画面描画(プロト)
             DrawGraph(0, 0, bgscene2, FALSE);
 
-            //mapChip->Draw();
+            mapChip->Draw();
             player->Update();
             enemy->Update();
-            player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X()));
+            player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X(), enemy->GetFlont()));
 
 
 
@@ -188,7 +188,7 @@ int WINAPI WinMain(
             }
 
             //ステージ3へ(テスト用)
-            if (player->GetPosition_X() > 500.f)
+            if (player->GetPosition_X() > 650.f)
             {
                 GameState = GamePlay3;
                 player->Initialize();
@@ -201,10 +201,10 @@ int WINAPI WinMain(
             //ゲーム画面描画(プロト)
             DrawGraph(0, 0, bgscene3, FALSE);
 
-            //mapChip->Draw();
+            mapChip->Draw();
             player->Update();
             enemy->Update();
-            player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X()));
+            player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X(), enemy->GetFlont()));
 
             //扉⇔プレイヤー　の当たり判定
             mapChip->Collision(player->GetPosition_X(), player->GetPosition_Y(),
@@ -219,7 +219,7 @@ int WINAPI WinMain(
             }
 
             //クリア画面へ(テスト用)
-            if (player->GetPosition_X() > 500.f)
+            if (player->GetPosition_X() > 650.f)
             {
                 GameState = GameClear;
             }
