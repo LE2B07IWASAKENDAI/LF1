@@ -17,6 +17,10 @@ void Player::Initialize()
 	position_Y = 600.0f;
 	death = 0;
 	hide = 0;
+	notDrawPlayer = false;//‰B‚ê‚Ä‚¢‚é‚Æ‚«‚Í•`‰æ‚µ‚È‚¢
+	keyPermission = false;
+	keyCounter = 0;
+	SetkeyPermission(false);
 }
 
 void Player::Update()
