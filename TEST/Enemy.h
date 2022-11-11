@@ -20,7 +20,6 @@ public:
 
 	int GetDeath();
 	int SetDeath(int d);
-	int GetFlont();
 
 	//‰æ‘œ“Ç‚İ‚İ
 	void LoadTexture();
@@ -29,11 +28,9 @@ public:
 public:
 	int Etexture;
 	float position_X = 1000.0f;
-	float position_Y = 600.0f;
+	float position_Y = 700.0f;
 	int death = 0; //¶€@0:¶‚«‚Ä‚é 1:€‚ñ‚Å‚é
-	int flont = 0;//0:‘O@1:Œã‚ë
 private:
 	float speed = 5;
-	float beforSpeed = 0;
 	int count = 0;
 };
