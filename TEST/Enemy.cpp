@@ -11,7 +11,7 @@ Enemy::~Enemy()
 void Enemy::Initialize()
 {
 	LoadTexture();
-	position_X = 1000.0f;
+	position_X = 900.0f;
 	position_Y = 600.0f;
 	count = 0;
 	speed = 5.f;
@@ -74,6 +74,11 @@ int Enemy::SetDeath(int d)
 	death = d;
 
 	return 0;
+}
+
+int Enemy::GetFlont()
+{
+	return flont;
 }
 
 void Enemy::LoadTexture()
