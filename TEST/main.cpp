@@ -63,8 +63,10 @@ int WINAPI WinMain(
     GameState = Title;
     int titlescene = LoadGraph("Resources/Scene/title.png");
     int gameoverscene = LoadGraph("Resources/Scene/GameOver.png");
+    int SCounter = 0;
 
-    int StartTime;
+    //ループテスト用
+    //int StartTime;
 
     while (1)
     {
@@ -81,12 +83,29 @@ int WINAPI WinMain(
             player->Initialize();
             enemy->Initialize();
 
-            StartTime = GetNowCount();
+            //StartTime = GetNowCount();
             //タイトル画面描画
             DrawGraph(0, 0, titlescene, FALSE);
 
             //(テスト用)スペースキー押下でゲーム開始
+            //スペースキー押したら
             if (CheckHitKey(KEY_INPUT_SPACE))
+            {
+                SCounter++;
+            }
+            else
+            {
+                if (SCounter > 0)
+                {
+                    SCounter = -1;
+                }
+                else
+                {
+                    SCounter = 0;
+                }
+            }
+            //ゲーム画面へ遷移
+            if (SCounter == 1)
             {
                 GameState = GamePlay;
             }
@@ -96,14 +115,15 @@ int WINAPI WinMain(
             mapChip->Draw();
             player->Update();
             enemy->Update();
-            player->SetDeath( collision->Found(player->GetPosition_X(), enemy->GetPosition_X()));
+            player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X()));
 
             //扉⇔プレイヤー　の当たり判定
             mapChip->Collision(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(),player->GetPlayerSizeY());
+                player->GetPlayerSizeX(), player->GetPlayerSizeY());
 
             //マップチップ.csのhideの値と連動
             player->SetHide(mapChip->GetHideTrigger());
+
             ////(※テスト用)ゲームオーバー画面へ
             ////5秒経過で移動
             //if (GetNowCount() - StartTime > 5000)
@@ -111,6 +131,7 @@ int WINAPI WinMain(
             //    GameState = GameOver;
             //}
 
+            //ゲームオーバー画面へ遷移
             if (player->death == 1)
             {
                 GameState = GameOver;
@@ -123,7 +144,24 @@ int WINAPI WinMain(
             DrawGraph(0, 0, gameoverscene, FALSE);
 
             //(テスト用)エンター押下でタイトルへ戻る
-            if (CheckHitKey(KEY_INPUT_RETURN))
+            //スペースキー押したら
+            if (CheckHitKey(KEY_INPUT_SPACE))
+            {
+                SCounter++;
+            }
+            else
+            {
+                if (SCounter > 0)
+                {
+                    SCounter = -1;
+                }
+                else
+                {
+                    SCounter = 0;
+                }
+            }
+            //タイトル画面へ遷移
+            if (SCounter == 1)
             {
                 GameState = Title;
             }
