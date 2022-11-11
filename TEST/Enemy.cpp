@@ -1,19 +1,20 @@
 #include "Enemy.h"
 
-//Enemy::Enemy()
-//{
-//}
-//
-//Enemy::~Enemy()
-//{
-//}
+Enemy::Enemy()
+{
+}
+
+Enemy::~Enemy()
+{
+}
 
 void Enemy::Initialize()
 {
 	LoadTexture();
-	float position_X = 1000.0f;
-	float position_Y = 700.0f;
+	position_X = 1000.0f;
+	position_Y = 700.0f;
 	count = 0;
+	speed = 5.f;
 }
 
 void Enemy::Update()
