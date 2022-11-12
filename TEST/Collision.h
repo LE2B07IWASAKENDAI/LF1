@@ -13,8 +13,7 @@ public:
 
 public:
 	int found = 0;//発見　0:見つかっていない 1:見つかった
-	float range = 448; //索敵範囲
-	float character_Size = 192; //キャラクターサイズ
+	float range = 320; //索敵範囲
+	float character_Size = 64; //キャラクターサイズ
 
 };
-
