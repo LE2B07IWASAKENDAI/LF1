@@ -1,6 +1,5 @@
-﻿  MapChip.cpp
-C:\後期チーム卒業制作_No11\TEST\MapChip.cpp(177,12): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\MapChip.cpp(177,10): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\MapChip.cpp(203,9): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\MapChip.cpp(203,6): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  TEST.vcxproj -> C:\後期チーム卒業制作_No11\TEST\Debug\TEST.exe
+﻿  main.cpp
+D:\FL1\TEST\main.cpp(134,50): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+D:\FL1\TEST\main.cpp(176,50): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+D:\FL1\TEST\main.cpp(210,50): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  TEST.vcxproj -> D:\FL1\TEST\Debug\TEST.exe

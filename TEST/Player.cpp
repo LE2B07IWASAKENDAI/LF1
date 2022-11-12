@@ -2,24 +2,25 @@
 
 Player::Player()
 {
+
 }
 
 Player::~Player()
 {
 }
 
+
 void Player::Initialize()
 {
 	LoadTexture();
 	position_X = 0.0f;
-	position_Y = 640.0f;
+	position_Y = 600.0f;
 	death = 0;
-	hide = false;
-	drawPlayer = false;//‰B‚ê‚Ä‚¢‚é‚Æ‚«‚Í•`‰æ‚µ‚È‚¢
+	hide = 0;
+	notDrawPlayer = false;//‰B‚ê‚Ä‚¢‚é‚Æ‚«‚Í•`‰æ‚µ‚È‚¢
 	keyPermission = false;
 	keyCounter = 0;
 	SetkeyPermission(false);
-	size_x = 64, size_y = 64;
 }
 
 void Player::Update()
@@ -37,23 +38,18 @@ void Player::Update()
 		}
 	}
 
-	//True‚È‚ç‰B‚ê‚é‚±‚Æ‚ª‚Å‚«‚é
-	//if (GetHide()) 
-	//{ 
-	//	Hidding(); 
-	//}
+	//True‚È‚ç‰B‚ê‚é‚Æ‚¢‚¤ŠÖ”‚ğŒÄ‚Ñ‚¾‚·B
+	if (GetHide()) { Hidding(); }
 
 	//‰B‚ê‚Ä‚¢‚éˆÈŠO‚Í•`‰æ‚·‚é
-	if (!drawPlayer || !GetHide()) {
+	if (!notDrawPlayer || !GetHide()) {
 		//‰æ‘œ“Ç‚İ‚İ
 		DrawGraph(position_X, position_Y, ptexture, FALSE);
 		SetkeyPermission(false);
 	}
 
 	//‰B‚ê‚Ä‚éI‚Ì•`‰æ
-	if(drawPlayer){ 
-		DrawGraph(1602, 0, hidetext, FALSE); SetkeyPermission(true);
-	}
+	if(notDrawPlayer){ DrawGraph(1602, 0, hidetext, FALSE); SetkeyPermission(true);}
 	//Œ»İ‚ÌÀ•W‚ğ•¶š—ñ•`‰æ
 	DrawPlayerPos();
 }
@@ -74,8 +70,6 @@ void Player::SetHide(bool sethide)
 
 void Player::Hidding()
 {
-	int a;
-	a = 0;
 	//‰B‚ê‚é
 	if (CheckHitKey(KEY_INPUT_LSHIFT))
 	{
@@ -89,17 +83,14 @@ void Player::Hidding()
 	}
 
 		//‰Ÿ‚³‚ê‚½uŠÔ‚Ìˆ—
-		if (keyCounter == 1 ){		
-			if (drawPlayer) {
-				//”à‚É‰B‚ê‚½‚Æ‚¢‚¤‰‰o‚ÅA•`‰æ‚ğ‚µ‚È‚¢‚æ‚¤‚É‚µ‚Ä‚¢‚é
-				drawPlayer = false;
-			}
-			else
-			{
-				//•`‰æ‚³‚ê‚Ä‚¢‚È‚¢‚ÉLSHIFT‰Ÿ‚·‚ÆH
-				drawPlayer = true;//ƒvƒŒƒCƒ„[‚ğ•`‰æ‚·‚é
-				SetkeyPermission(false);
-			}
+		if (keyCounter == 1 && notDrawPlayer) {
+			//”à‚É‰B‚ê‚½‚Æ‚¢‚¤‰‰o‚ÅA•`‰æ‚ğ‚µ‚È‚¢‚æ‚¤‚É‚µ‚Ä‚¢‚é(11/11)
+			notDrawPlayer = false;
+		}
+		else if (keyCounter == 1 && !notDrawPlayer) {
+			//•`‰æ‚³‚ê‚Ä‚¢‚È‚¢‚ÉLSHIFT‰Ÿ‚·‚ÆH
+			notDrawPlayer = true;//ƒvƒŒƒCƒ„[‚ğ•`‰æ‚·‚é
+			SetkeyPermission(false);
 		}
 }
 
@@ -136,7 +127,7 @@ int Player::SetDeath(int d)
 
 void Player::LoadTexture()
 {
-	ptexture = LoadGraph("Resources/Player/green_64.png");
+	ptexture = LoadGraph("Resources/Player/green.png");
 	hidetext = LoadGraph("Resources/Player/hidding2.png");
 }
 

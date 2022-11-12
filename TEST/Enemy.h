@@ -33,8 +33,7 @@ public:
 	int death = 0; //¶€@0:¶‚«‚Ä‚é 1:€‚ñ‚Å‚é
 	int flont = 0;//0:‘O@1:Œã‚ë
 private:
-
-	float speed = 5.f;
+	float speed = 5;
 	float beforSpeed = 0;
 	int count = 0;
 };

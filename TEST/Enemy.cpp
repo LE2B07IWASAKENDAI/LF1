@@ -12,18 +12,16 @@ void Enemy::Initialize()
 {
 	LoadTexture();
 	position_X = 900.0f;
-	position_Y = 640.0f;
+	position_Y = 600.0f;
 	count = 0;
-	speed = 8.f;//‘¬“x‚ð•Ï‚¦‚½11/12’Ã‘º
+	speed = 5.f;
 }
 
 void Enemy::Update()
 {
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);
-	//õ“G”ÍˆÍ
-	DrawBox(position_X - 250, position_Y, position_X + 450, position_Y + 64, GetColor(255, 0, 0), true);
+	DrawBox(position_X - 250, position_Y, position_X + 450, position_Y + 192, GetColor(255, 0, 0), true);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
-
 	DrawGraph(position_X, position_Y, Etexture, TRUE);
 	count++;
 	position_X += speed;
@@ -43,12 +41,12 @@ void Enemy::Update()
 	if (speed > 0)
 	{
 		flont = 0;
-		Etexture = LoadGraph("Resources/Enemy/01_Enemy_R_64.png");
+		Etexture = LoadGraph("Resources/Enemy/01_Enemy_R.png");
 	}
 	else if (speed < 0)
 	{
 		flont = 1;
-		Etexture = LoadGraph("Resources/Enemy/01_Enemy_L_64.png");
+		Etexture = LoadGraph("Resources/Enemy/01_Enemy_L.png");
 	}
 }
 
