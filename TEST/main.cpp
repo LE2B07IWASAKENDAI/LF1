@@ -4,7 +4,6 @@
 #include "Enemy.h"
 #include "Collision.h"
 
-
 int WINAPI WinMain(
     HINSTANCE hInstance,
     HINSTANCE hPrevInstance,
@@ -77,12 +76,21 @@ int WINAPI WinMain(
 
     //ループテスト用
     //int StartTime;
+    
+    //FPSの固定で使う変数
+    double dNextTime = GetNowCount();
 
     while (1)
     {
         //ゲームロジック
         //裏画面を消す
         ClearDrawScreen();
+        //60FPSでの固定
+        dNextTime += 16.66f;
+        if (dNextTime > GetNowCount())
+        {
+            WaitTimer((int)dNextTime - GetNowCount());
+        }
 
         //ゲームループ
         switch (GameState)
