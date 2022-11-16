@@ -17,7 +17,7 @@ void Player::Initialize()
 	position_Y = 600.0f;
 	death = 0;
 	hide = 0;
-	notDrawPlayer = false;//‰B‚ê‚Ä‚¢‚é‚Æ‚«‚Í•`‰æ‚µ‚È‚¢
+	drawPlayer = false;//‰B‚ê‚Ä‚¢‚é‚Æ‚«‚Í•`‰æ‚µ‚È‚¢
 	keyPermission = false;
 	keyCounter = 0;
 	SetkeyPermission(false);
@@ -42,14 +42,14 @@ void Player::Update()
 	if (GetHide()) { Hidding(); }
 
 	//‰B‚ê‚Ä‚¢‚éˆÈŠO‚Í•`‰æ‚·‚é
-	if (!notDrawPlayer || !GetHide()) {
+	if (!drawPlayer || !GetHide()) {
 		//‰æ‘œ“Ç‚İ‚İ
 		DrawGraph(position_X, position_Y, ptexture, FALSE);
 		SetkeyPermission(false);
 	}
 
 	//‰B‚ê‚Ä‚éI‚Ì•`‰æ
-	if(notDrawPlayer){ DrawGraph(1602, 0, hidetext, FALSE); SetkeyPermission(true);}
+	if(drawPlayer){ DrawGraph(1602, 0, hidetext, FALSE); SetkeyPermission(true);}
 	//Œ»İ‚ÌÀ•W‚ğ•¶š—ñ•`‰æ
 	DrawPlayerPos();
 }
@@ -83,13 +83,13 @@ void Player::Hidding()
 	}
 
 		//‰Ÿ‚³‚ê‚½uŠÔ‚Ìˆ—
-		if (keyCounter == 1 && notDrawPlayer) {
+		if (keyCounter == 1 && drawPlayer) {
 			//”à‚É‰B‚ê‚½‚Æ‚¢‚¤‰‰o‚ÅA•`‰æ‚ğ‚µ‚È‚¢‚æ‚¤‚É‚µ‚Ä‚¢‚é(11/11)
-			notDrawPlayer = false;
+			drawPlayer = false;
 		}
-		else if (keyCounter == 1 && !notDrawPlayer) {
+		else if (keyCounter == 1 && !drawPlayer) {
 			//•`‰æ‚³‚ê‚Ä‚¢‚È‚¢‚ÉLSHIFT‰Ÿ‚·‚ÆH
-			notDrawPlayer = true;//ƒvƒŒƒCƒ„[‚ğ•`‰æ‚·‚é
+			drawPlayer = true;//ƒvƒŒƒCƒ„[‚ğ•`‰æ‚·‚é
 			SetkeyPermission(false);
 		}
 }

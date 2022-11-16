@@ -38,6 +38,9 @@ public:
 	void SetkeyPermission(bool keyPermission) {	this->keyPermission = keyPermission; }
 	bool GetkeyPermission() { return keyPermission; }
 
+	//現在プレイヤーが描画されているかを取得する関数
+	bool GetDrawPlayer() { return drawPlayer; }
+
 //Debugモードのみで使うもの(予定)
 	void DrawPlayerPos();
 
@@ -50,7 +53,7 @@ private:
 	float position_Y = 700.0f; //Y座標
 	float speed = 7.5f;        //移動速度
 	bool hide = false;//隠れる
-	bool notDrawPlayer = false;//隠れているときは描画しない
+	bool drawPlayer = false;//隠れているときは描画しない
 	bool keyPermission = false;//扉の中にいるときは、移動出来ないようにする。
 
 public:

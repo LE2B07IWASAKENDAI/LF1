@@ -6,7 +6,7 @@
 #define MAP_WIDTH	84			// マップの幅
 #define MAP_HEIGHT	14			// マップの縦長さ// マップのデータ
 
-#define MAP_COUNT 2			//マップの総数
+#define MAP_COUNT 10			//マップの総数
 
 using namespace std;
 
@@ -67,7 +67,16 @@ public:
 	/// <param name="y">:相手のY座標</param>
 	/// <param name="player_sizeX">:相手のの横幅</param>
 	/// <param name="player_sizeY">:相手のの縦幅</param>
-	void Collision(float x,float y,int sizeX,int sizeY);
+	bool OnCollisionDoor(float x,float y,int sizeX,int sizeY);
+
+	/// <summary>
+	/// ゴールとの当たり判定
+	/// </summary>
+	/// <param name="x">:相手のX座標</param>
+	/// <param name="y">:相手のY座標</param>
+	/// <param name="player_sizeX">:相手のの横幅</param>
+	/// <param name="player_sizeY">:相手のの縦幅</param>
+	bool OnCollisionGoal(float x, float y, int sizeX, int sizeY);
 
 	/// <summary>
 	/// 当たり判定範囲
