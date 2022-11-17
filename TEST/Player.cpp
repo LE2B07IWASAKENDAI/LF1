@@ -44,7 +44,20 @@ void Player::Update()
 	//‰B‚ê‚Ä‚¢‚éŽžˆÈŠO‚Í•`‰æ‚·‚é
 	if (!drawPlayer || !GetHide()) {
 		//‰æ‘œ“Ç‚Ýž‚Ý
-		DrawGraph(position_X, position_Y, ptexture, FALSE);
+		
+		if(position_X >= end )
+		{
+			DrawGraph(position_X - end + center, position_Y, ptexture, FALSE);
+		}
+		else if (position_X >= center)
+		{
+			DrawGraph(center, position_Y, ptexture, FALSE);
+		}
+		else
+		{
+			DrawGraph(position_X, position_Y, ptexture, FALSE);
+		}
+		
 		SetkeyPermission(false);
 	}
 

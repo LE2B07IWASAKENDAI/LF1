@@ -4,11 +4,13 @@
 #include "Enemy.h"
 #include "Collision.h"
 
+
 int WINAPI WinMain(
     HINSTANCE hInstance,
     HINSTANCE hPrevInstance,
     LPSTR lpCmdLine,
     int nCmdShow
+
 )
 {
     //ウィンドウモードに設定 
@@ -20,10 +22,11 @@ int WINAPI WinMain(
     const int WIN_WITDH = 1800;
 
 
+
     // ウィンドウのタイトル
     //SetMainWindowText("title01");
     //ウィンドウサイズを手動では変更できず、 
-//かつウィンドウサイズに合わせて拡大できないようにする 
+    //かつウィンドウサイズに合わせて拡大できないようにする 
     SetWindowSizeChangeEnableFlag(FALSE, FALSE);
 
     // 画面サイズの最大サイズ、カラービット数を設定
@@ -33,7 +36,7 @@ int WINAPI WinMain(
     SetWindowSizeExtendRate(1.0);
 
     // 画面の背景色を設定する
-    SetBackgroundColor(0,0,0);
+    SetBackgroundColor(0, 0, 0);
 
     //Dxライブラリを初期化 
     if (DxLib_Init() == -1)
@@ -42,6 +45,7 @@ int WINAPI WinMain(
         return -1;
     }
     SetDrawScreen(DX_SCREEN_BACK);
+
 
 
     MapChip* mapChip = new MapChip();
@@ -64,7 +68,7 @@ int WINAPI WinMain(
         GameClear
     };
 
-    GameState = GamePlay2;
+    GameState = Title;
 
     //背景(プロト)
     int titlescene = LoadGraph("Resources/Scene/title.png");
@@ -78,9 +82,10 @@ int WINAPI WinMain(
 
     //ループテスト用
     //int StartTime;
-    
+
     //FPSの固定で使う変数
     double dNextTime = GetNowCount();
+
 
     while (1)
     {
@@ -136,14 +141,14 @@ int WINAPI WinMain(
 
             //マップ番号をセット
             mapChip->SetMapNumber(0);
-            mapChip->Draw();
+            mapChip->Draw(player->GetPosition_X());
             player->Update();
-            enemy->Update();
+            //enemy->Update();
 
             //ゲームオーバー処理           
-            if (player->GetkeyPermission() == false) {
+           /* if (player->GetkeyPermission() == false) {
                 player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X(), enemy->GetFlont()));
-            }
+            }*/
 
             //プレイヤーの描画のトリガーに合わせて、マップの当たり判定のON,OFFを操作している
             mapChip->SetHideTrigger(player->GetDrawPlayer());
@@ -171,6 +176,7 @@ int WINAPI WinMain(
                 GameState = GamePlay2;
                 player->Initialize();
                 enemy->Initialize();
+                mapChip->Initialize();
             }
 
             break;
@@ -178,7 +184,7 @@ int WINAPI WinMain(
         case GamePlay2:
 
             mapChip->SetMapNumber(1);
-            mapChip->Draw();
+            mapChip->Draw(player->GetPosition_X());
             player->Update();
             enemy->Update();
 
@@ -204,6 +210,7 @@ int WINAPI WinMain(
                 GameState = GamePlay3;
                 player->Initialize();
                 enemy->Initialize();
+                mapChip->Initialize();
             }
 
             //ゲームオーバーへ
@@ -212,13 +219,15 @@ int WINAPI WinMain(
                 GameState = GameOver;
             }
 
+
+
             break;
 
         case GamePlay3:
 
             //マップ番号のセット
             mapChip->SetMapNumber(2);
-            mapChip->Draw();
+            mapChip->Draw(player->GetPosition_X());
 
             player->Update();
             enemy->Update();

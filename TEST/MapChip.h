@@ -36,13 +36,20 @@ private:
 	//隠れているかどうか
 	bool hide;
 
+	//マップ動く変数
+	float scroll_X = 0.0f;
+	float start = 708.0f;
+	float end = 4115.0f;
+	float endChip = 3448.0f;
+
+
 public:
 	MapChip();
 	~MapChip();
 
 	void Initialize();
 	void Update();
-	void Draw();
+	void Draw(float position);
 
 
 	//マップ描画
@@ -59,6 +66,9 @@ public:
 	//ドアに隠れているか否かのSetterとGetter
 	void SetHideTrigger(bool hide) { this->hide = hide; }
 	bool GetHideTrigger() { return hide; }
+
+	//マップスクロール
+	void Scroll(float position);
 
 	/// <summary>
 	/// 扉との当たり判定

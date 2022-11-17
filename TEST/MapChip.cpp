@@ -17,15 +17,28 @@ void MapChip::Initialize()
 	hide = false;
 	LoadMap();
 	LoadTexture();
+	scroll_X = 0.0f;
 }
 
 
 void MapChip::Update()
 {
+	
 }
 
-void MapChip::Draw()
+void MapChip::Draw(float position)
 {
+	if (position >= end)
+	{
+		scroll_X = endChip * -1;
+	}
+	if (position >= start && position <= end)
+	{
+		scroll_X = start - position ;
+	}
+
+	
+
 	//キー押下でマップ番号変更
 	if (CheckHitKey(KEY_INPUT_L) == 1) {
 		//マップ番号の指定
@@ -42,6 +55,8 @@ void MapChip::Draw()
 
 void MapChip::MapDraw()
 {
+	
+
 	//現在のマップ番号を取得し、描画する
 	for (int i = 0; i < 14; i++) {
 		for (int j = 0; j < 82; j++) {
@@ -49,11 +64,11 @@ void MapChip::MapDraw()
 			{
 			case 0:
 				//  "  床   " 描画処理
-				DrawGraph(j * MAP_SIZE, i * MAP_SIZE, gHandle[0], FALSE);
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE, gHandle[0], FALSE);
 				break;
 			case 1:
 				//  "  壁   " 描画処理
-				DrawGraph(j * MAP_SIZE, i * MAP_SIZE, gHandle[1], FALSE);
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE, gHandle[1], FALSE);
 				break;
 			case 2:
 				//  "スタート" 描画処理
@@ -61,23 +76,23 @@ void MapChip::MapDraw()
 				//break;
 			case 3:
 				//  "ゴール地点" 描画処理
-				DrawGraph(j * MAP_SIZE, i * MAP_SIZE, gHandle[3], FALSE);
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE, gHandle[3], FALSE);
 				break;
 			case 4:
 				//  "空いてる扉" 描画処理
-				DrawGraph(j * MAP_SIZE, i * MAP_SIZE, gHandle[4], FALSE);
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE, gHandle[4], FALSE);
 				break;
 			case 5:
 				//  "閉じてる扉" 描画処理
-				DrawGraph(j * MAP_SIZE, i * MAP_SIZE, gHandle[5], FALSE);
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE, gHandle[5], FALSE);
 				break;
 			case 6:
 				//  " 椅　子 " 描画処理
-				DrawGraph(j * MAP_SIZE, i * MAP_SIZE, gHandle[5], FALSE);
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE, gHandle[5], FALSE);
 				break;
 			case 7:
 				//  "   机    " 描画処理
-				DrawGraph(j * MAP_SIZE, i * MAP_SIZE, gHandle[5], FALSE);
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE, gHandle[5], FALSE);
 				break;
 			}
 		}
@@ -184,6 +199,15 @@ void MapChip::UpdateMapNumber(int nowMapNumber)
 {
 	//マップ番号を現在の番号に変更する
 	mapNumber = nowMapNumber;
+}
+
+void MapChip::Scroll(float position)
+{
+	
+	if (position >= start)
+	{
+		scroll_X = position - start;
+	}
 }
 
 bool MapChip::OnCollisionDoor(float x,float y, int sizeX, int sizeY)

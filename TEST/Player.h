@@ -56,6 +56,9 @@ private:
 	bool drawPlayer = false;//隠れているときは描画しない
 	bool keyPermission = false;//扉の中にいるときは、移動出来ないようにする。
 
+	float center = 708.0f;//画面中心
+	float end = 4094.0f;//画面端
+
 public:
 	int death = 0; //生死　0:生きてる 1:死んでる
 };
