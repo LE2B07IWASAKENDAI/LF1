@@ -39,5 +39,6 @@ private:
 	float speed_ = -5.0f;
 	float vector = 0.0f;
 	float beforSpeed = 0;
+	int eye = 0;
 	int count = 0;
 };
