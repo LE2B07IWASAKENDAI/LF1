@@ -157,6 +157,7 @@
     <ClCompile Include="DebugClass.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="KeyInput.cpp" />
+    <ClCompile Include="knife.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapChip.cpp" />
     <ClCompile Include="MapLoader.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="DebugClass.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="KeyInput.h" />
+    <ClInclude Include="knife.h" />
     <ClInclude Include="MapChip.h" />
     <ClInclude Include="MapLoader.h" />
     <ClInclude Include="Player.h" />

@@ -25,6 +25,12 @@
     <Filter Include="ヘッダー ファイル\Character">
       <UniqueIdentifier>{bfa949d3-e0f7-4089-bc68-5585a05280b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Item">
+      <UniqueIdentifier>{af79ca73-e531-47bc-b488-6d43b95c95b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Item">
+      <UniqueIdentifier>{82d57632-6490-4a6f-b27a-90ed52e5aa15}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -51,6 +57,9 @@
     <ClCompile Include="DebugClass.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="knife.cpp">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MapChip.h">
@@ -73,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="DebugClass.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="knife.h">
+      <Filter>ヘッダー ファイル\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
