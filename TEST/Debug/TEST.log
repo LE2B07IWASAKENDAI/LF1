@@ -1,5 +1,4 @@
-﻿  knife.cpp
-C:\Users\K019G1412\Desktop\FL1\TEST\knife.cpp(1,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-C:\Users\K019G1412\Desktop\FL1\TEST\knife.h(2,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-C:\Users\K019G1412\Desktop\FL1\TEST\knife.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-  TEST.vcxproj -> C:\Users\K019G1412\Desktop\FL1\TEST\Debug\TEST.exe
+﻿  main.cpp
+D:\FL1\TEST\main.cpp(193,50): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+D:\FL1\TEST\main.cpp(237,50): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  TEST.vcxproj -> D:\FL1\TEST\Debug\TEST.exe

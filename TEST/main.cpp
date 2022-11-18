@@ -3,7 +3,6 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Collision.h"
-#include "knife.h"
 
 
 int WINAPI WinMain(
@@ -53,11 +52,9 @@ int WINAPI WinMain(
     Player* player = new Player();
     Enemy* enemy = new Enemy();
     Collision* collision = new Collision();
-    knife* Knife = new knife();
     mapChip->Initialize();
     player->Initialize();
     enemy->Initialize();
-    Knife->Initialize();
 
     //ゲームループ
     int GameState;
@@ -110,7 +107,6 @@ int WINAPI WinMain(
             mapChip->Initialize();
             player->Initialize();
             enemy->Initialize();
-            Knife->Initialize();
 
             //StartTime = GetNowCount();
             //タイトル画面描画
@@ -147,7 +143,6 @@ int WINAPI WinMain(
             mapChip->SetMapNumber(0);
             mapChip->Draw(player->GetPosition_X());
             player->Update();
-            Knife->Update();
             //enemy->Update();
 
             //ゲームオーバー処理           
