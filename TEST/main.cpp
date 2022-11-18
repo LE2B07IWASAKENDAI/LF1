@@ -80,6 +80,8 @@ int WINAPI WinMain(
 
     int SCounter = 0;
 
+    int load = 0;
+
     //ループテスト用
     //int StartTime;
 
@@ -138,17 +140,20 @@ int WINAPI WinMain(
             break;
 
         case GamePlay1:
-
+            load += 1;
             //マップ番号をセット
             mapChip->SetMapNumber(0);
             mapChip->Draw(player->GetPosition_X());
             player->Update();
-            //enemy->Update();
+            
+
+            enemy->Set_position(mapChip->Get_position_8_X(), mapChip->Get_position_8_Y());
+            enemy->Update();
 
             //ゲームオーバー処理           
-           /* if (player->GetkeyPermission() == false) {
+            if (player->GetkeyPermission() == false) {
                 player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X(), enemy->GetFlont()));
-            }*/
+            }
 
             //プレイヤーの描画のトリガーに合わせて、マップの当たり判定のON,OFFを操作している
             mapChip->SetHideTrigger(player->GetDrawPlayer());
@@ -159,6 +164,8 @@ int WINAPI WinMain(
             {
                 player->Hidding();
             }
+
+            
 
             //マップチップ.csのhideの値と連動
             player->SetHide(mapChip->GetHideTrigger());

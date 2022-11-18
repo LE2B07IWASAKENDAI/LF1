@@ -15,6 +15,8 @@ public:
 	void Update();
 	void Draw();
 
+	float Set_position(float position_x, float position_y);
+
 	float GetPosition_X();
 	float Getposition_Y();
 
@@ -34,6 +36,7 @@ public:
 	int flont = 0;//0:ëOÅ@1:å„ÇÎ
 private:
 	float speed = 5;
+	float vector = 0.0f;
 	float beforSpeed = 0;
 	int count = 0;
 };

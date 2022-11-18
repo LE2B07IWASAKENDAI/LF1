@@ -42,6 +42,10 @@ private:
 	float end = 4115.0f;
 	float endChip = 3448.0f;
 
+	//敵位置
+	float position_8_X = 0.0f;
+	float position_8_Y = 0.0f;
+
 
 public:
 	MapChip();
@@ -69,6 +73,11 @@ public:
 
 	//マップスクロール
 	void Scroll(float position);
+
+	//マップ座標を渡す
+	//敵_8
+	float Get_position_8_X();
+	float Get_position_8_Y();
 
 	/// <summary>
 	/// 扉との当たり判定

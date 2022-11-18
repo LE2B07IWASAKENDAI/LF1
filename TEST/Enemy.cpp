@@ -20,21 +20,25 @@ void Enemy::Initialize()
 void Enemy::Update()
 {
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);
-	DrawBox(position_X - 250, position_Y, position_X + 450, position_Y + 192, GetColor(255, 0, 0), true);
+	DrawBox(position_X - 250 + vector, position_Y, position_X + 450 + vector, position_Y + 192, GetColor(255, 0, 0), true);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
-	DrawGraph(position_X, position_Y, Etexture, TRUE);
+	DrawGraph(position_X + vector, position_Y, Etexture, TRUE);
 	count++;
 	position_X += speed;
 
-	if (count == 64)
+
+	if (count < 64)
 	{
-		beforSpeed = speed;
-		speed = 0;
+		vector = vector + speed * -1;
 	}
-	else if (count == 128)
+	else  if (count > 65 )
 	{
-		speed = beforSpeed;
-		speed *= -1;
+		vector = vector + speed;
+		
+	}
+
+	if (count == 129)
+	{
 		count = 0;
 	}
 
@@ -54,9 +58,17 @@ void Enemy::Draw()
 {
 }
 
+float Enemy::Set_position(float position_x, float position_y)
+{
+	position_X = position_x;
+	position_Y = position_y;
+
+	return 0.0f;
+}
+
 float Enemy::GetPosition_X()
 {
-	return position_X;
+	return position_X + vector;
 }
 
 float Enemy::Getposition_Y()
