@@ -1,13 +1,4 @@
-﻿  Enemy.cpp
-D:\FL1\TEST\Enemy.cpp(23,87): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\Enemy.cpp(23,66): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\Enemy.cpp(23,37): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\Enemy.cpp(23,27): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\Enemy.cpp(25,33): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\Enemy.cpp(25,23): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  main.cpp
-D:\FL1\TEST\main.cpp(155,50): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\main.cpp(200,50): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\main.cpp(244,50): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  コードを生成中...
+﻿  main.cpp
+D:\FL1\TEST\main.cpp(202,50): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+D:\FL1\TEST\main.cpp(246,50): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
   TEST.vcxproj -> D:\FL1\TEST\Debug\TEST.exe

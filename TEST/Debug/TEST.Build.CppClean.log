@@ -8,6 +8,7 @@ d:\fl1\test\debug\keyinput.obj
 d:\fl1\test\debug\enemy.obj
 d:\fl1\test\debug\debugclass.obj
 d:\fl1\test\debug\collision.obj
+d:\fl1\test\debug\knife.obj
 d:\fl1\test\debug\test.exe
 d:\fl1\test\debug\test.ilk
 d:\fl1\test\debug\test.pdb
@@ -15,5 +16,6 @@ d:\fl1\test\debug\test.tlog\cl.command.1.tlog
 d:\fl1\test\debug\test.tlog\cl.read.1.tlog
 d:\fl1\test\debug\test.tlog\cl.write.1.tlog
 d:\fl1\test\debug\test.tlog\link.command.1.tlog
+d:\fl1\test\debug\test.tlog\link.delete.1.tlog
 d:\fl1\test\debug\test.tlog\link.read.1.tlog
 d:\fl1\test\debug\test.tlog\link.write.1.tlog

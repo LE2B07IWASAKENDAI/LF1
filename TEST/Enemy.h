@@ -30,12 +30,13 @@ public:
 
 public:
 	int Etexture;
-	float position_X = 900.0f;
-	float position_Y = 600.0f;
+	float position_X = 0.0f;
+	float position_Y = 0.0f;
 	int death = 0; //¶€@0:¶‚«‚Ä‚é 1:€‚ñ‚Å‚é
 	int flont = 0;//0:‘O@1:Œã‚ë
 private:
-	float speed = 5;
+	float speed = 5.0f;
+	float speed_ = -5.0f;
 	float vector = 0.0f;
 	float beforSpeed = 0;
 	int count = 0;

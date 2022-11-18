@@ -47,14 +47,17 @@ void Player::Update()
 		
 		if(position_X >= end )
 		{
+			return_Positin = position_X - end + center;
 			DrawGraph(position_X - end + center, position_Y, ptexture, FALSE);
 		}
 		else if (position_X >= center)
 		{
+			return_Positin = center;
 			DrawGraph(center, position_Y, ptexture, FALSE);
 		}
 		else
 		{
+			return_Positin = position_X;
 			DrawGraph(position_X, position_Y, ptexture, FALSE);
 		}
 		
@@ -110,6 +113,11 @@ void Player::Hidding()
 float Player::GetPosition_X()
 {
 	return position_X;
+}
+
+float Player::GetPosition_x()
+{
+	return return_Positin;
 }
 
 float Player::GetPosition_Y()

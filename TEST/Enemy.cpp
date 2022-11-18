@@ -29,7 +29,7 @@ void Enemy::Update()
 
 	if (count < 64)
 	{
-		vector = vector + speed * -1;
+		vector = vector + speed_;
 	}
 	else  if (count > 65 )
 	{
@@ -42,12 +42,12 @@ void Enemy::Update()
 		count = 0;
 	}
 
-	if (speed > 0)
+	if (count >64)
 	{
 		flont = 0;
 		Etexture = LoadGraph("Resources/Enemy/01_Enemy_R.png");
 	}
-	else if (speed < 0)
+	else if (count <65)
 	{
 		flont = 1;
 		Etexture = LoadGraph("Resources/Enemy/01_Enemy_L.png");
@@ -68,6 +68,7 @@ float Enemy::Set_position(float position_x, float position_y)
 
 float Enemy::GetPosition_X()
 {
+	
 	return position_X + vector;
 }
 

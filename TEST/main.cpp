@@ -152,7 +152,9 @@ int WINAPI WinMain(
 
             //ゲームオーバー処理           
             if (player->GetkeyPermission() == false) {
-                player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X(), enemy->GetFlont()));
+                float a = enemy->GetPosition_X();
+                a = enemy->GetPosition_X();
+                player->SetDeath(collision->Found(player->GetPosition_x(), enemy->GetPosition_X(), enemy->GetFlont()));
             }
 
             //プレイヤーの描画のトリガーに合わせて、マップの当たり判定のON,OFFを操作している
