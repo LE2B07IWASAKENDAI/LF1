@@ -85,6 +85,7 @@ int WINAPI WinMain(
 
     int load = 0;
 
+    static bool mapInit = true;
     //ループテスト用
     //int StartTime;
 
@@ -145,6 +146,7 @@ int WINAPI WinMain(
 
         case GamePlay1:
             load += 1;
+
             //マップ番号をセット
             mapChip->SetMapNumber(0);
             mapChip->Draw(player->GetPosition_X());
@@ -170,9 +172,7 @@ int WINAPI WinMain(
                 player->GetPlayerSizeX(), player->GetPlayerSizeY()))
             {
                 player->Hidding();
-            }
-
-            
+            }            
 
             //マップチップ.csのhideの値と連動
             player->SetHide(mapChip->GetHideTrigger());
@@ -180,32 +180,51 @@ int WINAPI WinMain(
             //ゲームオーバー画面へ遷移
             if (player->death == 1)
             {
-                GameState = GameOver;
+                DrawFormatString(1607, 210, GetColor(255, 255, 255), "当たっている！！！");
+                //GameState = GameOver;
             }
 
             //ステージ2へ
             if (mapChip->OnCollisionGoal(player->GetPosition_X(), player->GetPosition_Y(),
                 player->GetPlayerSizeX(), player->GetPlayerSizeY()))
             {
-                GameState = GamePlay2;
+                mapChip->Initialize();
                 player->Initialize();
                 enemy->Initialize();
-                mapChip->Initialize();
+
+                GameState = GamePlay2;
             }
 
             break;
 
         case GamePlay2:
+            //for (int i = 0; i < 10; i++) {
+            //    if (mapInit) {
+            //        //初期化
+            //        mapChip->Initialize();
+            //        player->Initialize();
+            //        enemy->Initialize();
+            //        mapInit = false;
+            //    }
+            //}
 
+            //マップ番号をセット
             mapChip->SetMapNumber(1);
             mapChip->Draw(player->GetPosition_X());
             player->Update();
+
+            enemy->Set_position(mapChip->Get_position_8_X(), mapChip->Get_position_8_Y());
             enemy->Update();
 
-            //ゲームオーバー処理
+            //ゲームオーバー処理           
             if (player->GetkeyPermission() == false) {
-                player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X(), enemy->GetFlont()));
+                float a = enemy->GetPosition_X();
+                a = enemy->GetPosition_X();
+                player->SetDeath(collision->Found(player->GetPosition_x(), enemy->GetPosition_X(), enemy->GetFlont()));
             }
+
+            //プレイヤーの描画のトリガーに合わせて、マップの当たり判定のON,OFFを操作している
+            mapChip->SetHideTrigger(player->GetDrawPlayer());
 
             //扉⇔プレイヤー　の当たり判定
             if (mapChip->OnCollisionDoor(player->GetPosition_X(), player->GetPosition_Y(),
@@ -217,39 +236,46 @@ int WINAPI WinMain(
             //マップチップ.csのhideの値と連動
             player->SetHide(mapChip->GetHideTrigger());
 
-            //ステージ3へ
+            //ゲームオーバー画面へ遷移
+            if (player->death == 1)
+            {
+                DrawFormatString(1607, 210, GetColor(255, 255, 255), "当たっている！！！");
+
+                //GameState = GameOver;
+            }
+
+            //ステージ2へ
             if (mapChip->OnCollisionGoal(player->GetPosition_X(), player->GetPosition_Y(),
                 player->GetPlayerSizeX(), player->GetPlayerSizeY()))
             {
-                GameState = GamePlay3;
+                mapChip->Initialize();
                 player->Initialize();
                 enemy->Initialize();
-                mapChip->Initialize();
+
+                GameState = GamePlay3;
             }
-
-            //ゲームオーバーへ
-            if (player->death == 1)
-            {
-                GameState = GameOver;
-            }
-
-
 
             break;
 
         case GamePlay3:
 
-            //マップ番号のセット
+            //マップ番号をセット
             mapChip->SetMapNumber(2);
             mapChip->Draw(player->GetPosition_X());
-
             player->Update();
+
+            enemy->Set_position(mapChip->Get_position_8_X(), mapChip->Get_position_8_Y());
             enemy->Update();
 
-            //ゲームオーバー処理
+            //ゲームオーバー処理           
             if (player->GetkeyPermission() == false) {
-                player->SetDeath(collision->Found(player->GetPosition_X(), enemy->GetPosition_X(), enemy->GetFlont()));
+                float a = enemy->GetPosition_X();
+                a = enemy->GetPosition_X();
+                player->SetDeath(collision->Found(player->GetPosition_x(), enemy->GetPosition_X(), enemy->GetFlont()));
             }
+
+            //プレイヤーの描画のトリガーに合わせて、マップの当たり判定のON,OFFを操作している
+            mapChip->SetHideTrigger(player->GetDrawPlayer());
 
             //扉⇔プレイヤー　の当たり判定
             if (mapChip->OnCollisionDoor(player->GetPosition_X(), player->GetPosition_Y(),
@@ -261,18 +287,20 @@ int WINAPI WinMain(
             //マップチップ.csのhideの値と連動
             player->SetHide(mapChip->GetHideTrigger());
 
+            //ゲームオーバー画面へ遷移
             if (player->death == 1)
             {
-                GameState = GameOver;
+                DrawFormatString(1607, 210, GetColor(255, 255, 255), "当たっている！！！");
+
+                //GameState = GameOver;
             }
 
-            //クリア画面へ(テスト用)
+            //クリア
             if (mapChip->OnCollisionGoal(player->GetPosition_X(), player->GetPosition_Y(),
                 player->GetPlayerSizeX(), player->GetPlayerSizeY()))
             {
                 GameState = GameClear;
             }
-
 
             break;
 
