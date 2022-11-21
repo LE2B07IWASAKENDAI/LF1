@@ -21,6 +21,10 @@ void Player::Initialize()
 	keyPermission = false;
 	keyCounter = 0;
 	SetkeyPermission(false);
+
+	Kposition_X = -400.0f;
+	Kposition_Y = 600.0f;
+	Kspeed = 40.0f;
 }
 
 void Player::Update()
@@ -68,10 +72,30 @@ void Player::Update()
 	if(drawPlayer){ DrawGraph(1602, 0, hidetext, FALSE); SetkeyPermission(true);}
 	//現在の座標を文字列描画
 	DrawPlayerPos();
+
+	//ナイフ投げ
+	//Zキー押下時ナイフをプレイヤーの座標へ
+	if (CheckHitKey(KEY_INPUT_Z) == 1 && ShootFlag == 0)
+	{
+		Kposition_X = position_X + 200;
+		Kposition_Y = position_Y + 50;
+
+		
+		ShootFlag = 1;
+	}
+	//ナイフ移動処理
+	if (ShootFlag == 1)
+	{
+		Kposition_X = Kposition_X + Kspeed;
+		DrawGraph(Kposition_X, Kposition_Y, knifetex, FALSE);
+		
+	}
+
 }
 
 void Player::Draw()
 {
+	
 }
 
 bool Player::GetHide()
@@ -150,6 +174,7 @@ void Player::LoadTexture()
 {
 	ptexture = LoadGraph("Resources/Player/green.png");
 	hidetext = LoadGraph("Resources/Player/hidding2.png");
+	knifetex = LoadGraph("Resources/Player/Knife.png");
 }
 
 void Player::DrawPlayerPos()

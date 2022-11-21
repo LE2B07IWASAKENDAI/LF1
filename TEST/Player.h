@@ -63,4 +63,15 @@ private:
 
 public:
 	int death = 0; //生死　0:生きてる 1:死んでる
+
+	//ナイフ
+private:
+	float Kposition_X = 0.0f;
+	float Kposition_Y = 600.0f;
+
+	float Kspeed = 12.0f;
+
+	int knifetex = 0;
+	int ShootFlag = 0;
+
 };
