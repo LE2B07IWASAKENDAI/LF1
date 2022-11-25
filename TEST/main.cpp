@@ -71,7 +71,7 @@ int WINAPI WinMain(
         GameClear
     };
 
-    GameState = Title;
+    GameState = GamePlay2;
 
     //背景(プロト)
     int titlescene = LoadGraph("Resources/Scene/title.png");
@@ -216,12 +216,6 @@ int WINAPI WinMain(
             enemy->Set_position(mapChip->Get_position_8_X(), mapChip->Get_position_8_Y());
             enemy->Update();
 
-            //ゲームオーバー処理           
-            if (player->GetkeyPermission() == false) {
-                float a = enemy->GetPosition_X();
-                a = enemy->GetPosition_X();
-                player->SetDeath(collision->Found(player->GetPosition_x(), enemy->GetPosition_X(), enemy->GetFlont()));
-            }
 
             //プレイヤーの描画のトリガーに合わせて、マップの当たり判定のON,OFFを操作している
             mapChip->SetHideTrigger(player->GetDrawPlayer());
@@ -233,15 +227,45 @@ int WINAPI WinMain(
                 player->Hidding();
             }
 
+            //イス⇔プレイヤー　の当たり判定 /*右*/
+            if (mapChip->OnCollisionChair_Right(player->GetPosition_X(), player->GetPosition_Y(),
+                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
+            {
+                player->Hidding();
+                if (enemy->GetFlont() == 0 && 
+                    player->SetDeath(collision->Found(player->GetPosition_x(), enemy->GetPosition_X(), enemy->GetFlont()))) 
+                {
+                    mapChip->SetHideFalse_Chair();
+                }
+            }
+
+            //イス⇔プレイヤー　の当たり判定　/*左*/
+            else if (mapChip->OnCollisionChair_Left(player->GetPosition_X(), player->GetPosition_Y(),
+                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
+                 {
+                    player->Hidding();
+                    if (enemy->GetFlont() == 1 &&
+                        player->SetDeath(collision->Found(player->GetPosition_x(), enemy->GetPosition_X(), enemy->GetFlont())))
+                    {
+                        mapChip->SetHideFalse_Chair();
+                    }
+                 }
+
             //マップチップ.csのhideの値と連動
             player->SetHide(mapChip->GetHideTrigger());
+
+
+            //ゲームオーバー処理           
+            if (player->GetkeyPermission() == false) {
+                player->SetDeath(collision->Found(player->GetPosition_x(), enemy->GetPosition_X(), enemy->GetFlont()));
+            }
 
             //ゲームオーバー画面へ遷移
             if (player->death == 1)
             {
                 DrawFormatString(1607, 210, GetColor(255, 255, 255), "当たっている！！！");
 
-                //GameState = GameOver;
+                GameState = GameOver;
             }
 
             //ステージ3へ

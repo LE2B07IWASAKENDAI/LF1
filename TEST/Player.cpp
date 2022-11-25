@@ -42,9 +42,6 @@ void Player::Update()
 		}
 	}
 
-	//Trueなら隠れるという関数を呼びだす。
-	if (GetHide()) { Hidding(); }
-
 	//隠れている時以外は描画する
 	if (!drawPlayer || !GetHide()) {
 		//画像読み込み
@@ -68,10 +65,6 @@ void Player::Update()
 		SetkeyPermission(false);
 	}
 
-	//隠れてる！の描画
-	if(drawPlayer){ DrawGraph(1602, 0, hidetext, FALSE); SetkeyPermission(true);}
-	//現在の座標を文字列描画
-	DrawPlayerPos();
 
 	//ナイフ投げ
 	//Zキー押下時ナイフをプレイヤーの座標へ
@@ -93,6 +86,10 @@ void Player::Update()
 		DrawGraph(Kposition_X, Kposition_Y, knifetex, FALSE);
 
 	}
+		//隠れてる！の描画
+	if(drawPlayer){ DrawGraph(1602, 0, hidetext, FALSE); SetkeyPermission(true);}
+	//現在の座標を文字列描画
+	DrawPlayerPos();
 
 }
 

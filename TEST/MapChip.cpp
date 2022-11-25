@@ -94,9 +94,21 @@ void MapChip::MapDraw()
 				//  "   ä˜    " ï`âÊèàóù
 				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE, gHandle[7], FALSE);
 				break;
-			case 8:
-				//  "  è∞   "  "ìGÇÃà íu" ï`âÊèàóù
-				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE, gHandle[0], FALSE);
+
+				/*8ÇÕìGÇÃê∂ê¨*/
+
+			case 9:
+				//  "  ã–ñÿ    " ï`âÊèàóù
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE, gHandle[9], FALSE);
+				break;
+			case 10:
+				//  "ëŒâEÇÃìGÇ©ÇÁâBÇÍÇÈ " ï`âÊèàóù
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE, gHandle[10], FALSE);
+				break;
+			case 11:
+				//  "ëŒç∂ÇÃìGÇ©ÇÁâBÇÍÇÈ" ï`âÊèàóù
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE, gHandle[11], FALSE);
+				break;
 			}
 		}
 	}
@@ -151,8 +163,8 @@ void MapChip::LoadMap()
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*20*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*40*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*50*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 3,/*80*/ 3, 3, 3, 1} ,
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 6, 6, 6, 6, 1, 1, 1, 1, 1,/*20*/1, 7, 7, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 6, 6, 6, 6,/*40*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*50*/ 1, 7, 7, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 1, 6, 6, 6, 6,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 3,/*80*/ 3, 3, 3, 1} ,
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 6, 6, 6, 6, 1, 1, 1, 1, 1,/*20*/1, 7, 7, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 6, 6, 6, 6,/*40*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*50*/ 1, 7, 7, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 8, 1, 1, 1, 6, 6, 6, 6,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 3,/*80*/ 3, 3, 3, 1} ,
-			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 6, 6, 6, 6, 1, 1, 1, 1, 1,/*20*/1, 7, 7, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 6, 6, 6, 6,/*40*/1, 1, 1, 1, 4, 1, 1, 1, 1, 1,/*50*/ 1, 7, 7, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 1, 6, 6, 6, 6,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 3,/*80*/ 3, 3, 3, 1} ,
-			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*10*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*20*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*30*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*40*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*50*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*60*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*70*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*80*/ 0, 0, 0, 0} ,
+			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 6, 6, 6, 6, 1, 8, 1, 1, 1,/*20*/1, 7, 7, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 6, 6, 6, 6,/*40*/1, 1, 1, 1, 4, 1, 1, 1, 1, 1,/*50*/ 1, 7, 7, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 1, 6, 6, 6, 6,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 3,/*80*/ 3, 3, 3, 1} ,
+			{ 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,/*10*/10, 6, 6, 6, 6, 11, 9, 9, 9, 9,/*20*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*30*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*40*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*50*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*60*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*70*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*80*/ 0, 0, 0, 0} ,
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*10*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*20*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*30*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*40*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*50*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*60*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*70*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*80*/ 0, 0, 0, 0} ,
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*10*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*20*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*30*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*40*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*50*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*60*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*70*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*80*/ 0, 0, 0, 0} ,
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*10*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*20*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*30*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*40*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*50*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*60*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*70*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*80*/ 0, 0, 0, 0} ,
@@ -186,16 +198,20 @@ void MapChip::LoadMap()
 void MapChip::LoadTexture()
 {
 	//ïœêî âÊëúÉfÅ[É^äiî[
-	gHandle[0] = LoadGraph("Resources/Map/yuka.png");
-	gHandle[1] = LoadGraph("Resources/Map/wall.png");
+	gHandle[0] = LoadGraph("Resources/Map/Cobblestone.png");
+	gHandle[1] = LoadGraph("Resources/Map/Wall.png");
 	gHandle[2] = LoadGraph("Resources/Map/.png");
 	gHandle[3] = LoadGraph("Resources/Map/goal.png");
 	gHandle[4] = LoadGraph("Resources/Map/door_open.png");
 	gHandle[5] = LoadGraph("Resources/Map/door_close.png");
 	gHandle[6] = LoadGraph("Resources/Map/chair.png");
 	gHandle[7] = LoadGraph("Resources/Map/table.png");
+	/*8ÇÕìGÇÃê∂ê¨èÍèä*/
+	gHandle[9] = LoadGraph("Resources/Map/Baseboard_Wall.png");
+	gHandle[10] = LoadGraph("Resources/Map/light_right.png");
+	gHandle[11] = LoadGraph("Resources/Map/light_left.png");
 
-	gHandle[10] = LoadGraph("Resources/Map/hide_door_message.png");
+	gHandle[19] = LoadGraph("Resources/Map/hide_door_message.png");
 }
 
 void MapChip::UpdateMapNumber(int nowMapNumber)
@@ -252,6 +268,50 @@ bool MapChip::OnCollisionDoor(float x,float y, int sizeX, int sizeY)
 				if(CheckHit(j * MAP_SIZE,i * MAP_SIZE,MAP_SIZE, MAP_SIZE,
 									x,y,sizeX,sizeY))
 				{ 
+					SetHideTrigger(true);
+
+					return true;
+				}
+			}
+			else {
+				SetHideTrigger(false);
+			}
+		}
+	}
+	return false;
+}
+
+bool MapChip::OnCollisionChair_Right(float x, float y, int sizeX, int sizeY)
+{
+	for (int i = 0; i < 14; i++) {
+		for (int j = 0; j < 82; j++) {
+			//ÉvÉåÉCÉÑÅ[Ç™î‡ÇÃëOÇ…óàÇΩÇÁìñÇΩÇËÇÃîªíËÇì¸ÇÍÇÈ
+			if (mapData[GetMapNumber()].data[i][j] == 10) {
+				if (CheckHit(j * MAP_SIZE, i * MAP_SIZE, MAP_SIZE, MAP_SIZE,
+					x, y, sizeX, sizeY))
+				{
+					SetHideTrigger(true);
+
+					return true;
+				}
+			}
+			else {
+				SetHideTrigger(false);
+			}
+		}
+	}
+	return false;
+}
+
+bool MapChip::OnCollisionChair_Left(float x, float y, int sizeX, int sizeY)
+{
+	for (int i = 0; i < 14; i++) {
+		for (int j = 0; j < 82; j++) {
+			//ÉvÉåÉCÉÑÅ[Ç™î‡ÇÃëOÇ…óàÇΩÇÁìñÇΩÇËÇÃîªíËÇì¸ÇÍÇÈ
+			if (mapData[GetMapNumber()].data[i][j] == 11) {
+				if (CheckHit(j * MAP_SIZE, i * MAP_SIZE, MAP_SIZE, MAP_SIZE,
+					x, y, sizeX, sizeY))
+				{
 					SetHideTrigger(true);
 
 					return true;

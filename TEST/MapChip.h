@@ -31,7 +31,7 @@ private:
 	MAPDATA mapData[MAP_COUNT];
 
 	//グラフィックハンドル
-	int gHandle[11];
+	int gHandle[20];
 
 	//隠れているかどうか
 	bool hide;
@@ -71,6 +71,10 @@ public:
 	void SetHideTrigger(bool hide) { this->hide = hide; }
 	bool GetHideTrigger() { return hide; }
 
+	//イスに潜伏中に見つかる
+	void SetHideFalse_Chair() { hide = false; }
+
+
 	//マップスクロール
 	void Scroll(float position);
 
@@ -87,6 +91,24 @@ public:
 	/// <param name="player_sizeX">:相手のの横幅</param>
 	/// <param name="player_sizeY">:相手のの縦幅</param>
 	bool OnCollisionDoor(float x,float y,int sizeX,int sizeY);
+
+	/// <summary>
+	/// イスとの当たり判定　/*右からくる敵のみに有効*/
+	/// </summary>
+	/// <param name="x">:相手のX座標</param>
+	/// <param name="y">:相手のY座標</param>
+	/// <param name="player_sizeX">:相手のの横幅</param>
+	/// <param name="player_sizeY">:相手のの縦幅</param>
+	bool OnCollisionChair_Right(float x,float y,int sizeX,int sizeY);
+
+	/// <summary>
+	/// イスとの当たり判定　/*左からくる敵のみに有効*/
+	/// </summary>
+	/// <param name="x">:相手のX座標</param>
+	/// <param name="y">:相手のY座標</param>
+	/// <param name="player_sizeX">:相手のの横幅</param>
+	/// <param name="player_sizeY">:相手のの縦幅</param>
+	bool OnCollisionChair_Left(float x,float y,int sizeX,int sizeY);
 
 	/// <summary>
 	/// ゴールとの当たり判定
