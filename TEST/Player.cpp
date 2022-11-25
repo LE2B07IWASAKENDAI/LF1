@@ -75,12 +75,15 @@ void Player::Update()
 
 	//ナイフ投げ
 	//Zキー押下時ナイフをプレイヤーの座標へ
-	if (CheckHitKey(KEY_INPUT_Z) == 1 && ShootFlag == 0)
+	if (CheckHitKey(KEY_INPUT_RETURN) == 1 && ShootFlag == 0)
 	{
 		Kposition_X = position_X + 200;
 		Kposition_Y = position_Y + 50;
+		if (position_X > center)
+		{
+			Kposition_X = center + 200;
+		}
 
-		
 		ShootFlag = 1;
 	}
 	//ナイフ移動処理
@@ -88,14 +91,14 @@ void Player::Update()
 	{
 		Kposition_X = Kposition_X + Kspeed;
 		DrawGraph(Kposition_X, Kposition_Y, knifetex, FALSE);
-		
+
 	}
 
 }
 
 void Player::Draw()
 {
-	
+
 }
 
 bool Player::GetHide()
@@ -120,18 +123,22 @@ void Player::Hidding()
 		//キー押されていない
 		if (keyCounter > 0)keyCounter = -1;//LSHIFTキーが離れた瞬間
 		else { keyCounter = 0; }           //LSHIFTキーが離れている状態
+
+
 	}
 
-		//押された瞬間の処理
-		if (keyCounter == 1 && drawPlayer) {
-			//扉に隠れたという演出で、描画をしないようにしている(11/11)
-			drawPlayer = false;
-		}
-		else if (keyCounter == 1 && !drawPlayer) {
-			//描画されていない時にLSHIFT押すと？
-			drawPlayer = true;//プレイヤーを描画する
-			SetkeyPermission(false);
-		}
+	//押された瞬間の処理
+	if (keyCounter == 1 && drawPlayer) {
+		//扉に隠れたという演出で、描画をしないようにしている(11/11)
+		drawPlayer = false;
+		ShootFlag = 0;
+	}
+	else if (keyCounter == 1 && !drawPlayer) {
+		//描画されていない時にLSHIFT押すと？
+		drawPlayer = true;//プレイヤーを描画する
+		SetkeyPermission(false);
+		ShootFlag = -1;
+	}
 }
 
 float Player::GetPosition_X()
