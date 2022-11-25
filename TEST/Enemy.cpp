@@ -58,12 +58,12 @@ void Enemy::Update()
 
 	if (trigger == 1)
 	{
-		flont = 0;         
+		//flont = 0;         
 		vector += speed_;
 	}
 	else 
 	{
-		flont = 1;
+		//flont = 1;
 		vector += speed; 
 	}
 	if (movement_position_X <= -216) 
@@ -76,17 +76,17 @@ void Enemy::Update()
 	}   
 	//position_X += vector;    
 	movement_position_X = position_X - before_position_X;       
-	if (trigger) 
+	if (trigger==0) 
 	{
 		flont = 0;         
-		Etexture = LoadGraph("Resources/Enemy/01_Enemy_L.png");
-		DrawBox(eye - 250 + vector, position_Y, eye + 192 + vector, position_Y + 192, GetColor(255, 0, 0), true);
-	}
-	else if (!trigger) 
-	{
-		flont = 1;
 		Etexture = LoadGraph("Resources/Enemy/01_Enemy_R.png");         
 		DrawBox(eye + vector, position_Y, eye + 450 + vector, position_Y + 192, GetColor(255, 0, 0), true); 
+	}
+	else if (trigger==1) 
+	{
+		flont = 1;
+		Etexture = LoadGraph("Resources/Enemy/01_Enemy_L.png");
+		DrawBox(eye - 250 + vector, position_Y, eye + 192 + vector, position_Y + 192, GetColor(255, 0, 0), true);
 	}
 
 
