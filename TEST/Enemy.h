@@ -15,7 +15,7 @@ public:
 	void Update();
 	void Draw();
 
-	float Set_position(float position_x, float position_y);
+	void Set_position(float position_x, float position_y);
 
 	float GetPosition_X();
 	float Getposition_Y();
@@ -41,4 +41,7 @@ private:
 	float beforSpeed = 0;
 	int eye = 0;
 	int count = 0;
+	float before_position_X;
+	float movement_position_X;
+	int trigger;
 };
