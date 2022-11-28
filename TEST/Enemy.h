@@ -61,8 +61,8 @@ private:
 	float speed_ = -5.0f;
 	//移動量
 	float vector = 0.0f;
-
-	float eye = 0;
+	//停止時間のカウント
+	int count = 0;
 
 	//生成された時の座標
 	float before_position_X;

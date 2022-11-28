@@ -11,7 +11,7 @@ Enemy::~Enemy()
 void Enemy::Initialize()
 {
 	LoadTexture();
-	eye = 0;
+	count = 0;
 	flont = 0;
 	death = 0;
 
@@ -41,11 +41,37 @@ void Enemy::Movement()
 	//ˆÚ“®—Ê‚ªˆê’è’l’´‚¦‚½‚ç”½‘Î•ûŒü‚Ö‘–‚é///////////////////
 	if (movement_position_X <= -1000)
 	{
-		flont = 1;
+		count++;
+		//’â~ˆ—
+		if (count <= 150)
+		{
+			speed = 0;
+			speed_ = 0;
+		}
+		else if (count >= 151)
+		{
+			speed = 5;
+			speed_ = -5;
+			count = 0;
+			flont = 1;
+		}
 	}
 	else if (movement_position_X >= 1000)
 	{
-		flont = 0;
+		count++;
+		//’â~ˆ—
+		if (count <= 150)
+		{
+			speed = 0;
+			speed_ = 0;
+		}
+		else if (count >= 151)
+		{
+			speed = 5;
+			speed_ = -5;
+			count = 0;
+			flont = 0;
+		}
 	}
 }
 
@@ -97,7 +123,6 @@ void Enemy::DebugLog()
 {
 	DrawFormatString(1607, 180, GetColor(255, 255, 255), "vector + eye : %f", position_X);
 	DrawFormatString(7, 180, GetColor(255, 255, 255), "FirstPosition : %f", before_position_X);
-	DrawFormatString(7, 280, GetColor(255, 255, 255), "eye : %f", eye);
 	DrawFormatString(7, 300, GetColor(255, 255, 255), "position_X : %f", position_X);
 	DrawFormatString(7, 400, GetColor(255, 255, 255), "Knife_position_X : %f", knife->GetPosition());
 }
