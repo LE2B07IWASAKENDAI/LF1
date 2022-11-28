@@ -17,14 +17,17 @@ void Player::Initialize()
 	position_Y = 600.0f;
 	death = 0;
 	hide = 0;
-	drawPlayer = false;//隠れているときは描画しない
+	//drawPlayer = false;//隠れているときは描画しない
 	keyPermission = false;
 	keyCounter = 0;
 	SetkeyPermission(false);
 
-	Kposition_X = -400.0f;
-	Kposition_Y = 600.0f;
-	Kspeed = 40.0f;
+	/*ナイフ関連*/
+		knife = new Knife();
+		//初期化
+		knife->Initialize();
+		hitFlag = 0;
+		diaspper_knife_trigger = 0;
 }
 
 void Player::Update()
@@ -43,7 +46,7 @@ void Player::Update()
 	}
 
 	//隠れている時以外は描画する
-	if (!drawPlayer || !GetHide()) {
+	if (hide == 0 || !GetHide()) {
 		//画像読み込み
 		
 		if(position_X >= end )
@@ -65,32 +68,31 @@ void Player::Update()
 		SetkeyPermission(false);
 	}
 
-
-	//ナイフ投げ
-	//Zキー押下時ナイフをプレイヤーの座標へ
-	if (CheckHitKey(KEY_INPUT_RETURN) == 1 && ShootFlag == 0)
-	{
-		Kposition_X = position_X + 200;
-		Kposition_Y = position_Y + 50;
-		if (position_X > center)
-		{
-			Kposition_X = center + 200;
-		}
-
-		ShootFlag = 1;
-	}
-	//ナイフ移動処理
-	if (ShootFlag == 1)
-	{
-		Kposition_X = Kposition_X + Kspeed;
-		DrawGraph(Kposition_X, Kposition_Y, knifetex, FALSE);
-
-	}
-		//隠れてる！の描画
-	if(drawPlayer){ DrawGraph(1602, 0, hidetext, FALSE); SetkeyPermission(true);}
+	//隠れてる！の描画
+	if (hide == 1) { DrawGraph(1602, 0, hidetext, FALSE); SetkeyPermission(true); }
 	//現在の座標を文字列描画
 	DrawPlayerPos();
 
+
+////////////////ナイフ投げ処理////////////////////////////////
+
+	//エンター押下時　ナイフ位置、トリガー更新
+	if (CheckHitKey(KEY_INPUT_RETURN) == 1 && hide == 0)
+	{
+		//ナイフの発射位置をセット
+		knife->Ready_Throw(position_X + 200, position_Y + 50);
+		SetDisapperKnifeTrigger(0);
+	}	
+
+	if (GetDisapperKnifeTrigger() == 1) {
+		knife->Dead();
+	}
+
+	//ナイフ更新処理
+	knife->Update();
+
+	SetKnifePos(knife->GetPosition());
+	hitFlag = knife->Getis_throw();
 }
 
 void Player::Draw()
@@ -120,21 +122,17 @@ void Player::Hidding()
 		//キー押されていない
 		if (keyCounter > 0)keyCounter = -1;//LSHIFTキーが離れた瞬間
 		else { keyCounter = 0; }           //LSHIFTキーが離れている状態
-
-
 	}
 
 	//押された瞬間の処理
-	if (keyCounter == 1 && drawPlayer) {
-		//扉に隠れたという演出で、描画をしないようにしている(11/11)
-		drawPlayer = false;
-		ShootFlag = 0;
+	if (keyCounter == 1 && hide == 0) {
+		//扉に隠れたという演出で、描画をしないようにしている
+		hide = 1;
 	}
-	else if (keyCounter == 1 && !drawPlayer) {
+	else if (keyCounter == 1 && hide == 1) {
 		//描画されていない時にLSHIFT押すと？
-		drawPlayer = true;//プレイヤーを描画する
+		hide = 0;//プレイヤーを描画する
 		SetkeyPermission(false);
-		ShootFlag = -1;
 	}
 }
 
@@ -178,7 +176,6 @@ void Player::LoadTexture()
 {
 	ptexture = LoadGraph("Resources/Player/green.png");
 	hidetext = LoadGraph("Resources/Player/hidding2.png");
-	knifetex = LoadGraph("Resources/Player/Knife.png");
 }
 
 void Player::DrawPlayerPos()

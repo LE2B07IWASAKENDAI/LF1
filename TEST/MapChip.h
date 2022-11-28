@@ -34,7 +34,7 @@ private:
 	int gHandle[20];
 
 	//隠れているかどうか
-	bool hide;
+	int hide; //1:隠れている　0:そうでない
 
 	//マップ動く変数
 	float scroll_X = 0.0f;
@@ -45,6 +45,9 @@ private:
 	//敵位置
 	float position_8_X = 0.0f;
 	float position_8_Y = 0.0f;
+
+	float position_12_X = 0.0f;
+	float position_12_Y = 0.0f;
 
 
 public:
@@ -68,11 +71,11 @@ public:
 	void UpdateMapNumber(int nowMapNumber);
 
 	//ドアに隠れているか否かのSetterとGetter
-	void SetHideTrigger(bool hide) { this->hide = hide; }
-	bool GetHideTrigger() { return hide; }
+	void SetHideTrigger(int hide) { this->hide = hide; }
+	int GetHideTrigger() { return hide; }
 
 	//イスに潜伏中に見つかる
-	void SetHideFalse_Chair() { hide = false; }
+	void SetHideFalse_Chair() { hide = 0; }
 
 
 	//マップスクロール
@@ -82,6 +85,10 @@ public:
 	//敵_8
 	float Get_position_8_X();
 	float Get_position_8_Y();
+
+	//花瓶的なの
+	float GetPosition_12_X();
+	float GetPosition_12_Y();
 
 	/// <summary>
 	/// 扉との当たり判定

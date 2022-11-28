@@ -1,5 +1,8 @@
 #pragma once
 #include"DxLib.h"
+
+#include "knife.h"
+
 #include <vector>
 
 using namespace std;
@@ -39,8 +42,16 @@ public:
 	void SetkeyPermission(bool keyPermission) {	this->keyPermission = keyPermission; }
 	bool GetkeyPermission() { return keyPermission; }
 
-	//現在プレイヤーが描画されているかを取得する関数
-	bool GetDrawPlayer() { return drawPlayer; }
+	//ナイフの座標
+	float GetKnifePos() { return knifePosition; }
+	void SetKnifePos(float pos) { knifePosition = pos; }
+
+	//ナイフの当たり判定
+	int GetHitFlag() { return hitFlag; }
+
+	//ナイフを消すトリガー
+	void SetDisapperKnifeTrigger(int flag) { diaspper_knife_trigger = flag; }
+	int GetDisapperKnifeTrigger() { return diaspper_knife_trigger; }
 
 //Debugモードのみで使うもの(予定)
 	void DrawPlayerPos();
@@ -53,8 +64,8 @@ private:
 	float position_X = 0.0f;   //X座標
 	float position_Y = 700.0f; //Y座標
 	float speed = 7.5f;        //移動速度
-	bool hide = false;//隠れる
-	bool drawPlayer = false;//隠れているときは描画しない
+	int hide = 0;//1：隠れている　0:そうでない
+	//bool drawPlayer = false;//隠れているときは描画しない
 	bool keyPermission = false;//扉の中にいるときは、移動出来ないようにする。
 
 	float return_Positin = 0.0f;
@@ -66,12 +77,14 @@ public:
 
 	//ナイフ
 private:
-	float Kposition_X = 0.0f;
-	float Kposition_Y = 600.0f;
+	Knife* knife;
 
-	float Kspeed = 12.0f;
+	//敵との当たり判定用で使うナイフの座標
+	float knifePosition;
 
-	int knifetex = 0;
-	int ShootFlag = 0;
+	//ナイフ⇔敵の当たり判定
+	int hitFlag;
 
+	//ナイフを消すトリガー
+	int diaspper_knife_trigger;
 };

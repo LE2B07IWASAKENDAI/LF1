@@ -1,9 +1,11 @@
 #include "DxLib.h" 
+
 #include "MapChip.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Vase.h"
+
 #include "Collision.h"
-//#include "knife.h";
 
 
 int WINAPI WinMain(
@@ -52,12 +54,14 @@ int WINAPI WinMain(
     MapChip* mapChip = new MapChip();
     Player* player = new Player();
     Enemy* enemy = new Enemy();
+    Vase* vase = new Vase();
+
     Collision* collision = new Collision();
-    //knife* Knife = new knife();
+
     mapChip->Initialize();
     player->Initialize();
     enemy->Initialize();
-    //Knife->Initialize();
+    vase->Initialize();
 
     //ゲームループ
     int GameState;
@@ -150,22 +154,19 @@ int WINAPI WinMain(
             //マップ番号をセット
             mapChip->SetMapNumber(0);
             mapChip->Draw(player->GetPosition_X());
-            player->Update();
-            //Knife->Update();
-            
 
+            player->Update();
+            
             enemy->Set_position(mapChip->Get_position_8_X(), mapChip->Get_position_8_Y());
             enemy->Update();
+            enemy->Draw();
 
-            //ゲームオーバー処理           
-            if (player->GetkeyPermission() == false) {
-                float a = enemy->GetPosition_X();
-                a = enemy->GetPosition_X();
-                player->SetDeath(collision->Found(player->GetPosition_x(), enemy->GetPosition_X(), enemy->GetFlont()));
+            //ナイフと敵との当たり判定
+            if (collision->KnifetoEnemy(player->GetKnifePos(), enemy->GetPosition_X())) {
+                if (player->GetHitFlag() == 1) {
+                    enemy->Dead();
+                }
             }
-
-            //プレイヤーの描画のトリガーに合わせて、マップの当たり判定のON,OFFを操作している
-            mapChip->SetHideTrigger(player->GetDrawPlayer());
 
             //扉⇔プレイヤー　の当たり判定
             if (mapChip->OnCollisionDoor(player->GetPosition_X(), player->GetPosition_Y(),
@@ -174,14 +175,16 @@ int WINAPI WinMain(
                 player->Hidding();
             }            
 
-            //マップチップ.csのhideの値と連動
-            player->SetHide(mapChip->GetHideTrigger());
+            //ゲームオーバー処理           
+            if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy->GetDeath() == 0) {
+                player->SetDeath(collision->Found(player->GetPosition_x(), enemy->GetPosition_X(), enemy->GetFlont()));
+            }
 
             //ゲームオーバー画面へ遷移
             if (player->death == 1)
             {
                 DrawFormatString(1607, 210, GetColor(255, 255, 255), "当たっている！！！");
-                //GameState = GameOver;
+                GameState = GameOver;
             }
 
             //ステージ2へ
@@ -208,17 +211,46 @@ int WINAPI WinMain(
             //    }
             //}
 
+
             //マップ番号をセット
             mapChip->SetMapNumber(1);
             mapChip->Draw(player->GetPosition_X());
+
+            vase->SetPosition(mapChip->GetPosition_12_X(), mapChip->GetPosition_12_Y());
+            vase->Draw();
+
             player->Update();
 
-            enemy->Set_position(mapChip->Get_position_8_X(), mapChip->Get_position_8_Y());
-            enemy->Update();
+            if (enemy->GetDeath() == 0) {
+                enemy->Set_position(mapChip->Get_position_8_X(), mapChip->Get_position_8_Y());
+                enemy->Update();
+                enemy->Draw();
+            }
 
 
-            //プレイヤーの描画のトリガーに合わせて、マップの当たり判定のON,OFFを操作している
-            mapChip->SetHideTrigger(player->GetDrawPlayer());
+            //ナイフと敵との当たり判定
+            if (collision->KnifetoEnemy(player->GetKnifePos(), enemy->GetPosition_X())) {
+                if (player->GetHitFlag() == 1) {
+                    enemy->Dead();
+                    if (enemy->GetDeath() == 1) {
+                        player->SetDisapperKnifeTrigger(1);
+
+                        //delete以外でやるならトリガー用意して、一度当たったらtrueで二度と判定の条件式内に処理が通らないようにする
+                        delete enemy;
+                    }
+                }
+            }
+
+            //ナイフと花瓶の当たり判定
+            if (collision->KnifetoVase(player->GetKnifePos(), vase->GetPosition())) {
+                //まだ花瓶があるなら
+                if (vase->GetDead() == 0) {
+                    vase->SetDead(1);
+                    player->SetDisapperKnifeTrigger(1);
+
+                    delete vase;
+                }
+            }
 
             //扉⇔プレイヤー　の当たり判定
             if (mapChip->OnCollisionDoor(player->GetPosition_X(), player->GetPosition_Y(),
@@ -227,36 +259,33 @@ int WINAPI WinMain(
                 player->Hidding();
             }
 
-            //イス⇔プレイヤー　の当たり判定 /*右*/
+            //イス⇔プレイヤー　の当たり判定 /*対右*/
             if (mapChip->OnCollisionChair_Right(player->GetPosition_X(), player->GetPosition_Y(),
                 player->GetPlayerSizeX(), player->GetPlayerSizeY()))
             {
                 player->Hidding();
-                if (enemy->GetFlont() == 0 && 
-                    player->SetDeath(collision->Found(player->GetPosition_x(), enemy->GetPosition_X(), enemy->GetFlont()))) 
+
+                if (enemy->GetFlont() == 1 && enemy->GetDeath() == 0 &&
+                    collision->Found(player->GetPosition_x(), enemy->GetPosition_X(), enemy->GetFlont())) 
                 {
-                    mapChip->SetHideFalse_Chair();
+                    player->SetHide(0);
                 }
             }
 
-            //イス⇔プレイヤー　の当たり判定　/*左*/
+            //イス⇔プレイヤー　の当たり判定　/*対左*/
             else if (mapChip->OnCollisionChair_Left(player->GetPosition_X(), player->GetPosition_Y(),
                 player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-                 {
-                    player->Hidding();
-                    if (enemy->GetFlont() == 1 &&
+            {
+                 player->Hidding();
+                 if (enemy->GetFlont() == 0 && enemy->GetDeath() == 0 &&
                         player->SetDeath(collision->Found(player->GetPosition_x(), enemy->GetPosition_X(), enemy->GetFlont())))
-                    {
-                        mapChip->SetHideFalse_Chair();
-                    }
+                 {
+                     player->SetHide(0);
                  }
-
-            //マップチップ.csのhideの値と連動
-            player->SetHide(mapChip->GetHideTrigger());
-
+            }
 
             //ゲームオーバー処理           
-            if (player->GetkeyPermission() == false) {
+            if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy->GetDeath() == 0) {
                 player->SetDeath(collision->Found(player->GetPosition_x(), enemy->GetPosition_X(), enemy->GetFlont()));
             }
 
@@ -265,7 +294,7 @@ int WINAPI WinMain(
             {
                 DrawFormatString(1607, 210, GetColor(255, 255, 255), "当たっている！！！");
 
-                GameState = GameOver;
+                //GameState = GameOver;
             }
 
             //ステージ3へ
@@ -286,20 +315,20 @@ int WINAPI WinMain(
             //マップ番号をセット
             mapChip->SetMapNumber(2);
             mapChip->Draw(player->GetPosition_X());
+
             player->Update();
 
             enemy->Set_position(mapChip->Get_position_8_X(), mapChip->Get_position_8_Y());
             enemy->Update();
+            enemy->Draw();
 
-            //ゲームオーバー処理           
-            if (player->GetkeyPermission() == false) {
-                float a = enemy->GetPosition_X();
-                a = enemy->GetPosition_X();
-                player->SetDeath(collision->Found(player->GetPosition_x(), enemy->GetPosition_X(), enemy->GetFlont()));
+
+            //ナイフと敵との当たり判定
+            if (collision->KnifetoEnemy(player->GetKnifePos(), enemy->GetPosition_X())) {
+                if (player->GetHitFlag() == 1) {
+                    enemy->Dead();
+                }
             }
-
-            //プレイヤーの描画のトリガーに合わせて、マップの当たり判定のON,OFFを操作している
-            mapChip->SetHideTrigger(player->GetDrawPlayer());
 
             //扉⇔プレイヤー　の当たり判定
             if (mapChip->OnCollisionDoor(player->GetPosition_X(), player->GetPosition_Y(),
@@ -308,8 +337,10 @@ int WINAPI WinMain(
                 player->Hidding();
             }
 
-            //マップチップ.csのhideの値と連動
-            player->SetHide(mapChip->GetHideTrigger());
+            //ゲームオーバー処理           
+            if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy->GetDeath() == 0) {
+                player->SetDeath(collision->Found(player->GetPosition_x(), enemy->GetPosition_X(), enemy->GetFlont()));
+            }
 
             //ゲームオーバー画面へ遷移
             if (player->death == 1)
