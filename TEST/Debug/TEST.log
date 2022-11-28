@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  main.cpp
 C:\後期チーム卒業制作_No11\TEST\knife.h(2,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
 C:\後期チーム卒業制作_No11\TEST\knife.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
@@ -8,3 +9,17 @@ C:\後期チーム卒業制作_No11\TEST\main.cpp(283,58): warning C4244: '引�
 C:\後期チーム卒業制作_No11\TEST\main.cpp(291,50): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
 C:\後期チーム卒業制作_No11\TEST\main.cpp(344,50): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
   TEST.vcxproj -> C:\後期チーム卒業制作_No11\TEST\Debug\TEST.exe
+=======
+﻿  StopEnemy.cpp
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(32,64): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(32,46): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(32,23): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(32,11): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(38,70): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(38,52): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(38,29): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(38,22): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(82,25): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(82,13): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  TEST.vcxproj -> C:\Users\K019G1373\Desktop\seisakuLast\TEST\Debug\TEST.exe
+>>>>>>> mise1128
