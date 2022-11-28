@@ -59,6 +59,7 @@ void Knife::Update()
 		life >= 0 ? Draw() : Dead();
 	}
 	DrawFormatString(0, 200, GetColor(255, 255, 255), "life : %d", life);
+	DrawFormatString(0, 250, GetColor(255, 255, 255), "position : %f", GetPosition());
 }
 
 void Knife::Draw()

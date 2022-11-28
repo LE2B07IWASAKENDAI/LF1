@@ -244,11 +244,13 @@ int WINAPI WinMain(
             //ƒiƒCƒt‚Æ‰Ô•r‚Ì“–‚½‚è”»’è
             if (collision->KnifetoVase(player->GetKnifePos(), vase->GetPosition())) {
                 //‚Ü‚¾‰Ô•r‚ª‚ ‚é‚È‚ç
-                if (vase->GetDead() == 0) {
-                    vase->SetDead(1);
-                    player->SetDisapperKnifeTrigger(1);
+                if (player->GetHitFlag() == 1) {
+                    if (vase->GetDead() == 0) {
+                        vase->SetDead(1);
+                        player->SetDisapperKnifeTrigger(1);
 
-                    delete vase;
+                        delete vase;
+                    }
                 }
             }
 

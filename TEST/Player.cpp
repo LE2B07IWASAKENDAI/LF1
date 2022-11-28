@@ -80,7 +80,7 @@ void Player::Update()
 	if (CheckHitKey(KEY_INPUT_RETURN) == 1 && hide == 0)
 	{
 		//ナイフの発射位置をセット
-		knife->Ready_Throw(position_X + 200, position_Y + 50);
+		knife->Ready_Throw(GetPosition_x() + 200, GetPosition_Y() + 50);
 		SetDisapperKnifeTrigger(0);
 	}	
 

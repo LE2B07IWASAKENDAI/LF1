@@ -27,8 +27,11 @@ public:
 	bool GetHide();
 	void SetHide(bool sethide);
 
+	//ローカル座標
 	float GetPosition_X();
+	//グローバル座標
 	float GetPosition_x();
+
 	float GetPosition_Y();
 	float SetPosition(float x, float y);
 

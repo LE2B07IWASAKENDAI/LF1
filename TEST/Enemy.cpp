@@ -39,11 +39,11 @@ void Enemy::Movement()
 	movement_position_X = position_X - before_position_X;
 
 	//ˆÚ“®—Ê‚ªˆê’è’l’´‚¦‚½‚ç”½‘Î•ûŒü‚Ö‘–‚é///////////////////
-	if (movement_position_X <= -216)
+	if (movement_position_X <= -1000)
 	{
 		flont = 1;
 	}
-	else if (movement_position_X >= 216)
+	else if (movement_position_X >= 1000)
 	{
 		flont = 0;
 	}
