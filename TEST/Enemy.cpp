@@ -14,10 +14,12 @@ void Enemy::Initialize()
 	count = 0;
 	flont = 0;
 	death = 0;
+	Mode = Normal;
 
 //オブジェクト生成
 	knife = new Knife();
 	collision = new Collision();
+	vase = new Vase();
 }
 
 void Enemy::Movement()
@@ -36,42 +38,80 @@ void Enemy::Movement()
 
 
 	//初期位置と現在位置の座標差を取得
-	movement_position_X = position_X - before_position_X;
 
-	//移動量が一定値超えたら反対方向へ走る///////////////////
-	if (movement_position_X <= -1000)
+	switch (Mode)
 	{
-		count++;
-		//停止処理
-		if (count <= 150)
+	case Normal:
+		movement_position_X = position_X - before_position_X;
+		//移動量が一定値超えたら反対方向へ走る///////////////////
+		if (movement_position_X <= -1000)
 		{
-			speed = 0;
-			speed_ = 0;
+			count++;
+			//停止処理
+			if (count <= 150)
+			{
+				speed = 0;
+				speed_ = 0;
+			}
+			else if (count >= 151)
+			{
+				speed = 5;
+				speed_ = -5;
+				count = 0;
+				flont = 1;
+			}
 		}
-		else if (count >= 151)
+		else if (movement_position_X >= 1000)
 		{
-			speed = 5;
-			speed_ = -5;
-			count = 0;
-			flont = 1;
+			count++;
+			//停止処理
+			if (count <= 150)
+			{
+				speed = 0;
+				speed_ = 0;
+			}
+			else if (count >= 151)
+			{
+				speed = 5;
+				speed_ = -5;
+				count = 0;
+				flont = 0;
+			}
 		}
-	}
-	else if (movement_position_X >= 1000)
-	{
-		count++;
-		//停止処理
-		if (count <= 150)
+		break;
+	case Check:
+		if (position_X > BreakPoint)
 		{
-			speed = 0;
-			speed_ = 0;
-		}
-		else if (count >= 151)
-		{
-			speed = 5;
-			speed_ = -5;
-			count = 0;
 			flont = 0;
 		}
+		if (position_X < BreakPoint)
+		{
+			flont = 1;
+		}
+
+		if ((int)position_X == BreakPoint)
+		{
+			speed = 0;
+			speed_ = 0;
+			count++;
+		}
+
+		if (count >= 1 && count < 100)
+		{
+			flont = 0;
+		}
+		else if (count >= 101 && count < 200)
+		{
+			flont = 1;
+		}
+		else if (count >= 201)
+		{
+			Mode = Normal;
+			count = 0;
+			speed = 5;
+			speed_ = -5;
+		}
+		break;
 	}
 }
 
@@ -133,4 +173,10 @@ void Enemy::Set_position(float position_x, float position_y)
 	position_Y = position_y;
 
 	before_position_X = position_X;
+}
+
+void Enemy::CheckSound(float x)
+{
+	Mode = Check;
+	BreakPoint = x;
 }

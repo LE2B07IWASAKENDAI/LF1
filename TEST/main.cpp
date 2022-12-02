@@ -89,6 +89,9 @@ int WINAPI WinMain(
 
     int load = 0;
 
+    //花瓶フラグ
+    int BreakFlag = 0;
+
     static bool mapInit = true;
     //ループテスト用
     //int StartTime;
@@ -234,7 +237,6 @@ int WINAPI WinMain(
                     enemy->Dead();
                     if (enemy->GetDeath() == 1) {
                         player->SetDisapperKnifeTrigger(1);
-
                         //delete以外でやるならトリガー用意して、一度当たったらtrueで二度と判定の条件式内に処理が通らないようにする
                         delete enemy;
                     }
@@ -245,15 +247,21 @@ int WINAPI WinMain(
             if (collision->KnifetoVase(player->GetKnifePos(), vase->GetPosition())) {
                 //まだ花瓶があるなら
                 if (player->GetHitFlag() == 1) {
+                    //花瓶反応呼びだし
                     if (vase->GetDead() == 0) {
                         vase->SetDead(1);
                         player->SetDisapperKnifeTrigger(1);
 
-                        delete vase;
+                        //delete vase;
                     }
                 }
             }
 
+            if (vase->GetDead() == 1&&BreakFlag==0)
+            {
+                enemy->CheckSound(vase->GetPosition());
+                BreakFlag = 1;
+            }
             //扉⇔プレイヤー　の当たり判定
             if (mapChip->OnCollisionDoor(player->GetPosition_X(), player->GetPosition_Y(),
                 player->GetPlayerSizeX(), player->GetPlayerSizeY()))

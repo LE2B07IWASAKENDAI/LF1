@@ -4,6 +4,7 @@
 
 #include"knife.h"
 #include"Collision.h"
+#include"Vase.h"
 
 using namespace std;
 
@@ -46,6 +47,14 @@ public:
 	//向いている方向
 	int GetFlont() { return flont; }
 
+	void CheckSound(float x);
+	int Mode;
+	enum Mode
+	{
+		Normal,
+		Check,
+	};
+
 public:
 	//グラフィックハンドル
 	int Etexture;
@@ -68,8 +77,10 @@ private:
 	float before_position_X;
 	//初期位置と、現在位置との座標差
 	float movement_position_X;
+	float BreakPoint = 0;
 
 private:
 	Knife* knife;
 	Collision* collision;
+	Vase* vase;
 };
