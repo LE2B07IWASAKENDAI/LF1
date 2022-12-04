@@ -28,8 +28,11 @@ private:
 	//マップ番号
 	int mapNumber = 0;
 
+public:
 	MAPDATA mapData[MAP_COUNT];
 
+
+private:
 	//グラフィックハンドル
 	int gHandle[20];
 
@@ -81,6 +84,8 @@ public:
 	//マップスクロール
 	void Scroll(float position);
 
+	float GetScroll() { return scroll_X; }
+
 	//マップ座標を渡す
 	//敵_8
 	float Get_position_8_X();
@@ -97,7 +102,7 @@ public:
 	/// <param name="y">:相手のY座標</param>
 	/// <param name="player_sizeX">:相手のの横幅</param>
 	/// <param name="player_sizeY">:相手のの縦幅</param>
-	bool OnCollisionDoor(float x,float y,int sizeX,int sizeY);
+	bool OnCollisionDoor(float x, float y, int sizeX, int sizeY);
 
 	/// <summary>
 	/// イスとの当たり判定　/*右からくる敵のみに有効*/
@@ -106,7 +111,7 @@ public:
 	/// <param name="y">:相手のY座標</param>
 	/// <param name="player_sizeX">:相手のの横幅</param>
 	/// <param name="player_sizeY">:相手のの縦幅</param>
-	bool OnCollisionChair_Right(float x,float y,int sizeX,int sizeY);
+	bool OnCollisionChair_Right(float x, float y, int sizeX, int sizeY);
 
 	/// <summary>
 	/// イスとの当たり判定　/*左からくる敵のみに有効*/
@@ -115,7 +120,7 @@ public:
 	/// <param name="y">:相手のY座標</param>
 	/// <param name="player_sizeX">:相手のの横幅</param>
 	/// <param name="player_sizeY">:相手のの縦幅</param>
-	bool OnCollisionChair_Left(float x,float y,int sizeX,int sizeY);
+	bool OnCollisionChair_Left(float x, float y, int sizeX, int sizeY);
 
 	/// <summary>
 	/// ゴールとの当たり判定
@@ -138,7 +143,7 @@ public:
 	/// <param name="w2">:相手側の横幅</param>
 	/// <param name="h2">:相手側の縦幅</param>
 	/// <returns>: return = 1なら当たっている </returns>
-	int CheckHit(int x1,int y1,int w1,int h1,
+	int CheckHit(int x1, int y1, int w1, int h1,
 		int x2, int y2, int w2, int h2);
 
 	//マップ情報の削除
