@@ -473,7 +473,7 @@ int WINAPI WinMain(
 
             if (vase->GetDead() == 1)
             {
-                for (int i = 0; enemy.size(); i++) {
+                for (int i = 0; i < enemy.size(); i++) {
                     enemy[i]->CheckSound(vase->GetPosition());
                 }
                 vase->SetDead(2);
