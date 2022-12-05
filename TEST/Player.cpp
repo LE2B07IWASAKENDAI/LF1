@@ -14,7 +14,7 @@ void Player::Initialize()
 {
 	LoadTexture();
 	position_X = 0.0f;
-	position_Y = 600.0f;
+	position_Y = 576.0f;
 	death = 0;
 	hide = 0;
 	//drawPlayer = false;//‰B‚ê‚Ä‚¢‚é‚Æ‚«‚Í•`‰æ‚µ‚È‚¢
