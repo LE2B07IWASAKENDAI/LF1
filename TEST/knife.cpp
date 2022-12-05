@@ -15,12 +15,12 @@ void Knife::Initialize()
 	LoadTexture();
 	is_throw = 0;
 	life = 30;
-	range = 500.0f;
 	position_X = 0;
 	position_Y = 0;
 	speed = 20.0f;
 	front = 0;
 	Counter = 0;
+	stock = 10;
 }
 
 void Knife::Ready_Throw(float Ppos_x, float Ppos_y)
@@ -72,6 +72,7 @@ void Knife::Throw()
 	{
 		front = 1;
 	}
+
 	if (CheckHitKey(KEY_INPUT_D))
 	{
 		Counter++;
@@ -94,6 +95,8 @@ void Knife::Throw()
 
 	//¶‘¶ŽžŠÔ‚ðŒ¸‚ç‚·
 	life--;
+
+	
 }
 
 void Knife::Dead()
@@ -105,6 +108,12 @@ void Knife::Dead()
 	is_throw = 0;
 	//ˆÊ’u
 	position_X = 0;
+	//Žc‹@
+	stock--;
+	if (stock == 0)
+	{
+		is_throw = -1;
+	}
 }
 
 void Knife::Update()
@@ -113,7 +122,10 @@ void Knife::Update()
 		Throw();
 		//life‚ª0ˆÈã‚È‚ç•`‰æ‚»‚êˆÈŠO‚ÍŽ€–Sˆ—
 		life >= 0 ? Draw() : Dead();
+		
+		
 	}
+	DrawFormatString(0, 225, GetColor(255, 255, 255), "stock : %d", stock);
 	DrawFormatString(0, 200, GetColor(255, 255, 255), "life : %d", life);
 	DrawFormatString(0, 250, GetColor(255, 255, 255), "position : %f", GetPosition());
 }

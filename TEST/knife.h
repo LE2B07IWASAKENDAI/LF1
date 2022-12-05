@@ -63,4 +63,6 @@ private:
 
 	//ƒiƒCƒt‚Ì¶‘¶ŠÔ
 	int life = 100;
+
+	int stock = 10;
 };
