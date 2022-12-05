@@ -83,17 +83,26 @@ void Enemy::Movement()
 		if (position_X > BreakPoint)
 		{
 			flont = 0;
+			if (speed_ == 0 && EqualFlag == 0)
+			{
+				speed_ = -5;
+			}
 		}
 		if (position_X < BreakPoint)
 		{
 			flont = 1;
+			if (speed == 0 && EqualFlag == 0)
+			{
+				speed = 5;
+			}
 		}
 
-		if ((int)position_X == BreakPoint)
+		if (position_X + 10 > BreakPoint && position_X - 10 < BreakPoint)
 		{
 			speed = 0;
 			speed_ = 0;
 			count++;
+			EqualFlag = 1;
 		}
 
 		if (count >= 1 && count < 100)
@@ -110,6 +119,7 @@ void Enemy::Movement()
 			count = 0;
 			speed = 5;
 			speed_ = -5;
+			EqualFlag = 0;
 		}
 		break;
 	}

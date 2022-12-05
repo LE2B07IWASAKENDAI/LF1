@@ -63,7 +63,7 @@ public:
 	float position_Y = 0.0f;
 
 	int death = 0; //生死　0:生きている 1:死んでいる
-	int flont = 0;//0:前　1:後ろ
+	int flont = 0;//0:後ろ(左)　1:前(右)
 private:
 	//右、左に進む速度
 	float speed = 5.0f;
@@ -78,6 +78,7 @@ private:
 	//初期位置と、現在位置との座標差
 	float movement_position_X;
 	float BreakPoint = 0;
+	int EqualFlag = 0; //0:未到達　1:到達
 
 private:
 	Knife* knife;
