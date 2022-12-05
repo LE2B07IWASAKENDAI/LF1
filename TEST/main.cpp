@@ -171,6 +171,30 @@ int WINAPI WinMain(
                 //マップ番号をセット
                 mapChip->SetMapNumber(0);
 
+                //マップチップ番号の位置を保存する
+                for (int i = 0; i < 14; i++) {
+                    for (int j = 0; j < 84; j++) {
+
+                        switch (mapChip->mapData[mapChip->GetMapNumber()].data[i][j]) {
+
+                        case 4:
+                            open_doorx.push_back(float(j * 64));
+                            open_doory.push_back(float(i * 64));
+                            break;
+
+                        case 5:
+                            doorx.push_back(float(j * 64));
+                            doory.push_back(float(i * 64));
+                            break;
+
+                        case 8:
+                            eposx.push_back(float(j * 64));
+                            eposy.push_back(float(i * 64));
+                            break;
+                        }
+                    }
+                }
+
                 //enemy push_backをしていく
                 for (int i = 0; i < 14; i++) {
                     for (int j = 0; j < 84; j++) {
@@ -200,29 +224,6 @@ int WINAPI WinMain(
 
             player->Update();
             
-            //マップチップ番号の位置を保存する
-            for (int i = 0; i < 14; i++) {
-                for (int j = 0; j < 84; j++) {
-
-                    switch (mapChip->mapData[mapChip->GetMapNumber()].data[i][j]) {
-
-                    case 4:
-                        open_doorx.push_back(float(j * 64));
-                        open_doory.push_back(float(i * 64));
-                        break;
-
-                    case 5:
-                        doorx.push_back(float(j * 64));
-                        doory.push_back(float(i * 64));
-                        break;
-
-                    case 8:
-                        eposx.push_back(float(j * 64));
-                        eposy.push_back(float(i * 64));
-                        break;
-                    }
-                }
-            }
 
             /*空いているドアの描画*/
             for (int i = 0; i < open_doorx.size(); i++) {
@@ -293,6 +294,12 @@ int WINAPI WinMain(
                     doory.clear();
                     doory.shrink_to_fit();
                 }
+                for (int i = 0; i < eposx.size(); i++) {
+                    eposx.clear();
+                    eposx.shrink_to_fit();
+                    eposy.clear();
+                    eposy.shrink_to_fit();
+                }
                 for (int i = 0; i < enemy.size(); i++) {
                     enemy.clear();
                     //コンテナのサイズまでメモリを解放
@@ -306,6 +313,40 @@ int WINAPI WinMain(
 
                 //マップ番号をセット
                 mapChip->SetMapNumber(1);
+
+
+                //マップチップ番号の位置を保存する
+                for (int i = 0; i < 14; i++) {
+                    for (int j = 0; j < 84; j++) {
+
+                        switch (mapChip->mapData[mapChip->GetMapNumber()].data[i][j]) {
+                        case 4:
+                            open_doorx.push_back(float(j * 64));
+                            open_doory.push_back(float(i * 64));
+                            break;
+
+                        case 5:
+                            doorx.push_back(float(j * 64));
+                            doory.push_back(float(i * 64));
+                            break;
+
+                        case 6:
+                            chairx.push_back(float(j * 64));
+                            chairy.push_back(float(i * 64));
+                            break;
+
+                        case 7:
+                            deskx.push_back(float(j * 64));
+                            desky.push_back(float(i * 64));
+                            break;
+
+                        case 8:
+                            eposx.push_back(float(j * 64));
+                            eposy.push_back(float(i * 64));
+                            break;
+                        }
+                    }
+                }
 
                 //enemy push_backをしていく
                 for (int i = 0; i < 14; i++) {
@@ -338,46 +379,11 @@ int WINAPI WinMain(
             //}
 
 
-            //マップ番号をセット
-            mapChip->SetMapNumber(1);
             mapChip->Draw(player->GetPosition_X());
 
             vase->SetPosition(mapChip->GetPosition_12_X(), mapChip->GetPosition_12_Y());
             vase->Draw();
 
-
-            //マップチップ番号の位置を保存する
-            for (int i = 0; i < 14; i++) {
-                for (int j = 0; j < 84; j++) {
-
-                    switch (mapChip->mapData[mapChip->GetMapNumber()].data[i][j]) {
-                    case 4:
-                        open_doorx.push_back(float(j * 64));
-                        open_doory.push_back(float(i * 64));
-                        break;
-
-                    case 5:
-                        doorx.push_back(float(j * 64));
-                        doory.push_back(float(i * 64));
-                        break;
-
-                    case 6:
-                        chairx.push_back(float(j * 64));
-                        chairy.push_back(float(i * 64));
-                        break;
-
-                    case 7:
-                        deskx.push_back(float(j * 64));
-                        desky.push_back(float(i * 64));
-                        break;
-
-                    case 8:
-                        eposx.push_back(float(j * 64));
-                        eposy.push_back(float(i * 64));
-                        break;
-                    }
-                }
-            }
 
             /*空いているドア描画*/
             for (int i = 0; i < open_doorx.size(); i++) {
@@ -423,20 +429,6 @@ int WINAPI WinMain(
                     player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
                 }
 
-
-                //ナイフと敵との当たり判定
-                if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
-                    if (player->GetHitFlag() == 1) {
-                        enemy[i]->Dead();
-                        if (enemy[i]->GetDeath() == 1) {
-                            player->SetDisapperKnifeTrigger(1);
-
-                            //delete以外でやるならトリガー用意して、一度当たったらtrueで二度と判定の条件式内に処理が通らないようにする
-                            delete enemy[i];
-                        }
-                    }
-                }
-
                 //ナイフと花瓶の当たり判定
                 if (collision->KnifetoVase(player->GetKnifePos(), vase->GetPosition())) {
                     //まだ花瓶があるなら
@@ -448,7 +440,6 @@ int WINAPI WinMain(
                         }
                     }
                 }
-
             }
 
             for (int i = 0; i < enemy.size(); i++) {
@@ -462,6 +453,7 @@ int WINAPI WinMain(
                 }
                 BreakFlag = 1;
             }
+
             //扉⇔プレイヤー　の当たり判定
             if (mapChip->OnCollisionDoor(player->GetPosition_X(), player->GetPosition_Y(),
                 player->GetPlayerSizeX(), player->GetPlayerSizeY()))
