@@ -38,10 +38,12 @@ void Player::Update()
 		if (CheckHitKey(KEY_INPUT_A))
 		{
 			position_X = position_X - speed;
+			rl = 1;
 		}
 		if (CheckHitKey(KEY_INPUT_D))
 		{
 			position_X = position_X + speed;
+			rl = 0;
 		}
 	}
 
@@ -49,20 +51,40 @@ void Player::Update()
 	if (hide == 0 || !GetHide()) {
 		//‰æ‘œ“Ç‚Ýž‚Ý
 		
-		if(position_X >= end )
-		{
-			return_Positin = position_X - end + center;
-			DrawGraph(position_X - end + center, position_Y, ptexture, FALSE);
+		if (rl == 0) {
+			if (position_X >= end)
+			{
+				return_Positin = position_X - end + center;
+				DrawGraph(position_X - end + center, position_Y, ptexture_R, TRUE);
+			}
+			else if (position_X >= center)
+			{
+				return_Positin = center;
+				DrawGraph(center, position_Y, ptexture_R, TRUE);
+			}
+			else
+			{
+				return_Positin = position_X;
+				DrawGraph(position_X, position_Y, ptexture_R, TRUE);
+			}
 		}
-		else if (position_X >= center)
+		else if(rl ==1)
 		{
-			return_Positin = center;
-			DrawGraph(center, position_Y, ptexture, FALSE);
-		}
-		else
-		{
-			return_Positin = position_X;
-			DrawGraph(position_X, position_Y, ptexture, FALSE);
+			if (position_X >= end)
+			{
+				return_Positin = position_X - end + center;
+				DrawGraph(position_X - end + center, position_Y, ptexture_L, TRUE);
+			}
+			else if (position_X >= center)
+			{
+				return_Positin = center;
+				DrawGraph(center, position_Y, ptexture_L, TRUE);
+			}
+			else
+			{
+				return_Positin = position_X;
+				DrawGraph(position_X, position_Y, ptexture_L, TRUE);
+			}
 		}
 		
 		SetkeyPermission(false);
@@ -174,7 +196,8 @@ int Player::SetDeath(int d)
 
 void Player::LoadTexture()
 {
-	ptexture = LoadGraph("Resources/Player/green.png");
+	ptexture_R = LoadGraph("Resources/Player/Player_R.png");
+	ptexture_L = LoadGraph("Resources/Player/Player_L.png");
 	hidetext = LoadGraph("Resources/Player/hidding2.png");
 }
 

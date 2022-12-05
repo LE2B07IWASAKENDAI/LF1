@@ -60,7 +60,9 @@ public:
 	void DrawPlayerPos();
 
 private:
-	int ptexture = 0;
+	int ptexture_R = 0;
+	int ptexture_L = 0;
+	int rl = 0;
 	int hidetext = 0;
 	int keyCounter = 0;//キーを押した瞬間を取るためのカウンター
 	int size_x = 200, size_y = 200;//プレイヤー画像のサイズ(11/10に津村が追加 ※後で消去)
