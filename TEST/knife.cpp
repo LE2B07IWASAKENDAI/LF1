@@ -1,5 +1,7 @@
 #include "knife.h"
 
+#define PI 3.1415926535897932384626433832795f
+
 Knife::Knife()
 {
 }
@@ -12,10 +14,13 @@ void Knife::Initialize()
 {
 	LoadTexture();
 	is_throw = 0;
-	life = 100;
+	life = 30;
+	range = 500.0f;
 	position_X = 0;
 	position_Y = 0;
-	speed = 10.0f;
+	speed = 20.0f;
+	front = 0;
+	Counter = 0;
 }
 
 void Knife::Ready_Throw(float Ppos_x, float Ppos_y)
@@ -34,17 +39,68 @@ void Knife::Ready_Throw(float Ppos_x, float Ppos_y)
 
 void Knife::Throw()
 {
-	//右方向へ加算
-	position_X += speed;
+	if (front == 0)
+	{
+		//右にとんでく
+		position_X += speed;
+		position_Y += speed / 20;
+	}
+	else if (front == 1)
+	{
+		//左にとんでく
+		position_X -= speed;
+		position_Y += speed / 20;
+	}
+
+	//移動方向によって向きを変える
+	if (CheckHitKey(KEY_INPUT_A))
+	{
+		Counter++;
+	}
+	else
+	{
+		if (Counter > 0)
+		{
+			Counter = -1;
+		}
+		else
+		{
+			Counter = 0;
+		}
+	}
+	if (Counter == 1)
+	{
+		front = 1;
+	}
+	if (CheckHitKey(KEY_INPUT_D))
+	{
+		Counter++;
+	}
+	else
+	{
+		if (Counter > 0)
+		{
+			Counter = -1;
+		}
+		else
+		{
+			Counter = 0;
+		}
+	}
+	if (Counter == 1)
+	{
+		front = 0;
+	}
+
 	//生存時間を減らす
 	life--;
 }
 
 void Knife::Dead()
 {
-//リセット
+	//リセット
 	//ライフ
-	life = 100;
+	life = 30;
 	//投げるフラグ
 	is_throw = 0;
 	//位置
@@ -64,10 +120,20 @@ void Knife::Update()
 
 void Knife::Draw()
 {
-	DrawGraph(position_X,position_Y, knifetex, TRUE);
+	if (front == 0)
+	{
+		//右方向
+		DrawRotaGraph(position_X, position_Y, 1.0f, PI * 3 / 4, knifetexR, TRUE);
+	}
+	else if (front == 1)
+	{
+		//左方向
+		DrawRotaGraph(position_X, position_Y, 1.0f, PI * -1 / 4, knifetexL, TRUE);
+	}
 }
 
 void Knife::LoadTexture()
 {
-	knifetex = LoadGraph("Resources/Player/Knife.png");
+	knifetexR = LoadGraph("Resources/Player/KnifeR.png");
+	knifetexL = LoadGraph("Resources/Player/KnifeL.png");
 }
