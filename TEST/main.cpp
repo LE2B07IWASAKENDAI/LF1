@@ -168,6 +168,31 @@ int WINAPI WinMain(
             //ゲーム画面へ遷移
             if (SCounter == 1)
             {
+                //vector型の変数の要素を全削除、メモリ解放。
+                for (int i = 0; i < open_doorx.size(); i++) {
+                    open_doorx.clear();
+                    open_doorx.shrink_to_fit();
+                    open_doory.clear();
+                    open_doory.shrink_to_fit();
+                }
+                for (int i = 0; i < doorx.size(); i++) {
+                    doorx.clear();
+                    doorx.shrink_to_fit();
+                    doory.clear();
+                    doory.shrink_to_fit();
+                }
+                for (int i = 0; i < eposx.size(); i++) {
+                    eposx.clear();
+                    eposx.shrink_to_fit();
+                    eposy.clear();
+                    eposy.shrink_to_fit();
+                }
+                for (int i = 0; i < enemy.size(); i++) {
+                    enemy.clear();
+                    //コンテナのサイズまでメモリを解放
+                    enemy.shrink_to_fit();
+                }
+
                 //マップ番号をセット
                 mapChip->SetMapNumber(0);
 
@@ -446,12 +471,12 @@ int WINAPI WinMain(
                 enemy[i]->Draw();
             }
 
-            if (vase->GetDead() == 1&&BreakFlag==0)
+            if (vase->GetDead() == 1)
             {
                 for (int i = 0; enemy.size(); i++) {
                     enemy[i]->CheckSound(vase->GetPosition());
                 }
-                BreakFlag = 1;
+                vase->SetDead(2);
             }
 
             //扉⇔プレイヤー　の当たり判定
@@ -586,6 +611,30 @@ int WINAPI WinMain(
             if (SCounter == 1)
             {
                 GameState = Title;
+                //vector型の変数の要素を全削除、メモリ解放。
+                for (int i = 0; i < open_doorx.size(); i++) {
+                    open_doorx.clear();
+                    open_doorx.shrink_to_fit();
+                    open_doory.clear();
+                    open_doory.shrink_to_fit();
+                }
+                for (int i = 0; i < doorx.size(); i++) {
+                    doorx.clear();
+                    doorx.shrink_to_fit();
+                    doory.clear();
+                    doory.shrink_to_fit();
+                }
+                for (int i = 0; i < eposx.size(); i++) {
+                    eposx.clear();
+                    eposx.shrink_to_fit();
+                    eposy.clear();
+                    eposy.shrink_to_fit();
+                }
+                for (int i = 0; i < enemy.size(); i++) {
+                    enemy.clear();
+                    //コンテナのサイズまでメモリを解放
+                    enemy.shrink_to_fit();
+                }
             }
             break;
 
@@ -614,6 +663,32 @@ int WINAPI WinMain(
             if (SCounter == 1)
             {
                 GameState = Title;
+                //vector型の変数の要素を全削除、メモリ解放。
+                for (int i = 0; i < open_doorx.size(); i++) {
+                    open_doorx.clear();
+                    open_doorx.shrink_to_fit();
+                    open_doory.clear();
+                    open_doory.shrink_to_fit();
+                }
+                for (int i = 0; i < doorx.size(); i++) {
+                    doorx.clear();
+                    doorx.shrink_to_fit();
+                    doory.clear();
+                    doory.shrink_to_fit();
+                }
+                for (int i = 0; i < eposx.size(); i++) {
+                    eposx.clear();
+                    eposx.shrink_to_fit();
+                    eposy.clear();
+                    eposy.shrink_to_fit();
+                }
+                for (int i = 0; i < enemy.size(); i++) {
+                    enemy.clear();
+                    //コンテナのサイズまでメモリを解放
+                    enemy.shrink_to_fit();
+                }
+
+
             }
             break;
         }
