@@ -54,13 +54,12 @@ int WINAPI WinMain(
     MapChip* mapChip = new MapChip();
     Player* player = new Player();
     std::vector<Enemy*> enemy;
-    Vase* vase = new Vase();
+    std::vector<Vase*> vase;
 
     Collision* collision = new Collision();
 
     mapChip->Initialize();
     player->Initialize();
-    vase->Initialize();
 
     //ゲームループ
     int GameState;
@@ -120,6 +119,9 @@ int WINAPI WinMain(
 
     std::vector<float>deskx;
     std::vector<float>desky;
+
+    std::vector<float>vasex;
+    std::vector<float>vasey;
 
 
 
@@ -186,6 +188,12 @@ int WINAPI WinMain(
                     eposx.shrink_to_fit();
                     eposy.clear();
                     eposy.shrink_to_fit();
+                }
+                for (int i = 0; i < vasex.size(); i++) {
+                    vasex.clear();
+                    vasex.shrink_to_fit();
+                    vasey.clear();
+                    vasey.shrink_to_fit();
                 }
                 for (int i = 0; i < enemy.size(); i++) {
                     enemy.clear();
@@ -369,6 +377,11 @@ int WINAPI WinMain(
                             eposx.push_back(float(j * 64));
                             eposy.push_back(float(i * 64));
                             break;
+
+                        case 12:
+                            vasex.push_back(float(j * 64));
+                            vasey.push_back(float(i * 64));
+                            break;
                         }
                     }
                 }
@@ -386,6 +399,20 @@ int WINAPI WinMain(
 
                 for (int i = 0; i < enemy.size(); i++) {
                     enemy[i]->Initialize();
+                }
+
+                for (int i = 0; i < 14; i++) {
+                    for (int j = 0; j < 84; j++) {
+                        //プレイヤーが扉の前に来たら当たりの判定を入れる
+                        if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 12) {
+                            //enemyのオブジェクト生成
+                            vase.push_back(new Vase());
+                        }
+                    }
+                }
+
+                for (int i = 0; i < vase.size(); i++) {
+                    vase[i]->Initialize();
                 }
 
             }
@@ -406,8 +433,6 @@ int WINAPI WinMain(
 
             mapChip->Draw(player->GetPosition_X());
 
-            vase->SetPosition(mapChip->GetPosition_12_X(), mapChip->GetPosition_12_Y());
-            vase->Draw();
 
 
             /*空いているドア描画*/
@@ -433,9 +458,19 @@ int WINAPI WinMain(
             //プレイヤーの更新
             player->Update();
 
+
+            /*花瓶の更新*/
+            for (int i = 0; i < vasex.size(); i++) {
+                vase[i]->SetPosition(vasex[i] + mapChip->GetScroll(), vasey[i]);
+            }
             /*敵の更新*/
             for (int i = 0; i < eposx.size(); i++) {
                 enemy[i]->Set_position(eposx[i] + mapChip->GetScroll(), eposy[i]);
+            }
+
+
+            for (int i = 0; i < vase.size(); i++) {
+                vase[i]->Draw();
             }
 
             for (int i = 0; i < enemy.size(); i++) {
@@ -454,30 +489,39 @@ int WINAPI WinMain(
                     player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
                 }
 
-                //ナイフと花瓶の当たり判定
-                if (collision->KnifetoVase(player->GetKnifePos(), vase->GetPosition())) {
-                    //まだ花瓶があるなら
-                    if (player->GetHitFlag() == 1) {
-                        if (vase->GetDead() == 0) {
-                            vase->SetDead(1);
-                            player->SetDisapperKnifeTrigger(1);
-
-                        }
-                    }
-                }
             }
 
             for (int i = 0; i < enemy.size(); i++) {
                 enemy[i]->Draw();
             }
 
-            if (vase->GetDead() == 1)
-            {
-                for (int i = 0; i < enemy.size(); i++) {
-                    enemy[i]->CheckSound(vase->GetPosition());
+            for (int i = 0; i < vase.size(); i++) {
+                //ナイフと花瓶の当たり判定
+                if (collision->KnifetoVase(player->GetKnifePos(), vase[i]->GetPosition())) {
+                    //まだ花瓶があるなら
+                    if (player->GetHitFlag() == 1) {
+                        if (vase[i]->GetDead() == 0) {
+                            vase[i]->SetDead(1);
+                            player->SetDisapperKnifeTrigger(1);
+
+                        }
+                    }
                 }
-                vase->SetDead(2);
+
+                if (vase[i]->GetDead() == 1)
+                {
+                    for (int i = 0; i < enemy.size(); i++) {
+                        enemy[i]->CheckSound(vase[i]->GetPosition());
+                    }
+                    vase[i]->SetDead(2);
+                }
             }
+
+
+
+            
+
+
 
             //扉⇔プレイヤー　の当たり判定
             if (mapChip->OnCollisionDoor(player->GetPosition_X(), player->GetPosition_Y(),
