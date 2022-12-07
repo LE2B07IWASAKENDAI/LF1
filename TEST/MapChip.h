@@ -92,8 +92,8 @@ public:
 	float Get_position_8_Y();
 
 	//‰Ô•r“I‚È‚Ì
-	float GetPosition_12_X();
-	float GetPosition_12_Y();
+	float GetPosition_10_X();
+	float GetPosition_10_Y();
 
 	/// <summary>
 	/// ”à‚Æ‚Ì“–‚½‚è”»’è

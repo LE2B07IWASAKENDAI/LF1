@@ -13,6 +13,7 @@ void Vase::Initialize()
 	//position_X = 800;
 	//position_Y = 600;
 	LoadTexture();
+	dead = 0;
 }
 
 void Vase::Break()
