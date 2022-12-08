@@ -4,7 +4,8 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Vase.h"
-
+#include "BGM.h"
+#include "SE.h"
 #include "Collision.h"
 
 void SetItem(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int mapNumber);
@@ -56,6 +57,8 @@ int WINAPI WinMain(
 
     MapChip* mapChip = new MapChip();
     Player* player = new Player();
+    BGM* bgm = new BGM();
+    SE* se = new SE();
     std::vector<Enemy*> enemy;
     std::vector<Vase*> vase;
 
@@ -127,6 +130,7 @@ int WINAPI WinMain(
     std::vector<float>vasex;
     std::vector<float>vasey;
 
+    bgm->PlayBGM();
 
 
     while (1)
@@ -140,6 +144,8 @@ int WINAPI WinMain(
         {
             WaitTimer((int)dNextTime - GetNowCount());
         }
+
+        
 
         //ƒQ[ƒ€ƒ‹[ƒv
         switch (GameState)
@@ -420,6 +426,7 @@ int WINAPI WinMain(
                     if (player->GetHitFlag() == 1) {
                         if (vase[i]->GetDead() == 0) {
                             vase[i]->SetDead(1);
+                            se->CrackSE();
                             player->SetDisapperKnifeTrigger(1);
 
                         }

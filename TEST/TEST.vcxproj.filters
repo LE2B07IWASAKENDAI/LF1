@@ -63,6 +63,12 @@
     <ClCompile Include="StopEnemy.cpp">
       <Filter>ソース ファイル\Character</Filter>
     </ClCompile>
+    <ClCompile Include="BGM.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SE.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MapChip.h">
@@ -91,6 +97,12 @@
     </ClInclude>
     <ClInclude Include="StopEnemy.h">
       <Filter>ヘッダー ファイル\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="BGM.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SE.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
