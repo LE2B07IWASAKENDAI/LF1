@@ -41,6 +41,7 @@ public:
 
 	//座標置
 	float GetPosition() { return position_X; }
+	
 
 	//グラフィックハンドル
 	int knifetexR = 0;
@@ -55,8 +56,9 @@ private:
 	float position_X = 0;//プレイヤーの現在位置から取得する
 	float position_Y = 0;
 
-	//速度
-	float speed = 10.0f;
+	//変化量
+	float vector_x = 0.0f;
+	float vector_y = 0.0f;
 
 	//投げているかどうかのフラグ
 	int is_throw = 0;
