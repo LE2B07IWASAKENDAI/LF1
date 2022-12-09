@@ -33,7 +33,7 @@ public:
 	float GetPosition_x();
 
 	float GetPosition_Y();
-	void SetPosition(float x, float y);
+	float SetPosition(float x, float y);
 
 	int GetPlayerSizeX() { return size_x; }
 	int GetPlayerSizeY() { return size_y; }
@@ -56,11 +56,6 @@ public:
 	void SetDisapperKnifeTrigger(int flag) { diaspper_knife_trigger = flag; }
 	int GetDisapperKnifeTrigger() { return diaspper_knife_trigger; }
 
-	//分岐トリガー
-	void SetChangeMap(int change) { change_map = change; }
-	int GetChangeMap() { return change_map; }
-
-
 //Debugモードのみで使うもの(予定)
 	void DrawPlayerPos();
 
@@ -81,8 +76,6 @@ private:
 	float return_Positin = 0.0f;
 	float center = 708.0f;//画面中心
 	float end = 4094.0f;//画面端
-
-	int change_map = 0;
 
 public:
 	int death = 0; //生死　0:生きてる 1:死んでる

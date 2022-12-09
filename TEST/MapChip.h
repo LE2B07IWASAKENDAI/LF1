@@ -4,7 +4,7 @@
 #define MAP_SIZE	64			// マップチップ一つのドットサイズ
 
 #define MAP_WIDTH	84			// マップの幅
-#define MAP_HEIGHT	28			// マップの縦長さ// マップのデータ
+#define MAP_HEIGHT	14			// マップの縦長さ// マップのデータ
 
 #define MAP_COUNT 10			//マップの総数
 
@@ -41,8 +41,6 @@ private:
 
 	//マップ動く変数
 	float scroll_X = 0.0f;
-	float scroll_Y = 0.0f;
-
 	float start = 708.0f;
 	float end = 4115.0f;
 	float endChip = 3448.0f;
@@ -53,18 +51,6 @@ private:
 
 	float position_12_X = 0.0f;
 	float position_12_Y = 0.0f;
-
-	float position_20_X = 0.0f;
-	float position_20_Y = 0.0f;
-
-	float position_21_X = 0.0f;
-	float position_21_Y = 0.0f;
-
-	float position_22_X = 0.0f;
-	float position_22_Y = 0.0f;
-
-	float position_23_X = 0.0f;
-	float position_23_Y = 0.0f;
 
 
 public:
@@ -78,7 +64,6 @@ public:
 
 	//マップ描画
 	void MapDraw();
-	void MapDraw5();
 
 	//マップチップ番号読み込み
 	void LoadMap();
@@ -98,13 +83,6 @@ public:
 
 	//マップスクロール
 	void Scroll(float position);
-	//スクロール
-	void SetScroll_Y(int trigger) {
-		if (trigger == 1)scroll_Y = -(MAP_SIZE * 14);
-		else if (trigger == 0)scroll_Y = 0;
-	}
-
-	float GetScroll_Y() { return scroll_Y; }
 
 	float GetScroll() { return scroll_X; }
 
@@ -117,13 +95,6 @@ public:
 	float GetPosition_10_X();
 	float GetPosition_10_Y();
 
-	//分岐地点
-	float GetPosition_21_X();
-	float GetPosition_21_Y();
-
-	float GetPosition_23_X();
-	float GetPosition_23_Y();
-
 	/// <summary>
 	/// 扉との当たり判定
 	/// </summary>
@@ -132,33 +103,6 @@ public:
 	/// <param name="player_sizeX">:相手のの横幅</param>
 	/// <param name="player_sizeY">:相手のの縦幅</param>
 	bool OnCollisionDoor(float x, float y, int sizeX, int sizeY);
-
-	/// <summary>
-	/// 扉との当たり判定_28
-	/// </summary>
-	/// <param name="x">:相手のX座標</param>
-	/// <param name="y">:相手のY座標</param>
-	/// <param name="player_sizeX">:相手のの横幅</param>
-	/// <param name="player_sizeY">:相手のの縦幅</param>
-	bool OnCollisionDoor_28(float x, float y, int sizeX, int sizeY);
-
-	/// <summary>
-	/// ワープ地点との当たり判定_20
-	/// </summary>
-	/// <param name="x">:相手のX座標</param>
-	/// <param name="y">:相手のY座標</param>
-	/// <param name="player_sizeX">:相手のの横幅</param>
-	/// <param name="player_sizeY">:相手のの縦幅</param>
-	bool OnCollisionWarp_20(float x, float y, int sizeX, int sizeY);
-
-	/// <summary>
-	/// ワープ地点との当たり判定_22
-	/// </summary>
-	/// <param name="x">:相手のX座標</param>
-	/// <param name="y">:相手のY座標</param>
-	/// <param name="player_sizeX">:相手のの横幅</param>
-	/// <param name="player_sizeY">:相手のの縦幅</param>
-	bool OnCollisionWarp_22(float x, float y, int sizeX, int sizeY);
 
 	/// <summary>
 	/// イスとの当たり判定　/*右からくる敵のみに有効*/
@@ -170,15 +114,6 @@ public:
 	bool OnCollisionChair_Right(float x, float y, int sizeX, int sizeY);
 
 	/// <summary>
-	/// イスとの当たり判定_28　/*右からくる敵のみに有効*/
-	/// </summary>
-	/// <param name="x">:相手のX座標</param>
-	/// <param name="y">:相手のY座標</param>
-	/// <param name="player_sizeX">:相手のの横幅</param>
-	/// <param name="player_sizeY">:相手のの縦幅</param>
-	bool OnCollisionChair_Right_28(float x, float y, int sizeX, int sizeY);
-
-	/// <summary>
 	/// イスとの当たり判定　/*左からくる敵のみに有効*/
 	/// </summary>
 	/// <param name="x">:相手のX座標</param>
@@ -186,15 +121,6 @@ public:
 	/// <param name="player_sizeX">:相手のの横幅</param>
 	/// <param name="player_sizeY">:相手のの縦幅</param>
 	bool OnCollisionChair_Left(float x, float y, int sizeX, int sizeY);
-
-	/// <summary>
-	/// イスとの当たり判定_28　/*左からくる敵のみに有効*/
-	/// </summary>
-	/// <param name="x">:相手のX座標</param>
-	/// <param name="y">:相手のY座標</param>
-	/// <param name="player_sizeX">:相手のの横幅</param>
-	/// <param name="player_sizeY">:相手のの縦幅</param>
-	bool OnCollisionChair_Left_28(float x, float y, int sizeX, int sizeY);
 
 	/// <summary>
 	/// ゴールとの当たり判定
