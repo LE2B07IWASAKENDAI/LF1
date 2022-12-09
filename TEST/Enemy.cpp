@@ -101,8 +101,12 @@ void Enemy::Movement()
 		{
 			speed = 0;
 			speed_ = 0;
-			count++;
 			EqualFlag = 1;
+		}
+
+		if (EqualFlag == 1)
+		{
+			count++;
 		}
 
 		if (count >= 1 && count < 100)
@@ -185,8 +189,12 @@ void Enemy::Set_position(float position_x, float position_y)
 	before_position_X = position_X;
 }
 
-void Enemy::CheckSound(float x)
+void Enemy::Breaking(float x)
+{
+	BreakPoint = x;
+}
+
+void Enemy::CheckSound()
 {
 	Mode = Check;
-	BreakPoint = x;
 }

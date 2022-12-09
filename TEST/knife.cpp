@@ -17,7 +17,8 @@ void Knife::Initialize()
 	life = 30;
 	position_X = 0;
 	position_Y = 0;
-	speed = 20.0f;
+	vector_x = 15.0f;
+	vector_y = 1.05f;
 	front = 0;
 	Counter = 0;
 	stock = 10;
@@ -42,14 +43,39 @@ void Knife::Throw()
 	if (front == 0)
 	{
 		//右にとんでく
-		position_X += speed;
-		position_Y += speed / 20;
+		position_X += vector_x;
+		position_Y += vector_y;
+
+		//if (life >= 10)
+		//{
+		//	position_X += vector_x;
+		//}
+		////なんか最後フォークっぽくなる
+		//else if (life < 10 && life >= 0)
+		//{
+		//	position_X += vector_x;
+		//	position_Y = position_Y + (vector_y * vector_y);
+		//}
+		
+		
 	}
 	else if (front == 1)
 	{
 		//左にとんでく
-		position_X -= speed;
-		position_Y += speed / 20;
+		position_X -= vector_x;
+		position_Y += vector_y;
+
+		//if (life >= 5)
+		//{
+		//	position_X -= vector_x;
+		//}
+		////なんか最後フォークっぽくなる
+		//else if (life < 5 && life >= 0)
+		//{
+		//	position_Y += vector_x;
+		//	position_Y = position_Y + (vector_y * vector_y);
+		//}
+		
 	}
 
 	//移動方向によって向きを変える
@@ -95,8 +121,6 @@ void Knife::Throw()
 
 	//生存時間を減らす
 	life--;
-
-	
 }
 
 void Knife::Dead()
@@ -110,10 +134,12 @@ void Knife::Dead()
 	position_X = 0;
 	//残機
 	stock--;
-	if (stock == 0)
+	if (stock <= 0)
 	{
 		is_throw = -1;
+		stock = 0;
 	}
+	
 }
 
 void Knife::Update()
@@ -127,15 +153,16 @@ void Knife::Update()
 	}
 	DrawFormatString(0, 225, GetColor(255, 255, 255), "stock : %d", stock);
 	DrawFormatString(0, 200, GetColor(255, 255, 255), "life : %d", life);
-	DrawFormatString(0, 250, GetColor(255, 255, 255), "position : %f", GetPosition());
+	DrawFormatString(0, 250, GetColor(255, 255, 255), "position_X : %f", GetPosition());
 }
 
 void Knife::Draw()
 {
+	
 	if (front == 0)
 	{
 		//右方向
-		DrawRotaGraph(position_X, position_Y, 1.0f, PI * 3 / 4, knifetexR, TRUE);
+		DrawRotaGraph(position_X, position_Y, 1.0f, PI * 1 / 4, knifetexR, TRUE);
 	}
 	else if (front == 1)
 	{
