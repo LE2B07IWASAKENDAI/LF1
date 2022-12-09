@@ -19,7 +19,6 @@ void Enemy::Initialize()
 //オブジェクト生成
 	knife = new Knife();
 	collision = new Collision();
-	vase = new Vase();
 }
 
 void Enemy::Movement()
@@ -185,8 +184,8 @@ void Enemy::Set_position(float position_x, float position_y)
 	before_position_X = position_X;
 }
 
-void Enemy::CheckSound(float x)
+void Enemy::CheckSound()
 {
 	Mode = Check;
-	BreakPoint = x;
+	//BreakPoint = x;
 }

@@ -173,12 +173,10 @@ float Player::GetPosition_Y()
 	return position_Y;
 }
 
-float Player::SetPosition(float x, float y)
+void Player::SetPosition(float x, float y)
 {
 	position_X = x;
 	position_Y = y;
-
-	return 0;
 }
 
 int Player::GetDeath()

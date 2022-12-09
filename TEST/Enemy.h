@@ -47,7 +47,7 @@ public:
 	//Œü‚¢‚Ä‚¢‚é•ûŒü
 	int GetFlont() { return flont; }
 
-	void CheckSound(float x);
+	void CheckSound();
 	int Mode;
 	enum Mode
 	{
