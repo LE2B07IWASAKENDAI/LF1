@@ -5,6 +5,7 @@
 #include"knife.h"
 #include"Collision.h"
 #include"Vase.h"
+//#include"MapChip.h"
 
 using namespace std;
 
@@ -47,7 +48,8 @@ public:
 	//Œü‚¢‚Ä‚¢‚é•ûŒü
 	int GetFlont() { return flont; }
 
-	void CheckSound(float x);
+	void CheckSound();
+	void Breaking(float x);
 	int Mode;
 	enum Mode
 	{
