@@ -9,6 +9,7 @@
 #include "Collision.h"
 
 void SetItem(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int mapNumber);
+void SetItemX_28(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int chipNumber);
 void DrawItem(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int ghandle);
 void DeleteItem(std::vector<float>& posx, std::vector<float>& posy);
 
@@ -77,6 +78,7 @@ int WINAPI WinMain(
         GamePlay3,
         GamePlay4,
         GamePlay5,
+        GamePlay5_1,
         GameOver,
         GameClear
     };
@@ -104,6 +106,8 @@ int WINAPI WinMain(
     int BreakFlag = 0;
 
     static bool mapInit = true;
+
+    int mapWarp = 0;
     //ループテスト用
     //int StartTime;
 
@@ -145,7 +149,7 @@ int WINAPI WinMain(
             WaitTimer((int)dNextTime - GetNowCount());
         }
 
-        
+
 
         //ゲームループ
         switch (GameState)
@@ -191,6 +195,8 @@ int WINAPI WinMain(
                     //コンテナのサイズまでメモリを解放
                     enemy.shrink_to_fit();
                 }
+
+                mapChip->SetScroll_Y(0);
 
                 //マップ番号をセット
                 mapChip->SetMapNumber(0);
@@ -238,6 +244,7 @@ int WINAPI WinMain(
             //マップ番号をセット
             mapChip->SetMapNumber(0);
             mapChip->Draw(player->GetPosition_X());
+            mapChip->MapDraw();
 
             player->Update();
 
@@ -338,30 +345,10 @@ int WINAPI WinMain(
                     }
                 }
 
-                //enemy push_backをしていく
-                //for (int i = 0; i < 14; i++) {
-                //    for (int j = 0; j < 84; j++) {
-                //        //プレイヤーが扉の前に来たら当たりの判定を入れる
-                //        if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 8) {
-                //            //enemyのオブジェクト生成
-                //            enemy.push_back(new Enemy());
-                //        }
-                //    }
-                //}
 
                 for (int i = 0; i < enemy.size(); i++) {
                     enemy[i]->Initialize();
                 }
-
-                //for (int i = 0; i < 14; i++) {
-                //    for (int j = 0; j < 84; j++) {
-                //        //プレイヤーが扉の前に来たら当たりの判定を入れる
-                //        if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 10) {
-                //            //enemyのオブジェクト生成
-                //            vase.push_back(new Vase());
-                //        }
-                //    }
-                //}
 
                 for (int i = 0; i < vase.size(); i++) {
                     vase[i]->Initialize();
@@ -374,6 +361,7 @@ int WINAPI WinMain(
 
 #pragma region Stage2
             mapChip->Draw(player->GetPosition_X());
+            mapChip->MapDraw();
 
             //マップチップの描画
             DrawItem(open_doorx, open_doory, mapChip, ghandleOPD);
@@ -436,7 +424,7 @@ int WINAPI WinMain(
                 if (vase[i]->GetDead() == 1)
                 {
                     for (int j = 0; j < enemy.size(); j++) {
-                        enemy[j]->CheckSound(vase[i]->GetPosition());
+                        enemy[j]->CheckSound();
                     }
                     vase[i]->SetDead(2);
                 }
@@ -580,6 +568,7 @@ int WINAPI WinMain(
 #pragma region Stage3
             //マップ番号をセット
             mapChip->Draw(player->GetPosition_X());
+            mapChip->MapDraw();
 
             player->Update();
 
@@ -648,7 +637,7 @@ int WINAPI WinMain(
                 if (vase[i]->GetDead() == 1)
                 {
                     for (int j = 0; j < enemy.size(); j++) {
-                        enemy[j]->CheckSound(vase[i]->GetPosition());
+                        enemy[j]->CheckSound();
                     }
                     vase[i]->SetDead(2);
                 }
@@ -787,6 +776,7 @@ int WINAPI WinMain(
 #pragma region Stage4
             //マップ番号をセット
             mapChip->Draw(player->GetPosition_X());
+            mapChip->MapDraw();
 
             player->Update();
 
@@ -847,7 +837,6 @@ int WINAPI WinMain(
                         if (vase[i]->GetDead() == 0) {
                             vase[i]->SetDead(1);
                             player->SetDisapperKnifeTrigger(1);
-
                         }
                     }
                 }
@@ -855,7 +844,7 @@ int WINAPI WinMain(
                 if (vase[i]->GetDead() == 1)
                 {
                     for (int j = 0; j < enemy.size(); j++) {
-                        enemy[j]->CheckSound(vase[i]->GetPosition());
+                        enemy[j]->CheckSound();
                     }
                     vase[i]->SetDead(2);
                 }
@@ -939,13 +928,13 @@ int WINAPI WinMain(
 
 
                 //マップチップ番号の位置を保存する
-                   //マップチップから位置を挿入
-                SetItem(open_doorx, open_doory, mapChip, 4);
-                SetItem(doorx, doory, mapChip, 5);
-                SetItem(chairx, chairy, mapChip, 6);
-                SetItem(deskx, desky, mapChip, 7);
+                 //マップチップから位置を挿入
+                SetItemX_28(open_doorx, open_doory, mapChip, 4);
+                SetItemX_28(doorx, doory, mapChip, 5);
+                SetItemX_28(chairx, chairy, mapChip, 6);
+                SetItemX_28(deskx, desky, mapChip, 7);
 
-                for (int i = 0; i < 14; i++) {
+                for (int i = 0; i < 28; i++) {
                     for (int j = 0; j < 84; j++) {
 
                         switch (mapChip->mapData[mapChip->GetMapNumber()].data[i][j]) {
@@ -963,7 +952,7 @@ int WINAPI WinMain(
                 }
 
                 //enemy push_backをしていく
-                for (int i = 0; i < 14; i++) {
+                for (int i = 0; i < 28; i++) {
                     for (int j = 0; j < 84; j++) {
                         //プレイヤーが扉の前に来たら当たりの判定を入れる
                         if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 8) {
@@ -977,7 +966,7 @@ int WINAPI WinMain(
                     enemy[i]->Initialize();
                 }
 
-                for (int i = 0; i < 14; i++) {
+                for (int i = 0; i < 28; i++) {
                     for (int j = 0; j < 84; j++) {
                         //プレイヤーが扉の前に来たら当たりの判定を入れる
                         if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 10) {
@@ -994,10 +983,12 @@ int WINAPI WinMain(
 #pragma endregion
             break;
         case GamePlay5:
-
 #pragma region Stage5
+            mapChip->SetMapNumber(4);
+
             //マップ番号をセット
             mapChip->Draw(player->GetPosition_X());
+            mapChip->MapDraw5();
 
             player->Update();
 
@@ -1011,14 +1002,13 @@ int WINAPI WinMain(
             //プレイヤーの更新
             player->Update();
 
-
             /*花瓶の更新*/
             for (int i = 0; i < vasex.size(); i++) {
-                vase[i]->SetPosition(vasex[i] + mapChip->GetScroll(), vasey[i]);
+                vase[i]->SetPosition(vasex[i] + mapChip->GetScroll(), vasey[i] + mapChip->GetScroll_Y());
             }
             /*敵の更新*/
             for (int i = 0; i < eposx.size(); i++) {
-                enemy[i]->Set_position(eposx[i] + mapChip->GetScroll(), eposy[i]);
+                enemy[i]->Set_position(eposx[i] + mapChip->GetScroll(), eposy[i] + mapChip->GetScroll_Y());
             }
 
             //花瓶の描画
@@ -1063,21 +1053,21 @@ int WINAPI WinMain(
                 if (vase[i]->GetDead() == 1)
                 {
                     for (int j = 0; j < enemy.size(); j++) {
-                        enemy[j]->CheckSound(vase[i]->GetPosition());
+                        enemy[j]->CheckSound();
                     }
                     vase[i]->SetDead(2);
                 }
             }
 
             //扉⇔プレイヤー　の当たり判定
-            if (mapChip->OnCollisionDoor(player->GetPosition_X(), player->GetPosition_Y(),
+            if (mapChip->OnCollisionDoor_28(player->GetPosition_X(), player->GetPosition_Y(),
                 player->GetPlayerSizeX(), player->GetPlayerSizeY()))
             {
                 player->Hidding();
             }
 
             //イス⇔プレイヤー　の当たり判定 /*対右*/
-            if (mapChip->OnCollisionChair_Right(player->GetPosition_X(), player->GetPosition_Y(),
+            if (mapChip->OnCollisionChair_Right_28(player->GetPosition_X(), player->GetPosition_Y(),
                 player->GetPlayerSizeX(), player->GetPlayerSizeY()))
             {
                 player->Hidding();
@@ -1092,7 +1082,7 @@ int WINAPI WinMain(
             }
 
             //イス⇔プレイヤー　の当たり判定　/*対左*/
-            else if (mapChip->OnCollisionChair_Left(player->GetPosition_X(), player->GetPosition_Y(),
+            else if (mapChip->OnCollisionChair_Left_28(player->GetPosition_X(), player->GetPosition_Y(),
                 player->GetPlayerSizeX(), player->GetPlayerSizeY()))
             {
                 player->Hidding();
@@ -1103,6 +1093,27 @@ int WINAPI WinMain(
                     {
                         player->SetHide(0);
                     }
+                }
+            }
+
+            //分岐
+            if (mapChip->OnCollisionWarp_20(player->GetPosition_X(), player->GetPosition_Y(),
+                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
+            {
+                if (CheckHitKey(KEY_INPUT_LSHIFT) == 1) {
+                    //位置を瞬間移動すればよい
+                    player->SetPosition(mapChip->GetPosition_21_X(), mapChip->GetPosition_21_Y());
+                    mapChip->SetScroll_Y(1);
+                }
+            }
+
+            if (mapChip->OnCollisionWarp_22(player->GetPosition_X(), player->GetPosition_Y(),
+                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
+            {
+                if (CheckHitKey(KEY_INPUT_RSHIFT) == 1) {
+                    //位置を瞬間移動すればよい
+                    mapChip->SetScroll_Y(0);
+                    player->SetPosition(mapChip->GetPosition_23_X(), mapChip->GetPosition_23_Y());
                 }
             }
 
@@ -1140,6 +1151,8 @@ int WINAPI WinMain(
 
                 GameState = GameClear;
             }
+
+
 #pragma endregion
             break;
         case GameOver:
@@ -1239,8 +1252,21 @@ int WINAPI WinMain(
 }
 
 //マップチップ上のアイテム生成関数
-void SetItem(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip,int chipNumber ) {
+void SetItem(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int chipNumber)
+{
     for (int i = 0; i < 14; i++) {
+        for (int j = 0; j < 84; j++) {
+            if (mapchip->mapData[mapchip->GetMapNumber()].data[i][j] == chipNumber)
+            {
+                posx.push_back(float(j * 64));
+                posy.push_back(float(i * 64));
+            }
+        }
+    }
+}
+
+void SetItemX_28(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int chipNumber) {
+    for (int i = 0; i < 28; i++) {
         for (int j = 0; j < 84; j++) {
             if (mapchip->mapData[mapchip->GetMapNumber()].data[i][j] == chipNumber)
             {
@@ -1254,7 +1280,7 @@ void SetItem(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchi
 void DrawItem(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int ghandle) {
 
     for (int i = 0; i < posx.size(); i++) {
-        DrawGraph(posx[i] + mapchip->GetScroll(), posy[i], ghandle, TRUE);
+        DrawGraph(posx[i] + mapchip->GetScroll(), posy[i] + mapchip->GetScroll_Y(), ghandle, TRUE);
     }
 }
 //マップチップ上のアイテム削除関数

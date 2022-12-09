@@ -101,23 +101,21 @@ void Player::Update()
 	//エンター押下時　ナイフ位置、トリガー更新
 	if (CheckHitKey(KEY_INPUT_RETURN) == 1 && hide == 0)
 	{
-		keyCounter++;
-		
-		
+		keyCounter_knife++;
 	}
 	else
 	{
-		if (keyCounter > 0)
+		if (keyCounter_knife > 0)
 		{
-			keyCounter = -1;
+			keyCounter_knife = -1;
 		}
 		else
 		{
-			keyCounter = 0;
+			keyCounter_knife = 0;
 		}
 	}
 
-	if (keyCounter == 1)
+	if (keyCounter_knife == 1)
 	{
 		//ナイフの発射位置をセット
 		knife->Ready_Throw(GetPosition_x() + 100, GetPosition_Y() + 100);

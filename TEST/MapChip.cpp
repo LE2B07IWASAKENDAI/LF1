@@ -41,13 +41,10 @@ void MapChip::Draw(float position)
 	//現在のマップ番号更新
 	UpdateMapNumber(GetMapNumber());
 
-	MapDraw();
 }
 
 void MapChip::MapDraw()
 {
-
-
 	//現在のマップ番号を取得し、描画する
 	for (int i = 0; i < 14; i++) {
 		for (int j = 0; j < 84; j++) {
@@ -110,16 +107,72 @@ void MapChip::MapDraw()
 			}
 		}
 	}
-	//for (size_t i = 0; i < mapData.size(); i++) {
-	//	for (size_t j = 0; j < mapData[0].size(); j++) {
-	//		if (mapData[i][j] == 0) {
-	//			DrawBox(j * MAP_SIZE, i * MAP_SIZE,
-	//				j * MAP_SIZE + MAP_SIZE, i * MAP_SIZE + MAP_SIZE,
-	//				GetColor(255, 255, 255), FALSE);
-	//		}
-	//	}
-	//}
+}
 
+void MapChip::MapDraw5()
+{
+	//現在のマップ番号を取得し、描画する
+	for (int i = 0; i < 28; i++) {
+		for (int j = 0; j < 84; j++) {
+			switch (mapData[GetMapNumber()].data[i][j])
+			{
+			case 0:
+				//  "  床   " 描画処理
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE + GetScroll_Y(), gHandle[0], FALSE);
+				break;
+			case 1:
+				//  "  壁   " 描画処理
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE + GetScroll_Y(), gHandle[1], FALSE);
+				break;
+			case 2:
+				//  "スタート" 描画処理
+				//DrawGraph(j * MAP_SIZE, i * MAP_SIZE, gHandle[1], FALSE);
+				//break;
+			case 3:
+				//  "ゴール地点" 描画処理
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE + GetScroll_Y(), gHandle[3], FALSE);
+				break;
+			case 4:
+				//  "空いてる扉" 描画処理
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE + GetScroll_Y(), gHandle[1], FALSE);
+				break;
+			case 5:
+				//  "閉じてる扉" 描画処理
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE + GetScroll_Y(), gHandle[1], FALSE);
+				break;
+			case 6:
+				//  " 椅　子 " 描画処理
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE + GetScroll_Y(), gHandle[1], FALSE);
+				break;
+			case 7:
+				//  "   机    " 描画処理
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE + GetScroll_Y(), gHandle[1], FALSE);
+				break;
+
+			case 8:
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE + GetScroll_Y(), gHandle[9], FALSE);
+				break;
+
+			case 9:
+				//  "  巾木    " 描画処理
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE + GetScroll_Y(), gHandle[9], FALSE);
+				break;
+			case 10:
+				//  "花瓶" 描画処理
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE + GetScroll_Y(), gHandle[1], FALSE);
+				break;
+
+			case 15:
+				//  "対右の敵から隠れる " 描画処理
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE + GetScroll_Y(), gHandle[10], FALSE);
+				break;
+			case 16:
+				//  "対左の敵から隠れる" 描画処理
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE + GetScroll_Y(), gHandle[11], FALSE);
+				break;
+			}
+		}
+	}
 }
 
 void MapChip::LoadMap()
@@ -217,7 +270,7 @@ void MapChip::LoadMap()
 	mapData[4] =
 	{
 		84,
-		14,
+		28,
 		{
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*20*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*40*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*50*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*80*/ 1, 1, 1, 1} ,
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*20*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*40*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*50*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*80*/ 1, 1, 1, 1} ,
@@ -227,15 +280,29 @@ void MapChip::LoadMap()
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*20*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*40*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*50*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*80*/ 1, 1, 1, 1} ,
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*20*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*40*/1, 1, 1, 1, 1, 1, 1, 1, 10,1,/*50*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 3,/*80*/ 3, 3, 3, 1} ,
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*20*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*40*/1, 1, 1, 1, 1, 1, 1, 1, 7, 1,/*50*/ 1, 1, 1, 1, 6, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 3,/*80*/ 3, 3, 3, 1} ,
-			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*20*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*40*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*50*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 3,/*80*/ 3, 3, 3, 1} ,
+			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 1,20, 1, 1, 1, 1, 1, 1, 1,/*20*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*40*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*50*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 23, 1, 1, 1, 1,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 3,/*80*/ 3, 3, 3, 1} ,
 			{ 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,/*10*/ 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,/*20*/9, 9, 9, 9, 8, 9, 9, 9, 9, 9,/*30*/ 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,/*40*/9, 9, 9, 9, 9, 9, 9, 9, 9, 9,/*50*/ 9, 9, 9, 9, 15, 9, 9, 16, 9, 9,/*60*/9, 9, 9, 9, 9, 8, 9, 9, 9, 9,/*70*/9, 9, 9, 9, 9, 9, 9, 9, 9, 3,/*80*/ 3, 3, 3, 1},
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*10*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*20*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*30*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*40*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*50*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*60*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*70*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*80*/ 0, 0, 0, 0} ,
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*10*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*20*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*30*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*40*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*50*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*60*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*70*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*80*/ 0, 0, 0, 0} ,
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*10*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*20*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*30*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*40*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*50*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*60*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*70*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*80*/ 0, 0, 0, 0} ,
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*10*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*20*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*30*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*40*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*50*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*60*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*70*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*80*/ 0, 0, 0, 0} ,
+
+			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*20*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*40*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*50*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*80*/ 1, 1, 1, 1} ,
+			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*20*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*40*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*50*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*80*/ 1, 1, 1, 1} ,
+			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*20*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*40*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*50*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*80*/ 1, 1, 1, 1} ,
+			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*20*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*40*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*50*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*80*/ 1, 1, 1, 1} ,
+			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*20*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*40*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*50*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*80*/ 1, 1, 1, 1} ,
+			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*20*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*40*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*50*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*80*/ 1, 1, 1, 1} ,
+			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*20*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*40*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*50*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 3,/*80*/ 3, 3, 3, 1} ,
+			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*20*/7, 1, 1, 6, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*40*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*50*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 3,/*80*/ 3, 3, 3, 1} ,
+			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*10*/ 1, 1,21, 1, 1, 1, 1, 1, 1, 1,/*20*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*30*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*40*/1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*50*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,/*60*/1, 1, 1, 1, 1, 22 , 1, 1, 1, 1,/*70*/1, 1, 1, 1, 1, 1, 1, 1, 1, 3,/*80*/ 3, 3, 3, 1} ,
+			{ 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,/*10*/ 9, 9, 9, 9, 9, 9, 9, 9, 9,15,/*20*/9, 9,16,15, 9, 9, 16, 9, 9, 9,/*30*/ 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,/*40*/9, 9, 9, 9, 9, 9, 9, 9, 9, 9,/*50*/ 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,/*60*/9, 9, 9, 9, 9, 9, 9, 9, 9, 9,/*70*/9, 9, 9, 9, 9, 9, 9, 9, 9, 3,/*80*/ 3, 3, 3, 1},
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*10*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*20*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*30*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*40*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*50*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*60*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*70*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*80*/ 0, 0, 0, 0} ,
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*10*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*20*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*30*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*40*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*50*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*60*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*70*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*80*/ 0, 0, 0, 0} ,
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*10*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*20*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*30*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*40*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*50*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*60*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*70*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*80*/ 0, 0, 0, 0} ,
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*10*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*20*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*30*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*40*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*50*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*60*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*70*/0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*80*/ 0, 0, 0, 0} ,
 		}
 	};
-
 }
 
 void MapChip::LoadTexture()
@@ -265,7 +332,6 @@ void MapChip::UpdateMapNumber(int nowMapNumber)
 
 void MapChip::Scroll(float position)
 {
-
 	if (position >= start)
 	{
 		scroll_X = position - start;
@@ -279,7 +345,6 @@ float MapChip::Get_position_8_X()
 			//プレイヤーが扉の前に来たら当たりの判定を入れる
 			if (mapData[GetMapNumber()].data[i][j] == 8) {
 				position_8_X = j * MAP_SIZE + scroll_X;
-				position_8_Y = i * MAP_SIZE;
 			}
 		}
 	}
@@ -293,13 +358,10 @@ float MapChip::Get_position_8_Y()
 		for (int j = 0; j < 82; j++) {
 			//プレイヤーが扉の前に来たら当たりの判定を入れる
 			if (mapData[GetMapNumber()].data[i][j] == 8) {
-				position_8_X = j * MAP_SIZE;
-				position_8_Y = i * MAP_SIZE;
-
+				position_8_Y = i * MAP_SIZE + scroll_Y;
 			}
 		}
 	}
-
 	return position_8_Y;
 }
 
@@ -310,11 +372,9 @@ float MapChip::GetPosition_10_X()
 			//プレイヤーが扉の前に来たら当たりの判定を入れる
 			if (mapData[GetMapNumber()].data[i][j] == 10) {
 				position_12_X = j * MAP_SIZE + scroll_X;
-				position_12_Y = i * MAP_SIZE;
 			}
 		}
 	}
-
 	return position_12_X;
 }
 
@@ -324,13 +384,64 @@ float MapChip::GetPosition_10_Y()
 		for (int j = 0; j < 82; j++) {
 			//プレイヤーが扉の前に来たら当たりの判定を入れる
 			if (mapData[GetMapNumber()].data[i][j] == 10) {
-				position_12_X = j * MAP_SIZE;
-				position_12_Y = i * MAP_SIZE;
+				position_12_Y = i * MAP_SIZE + scroll_Y;
 			}
 		}
 	}
 
 	return position_12_Y;
+}
+
+float MapChip::GetPosition_21_X()
+{
+	for (int i = 0; i < 28; i++) {
+		for (int j = 0; j < 82; j++) {
+			//プレイヤーが扉の前に来たら当たりの判定を入れる
+			if (mapData[GetMapNumber()].data[i][j] == 21) {
+				position_21_X = j * MAP_SIZE /*+ GetScroll()*/;
+			}
+		}
+	}
+	return position_21_X;
+}
+
+float MapChip::GetPosition_21_Y()
+{
+	for (int i = 0; i < 28; i++) {
+		for (int j = 0; j < 82; j++) {
+			//プレイヤーが扉の前に来たら当たりの判定を入れる
+			if (mapData[GetMapNumber()].data[i][j] == 21) {
+				position_21_Y = i * MAP_SIZE + GetScroll_Y();
+			}
+		}
+	}
+	return position_21_Y;
+}
+
+float MapChip::GetPosition_23_X()
+{
+	for (int i = 0; i < 28; i++) {
+		for (int j = 0; j < 84; j++) {
+			//
+			if (mapData[GetMapNumber()].data[i][j] == 23) {
+				position_23_X = j * MAP_SIZE/* + GetScroll()*/;
+			}
+		}
+	}
+	return position_23_X;
+}
+
+float MapChip::GetPosition_23_Y()
+{
+	for (int i = 0; i < 28; i++) {
+		for (int j = 0; j < 84; j++) {
+			//プレイヤーが扉の前に来たら当たりの判定を入れる
+			if (mapData[GetMapNumber()].data[i][j] == 23) {
+				position_23_Y = i * MAP_SIZE + GetScroll_Y();
+			}
+		}
+	}
+	return position_23_Y;
 }
 
 bool MapChip::OnCollisionDoor(float x, float y, int sizeX, int sizeY)
@@ -339,6 +450,72 @@ bool MapChip::OnCollisionDoor(float x, float y, int sizeX, int sizeY)
 		for (int j = 0; j < 82; j++) {
 			//プレイヤーが扉の前に来たら当たりの判定を入れる
 			if (mapData[GetMapNumber()].data[i][j] == 4) {
+				if (CheckHit(j * MAP_SIZE, i * MAP_SIZE, MAP_SIZE, MAP_SIZE,
+					x, y, sizeX, sizeY))
+				{
+					SetHideTrigger(true);
+
+					return true;
+				}
+			}
+			else {
+				SetHideTrigger(false);
+			}
+		}
+	}
+	return false;
+}
+
+bool MapChip::OnCollisionDoor_28(float x, float y, int sizeX, int sizeY)
+{
+	for (int i = 0; i < 28; i++) {
+		for (int j = 0; j < 82; j++) {
+			//プレイヤーが扉の前に来たら当たりの判定を入れる
+			if (mapData[GetMapNumber()].data[i][j] == 4) {
+				if (CheckHit(j * MAP_SIZE, i * MAP_SIZE, MAP_SIZE, MAP_SIZE,
+					x, y, sizeX, sizeY))
+				{
+					SetHideTrigger(true);
+
+					return true;
+				}
+			}
+			else {
+				SetHideTrigger(false);
+			}
+		}
+	}
+	return false;
+}
+
+bool MapChip::OnCollisionWarp_20(float x, float y, int sizeX, int sizeY)
+{
+	for (int i = 0; i < 28; i++) {
+		for (int j = 0; j < 82; j++) {
+			//プレイヤーが扉の前に来たら当たりの判定を入れる
+			if (mapData[GetMapNumber()].data[i][j] == 20) {
+				if (CheckHit(j * MAP_SIZE, i * MAP_SIZE, MAP_SIZE, MAP_SIZE,
+					x, y, sizeX, sizeY))
+				{
+					SetHideTrigger(true);
+
+					return true;
+				}
+			}
+			else {
+				SetHideTrigger(false);
+			}
+		}
+	}
+	return false;
+}
+
+bool MapChip::OnCollisionWarp_22(float x, float y, int sizeX, int sizeY)
+{
+	for (int i = 0; i < 28; i++) {
+		for (int j = 0; j < 82; j++) {
+			//プレイヤーが扉の前に来たら当たりの判定を入れる
+			if (mapData[GetMapNumber()].data[i][j] == 22) {
 				if (CheckHit(j * MAP_SIZE, i * MAP_SIZE, MAP_SIZE, MAP_SIZE,
 					x, y, sizeX, sizeY))
 				{
@@ -377,9 +554,54 @@ bool MapChip::OnCollisionChair_Right(float x, float y, int sizeX, int sizeY)
 	return false;
 }
 
+bool MapChip::OnCollisionChair_Right_28(float x, float y, int sizeX, int sizeY)
+{
+
+	for (int i = 0; i < 28; i++) {
+		for (int j = 0; j < 82; j++) {
+			//プレイヤーが扉の前に来たら当たりの判定を入れる
+			if (mapData[GetMapNumber()].data[i][j] == 15) {
+				if (CheckHit(j * MAP_SIZE, i * MAP_SIZE, MAP_SIZE, MAP_SIZE,
+					x, y, sizeX, sizeY))
+				{
+					SetHideTrigger(true);
+
+					return true;
+				}
+			}
+			else {
+				SetHideTrigger(false);
+			}
+		}
+	}
+	return false;
+}
+
 bool MapChip::OnCollisionChair_Left(float x, float y, int sizeX, int sizeY)
 {
 	for (int i = 0; i < 14; i++) {
+		for (int j = 0; j < 82; j++) {
+			//プレイヤーが扉の前に来たら当たりの判定を入れる
+			if (mapData[GetMapNumber()].data[i][j] == 16) {
+				if (CheckHit(j * MAP_SIZE, i * MAP_SIZE, MAP_SIZE, MAP_SIZE,
+					x, y, sizeX, sizeY))
+				{
+					SetHideTrigger(true);
+
+					return true;
+				}
+			}
+			else {
+				SetHideTrigger(false);
+			}
+		}
+	}
+	return false;
+}
+
+bool MapChip::OnCollisionChair_Left_28(float x, float y, int sizeX, int sizeY)
+{
+	for (int i = 0; i < 28; i++) {
 		for (int j = 0; j < 82; j++) {
 			//プレイヤーが扉の前に来たら当たりの判定を入れる
 			if (mapData[GetMapNumber()].data[i][j] == 16) {
