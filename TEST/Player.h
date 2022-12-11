@@ -75,8 +75,6 @@ private:
 	bool keyPermission = false;//扉の中にいるときは、移動出来ないようにする。
 
 	float return_Positin = 0.0f;
-	float return_Positin_y = 0.0f;
-
 	float center = 708.0f;//画面中心
 	float end = 4094.0f;//画面端
 

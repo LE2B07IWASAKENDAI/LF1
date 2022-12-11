@@ -1044,7 +1044,7 @@ int WINAPI WinMain(
                 //ゲームオーバー処理           
                 if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
                     //se->DiscoverSE_voice();
-                    player->SetDeath(collision->FoundXY(player->GetPosition_x(), player->GetPosition_Y(), enemy[i]->GetPosition_X(), enemy[i]->Getposition_Y(), enemy[i]->GetFlont()));
+                    player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
                 }
 
                 enemy[i]->Draw();
@@ -1089,7 +1089,7 @@ int WINAPI WinMain(
 
                 for (int i = 0; i < enemy.size(); i++) {
                     if (enemy[i]->GetFlont() == 1 && enemy[i]->GetDeath() == 0 &&
-                        player->SetDeath(collision->FoundXY(player->GetPosition_x(), player->GetPosition_Y(), enemy[i]->GetPosition_X(), enemy[i]->Getposition_Y(), enemy[i]->GetFlont())))
+                        collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()))
                     {
                         player->SetHide(0);
                     }
@@ -1104,7 +1104,7 @@ int WINAPI WinMain(
                 for (int i = 0; i < enemy.size(); i++) {
 
                     if (enemy[i]->GetFlont() == 0 && enemy[i]->GetDeath() == 0 &&
-                        player->SetDeath(collision->FoundXY(player->GetPosition_x(),player->GetPosition_Y(), enemy[i]->GetPosition_X(),enemy[i]->Getposition_Y(), enemy[i]->GetFlont())))
+                        player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont())))
                     {
                         player->SetHide(0);
                     }
@@ -1135,9 +1135,9 @@ int WINAPI WinMain(
             //ゲームオーバー画面へ遷移
             if (player->death == 1)
             {
-                //DrawFormatString(1607, 210, GetColor(255, 255, 255), "当たっている！！！");
+                DrawFormatString(1607, 210, GetColor(255, 255, 255), "当たっている！！！");
 
-                GameState = GameOver;
+                //GameState = GameOver;
             }
 
             //クリア

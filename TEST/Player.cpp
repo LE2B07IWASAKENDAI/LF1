@@ -68,7 +68,6 @@ void Player::Update()
 				DrawGraph(position_X, position_Y, ptexture_R, TRUE);
 			}
 		}
-
 		else if(rl ==1)
 		{
 			if (position_X >= end)
@@ -220,6 +219,6 @@ void Player::LoadTexture()
 
 void Player::DrawPlayerPos()
 {
-	//DrawFormatString(1607, 100, GetColor(255, 255, 255), "x座標 : %f",GetPosition_X());
-	//DrawFormatString(1607, 128, GetColor(255, 255, 255), "y座標 : %f",GetPosition_Y());
+	DrawFormatString(1607, 100, GetColor(255, 255, 255), "x座標 : %f",GetPosition_X());
+	DrawFormatString(1607, 128, GetColor(255, 255, 255), "y座標 : %f",GetPosition_Y());
 }
