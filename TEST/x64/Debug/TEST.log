@@ -1,25 +1,26 @@
 ﻿  main.cpp
-D:\FL1\TEST\knife.h(2,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-D:\FL1\TEST\knife.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-D:\FL1\TEST\Vase.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-D:\FL1\TEST\Vase.h(4,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-D:\FL1\TEST\main.cpp(278,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\main.cpp(408,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\main.cpp(469,58): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\main.cpp(622,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\main.cpp(685,58): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\main.cpp(833,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\main.cpp(895,58): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\main.cpp(1047,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\main.cpp(1107,58): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\main.cpp(1298,59): warning C4244: '引数': '_Ty' から 'int' への変換です。データが失われる可能性があります。
+C:\後期チーム卒業制作_No11\TEST\knife.h(2,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\後期チーム卒業制作_No11\TEST\knife.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\後期チーム卒業制作_No11\TEST\Vase.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\後期チーム卒業制作_No11\TEST\Vase.h(4,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\後期チーム卒業制作_No11\TEST\main.cpp(278,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\後期チーム卒業制作_No11\TEST\main.cpp(408,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\後期チーム卒業制作_No11\TEST\main.cpp(469,58): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\後期チーム卒業制作_No11\TEST\main.cpp(622,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\後期チーム卒業制作_No11\TEST\main.cpp(685,58): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\後期チーム卒業制作_No11\TEST\main.cpp(833,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\後期チーム卒業制作_No11\TEST\main.cpp(895,58): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\後期チーム卒業制作_No11\TEST\main.cpp(1047,56): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\後期チーム卒業制作_No11\TEST\main.cpp(1092,60): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\後期チーム卒業制作_No11\TEST\main.cpp(1107,60): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\後期チーム卒業制作_No11\TEST\main.cpp(1298,59): warning C4244: '引数': '_Ty' から 'int' への変換です。データが失われる可能性があります。
           with
           [
               _Ty=float
           ]
-D:\FL1\TEST\main.cpp(1298,27): warning C4244: '引数': '_Ty' から 'int' への変換です。データが失われる可能性があります。
+C:\後期チーム卒業制作_No11\TEST\main.cpp(1298,27): warning C4244: '引数': '_Ty' から 'int' への変換です。データが失われる可能性があります。
           with
           [
               _Ty=float
           ]
-  TEST.vcxproj -> D:\FL1\TEST\x64\Debug\TEST.exe
+  TEST.vcxproj -> C:\後期チーム卒業制作_No11\TEST\x64\Debug\TEST.exe

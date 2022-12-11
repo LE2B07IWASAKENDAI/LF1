@@ -175,10 +175,10 @@ void Enemy::Draw()
 
 void Enemy::DebugLog()
 {
-	DrawFormatString(1607, 180, GetColor(255, 255, 255), "vector + eye : %f", position_X);
-	DrawFormatString(7, 180, GetColor(255, 255, 255), "FirstPosition : %f", before_position_X);
-	DrawFormatString(7, 300, GetColor(255, 255, 255), "position_X : %f", position_X);
-	DrawFormatString(7, 400, GetColor(255, 255, 255), "Knife_position_X : %f", knife->GetPosition());
+	//DrawFormatString(1607, 180, GetColor(255, 255, 255), "vector + eye : %f", position_X);
+	//DrawFormatString(7, 180, GetColor(255, 255, 255), "FirstPosition : %f", before_position_X);
+	//DrawFormatString(7, 300, GetColor(255, 255, 255), "position_X : %f", position_X);
+	//DrawFormatString(7, 400, GetColor(255, 255, 255), "Knife_position_X : %f", knife->GetPosition());
 }
 
 void Enemy::Set_position(float position_x, float position_y)
