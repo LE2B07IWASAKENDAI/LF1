@@ -267,11 +267,14 @@ int WINAPI WinMain(
                 //ナイフと敵との当たり判定
                 if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
                     if (player->GetHitFlag() == 1) {
+                        se->KillSE_voice();
                         enemy[i]->Dead();
+                        
                     }
                 }
                 //ゲームオーバー処理           
                 if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
+                    se->DiscoverSE_voice();
                     player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
                 }
             }
@@ -280,12 +283,13 @@ int WINAPI WinMain(
             for (int i = 0; i < enemy.size(); i++) {
                 enemy[i]->Draw();
             }
-
+            
 
             //扉⇔プレイヤー　の当たり判定
             if (mapChip->OnCollisionDoor(player->GetPosition_X(), player->GetPosition_Y(),
                 player->GetPlayerSizeX(), player->GetPlayerSizeY()))
             {
+                
                 player->Hidding();
             }
 
@@ -393,12 +397,14 @@ int WINAPI WinMain(
                 //ナイフと敵との当たり判定
                 if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
                     if (player->GetHitFlag() == 1) {
+                        se->KillSE_voice();
                         enemy[i]->Dead();
                     }
                 }
 
                 //ゲームオーバー処理           
                 if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
+                    se->DiscoverSE_voice();
                     player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
                 }
             }
@@ -605,12 +611,14 @@ int WINAPI WinMain(
                 //ナイフと敵との当たり判定
                 if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
                     if (player->GetHitFlag() == 1) {
+                        se->KillSE_voice();
                         enemy[i]->Dead();
                     }
                 }
 
                 //ゲームオーバー処理           
                 if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
+                    se->DiscoverSE_voice();
                     player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
                 }
             }
@@ -627,6 +635,7 @@ int WINAPI WinMain(
                     //まだ花瓶があるなら
                     if (player->GetHitFlag() == 1) {
                         if (vase[i]->GetDead() == 0) {
+                            se->CrackSE();
                             vase[i]->SetDead(1);
                             player->SetDisapperKnifeTrigger(1);
 
@@ -813,12 +822,14 @@ int WINAPI WinMain(
                 //ナイフと敵との当たり判定
                 if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
                     if (player->GetHitFlag() == 1) {
+                        se->KillSE_voice();
                         enemy[i]->Dead();
                     }
                 }
 
                 //ゲームオーバー処理           
                 if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
+                    se->DiscoverSE_voice();
                     player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
                 }
             }
@@ -835,6 +846,7 @@ int WINAPI WinMain(
                     //まだ花瓶があるなら
                     if (player->GetHitFlag() == 1) {
                         if (vase[i]->GetDead() == 0) {
+                            se->CrackSE();
                             vase[i]->SetDead(1);
                             player->SetDisapperKnifeTrigger(1);
                         }
@@ -1024,12 +1036,14 @@ int WINAPI WinMain(
                 //ナイフと敵との当たり判定
                 if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
                     if (player->GetHitFlag() == 1) {
+                        se->KillSE_voice();
                         enemy[i]->Dead();
                     }
                 }
 
                 //ゲームオーバー処理           
                 if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
+                    se->DiscoverSE_voice();
                     player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
                 }
 
@@ -1043,6 +1057,7 @@ int WINAPI WinMain(
                     //まだ花瓶があるなら
                     if (player->GetHitFlag() == 1) {
                         if (vase[i]->GetDead() == 0) {
+                            se->CrackSE();
                             vase[i]->SetDead(1);
                             player->SetDisapperKnifeTrigger(1);
 
