@@ -34,7 +34,7 @@ public:
 
 private:
 	//グラフィックハンドル
-	int gHandle[20];
+	int gHandle[21];
 
 	//隠れているかどうか
 	int hide; //1:隠れている　0:そうでない

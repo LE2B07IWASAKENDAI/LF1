@@ -267,14 +267,14 @@ int WINAPI WinMain(
                 //ナイフと敵との当たり判定
                 if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
                     if (player->GetHitFlag() == 1) {
-                        se->KillSE_voice();
+                        //se->KillSE_voice();
                         enemy[i]->Dead();
                         
                     }
                 }
                 //ゲームオーバー処理           
                 if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
-                    se->DiscoverSE_voice();
+                    //se->DiscoverSE_voice();
                     player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
                 }
             }
@@ -397,14 +397,14 @@ int WINAPI WinMain(
                 //ナイフと敵との当たり判定
                 if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
                     if (player->GetHitFlag() == 1) {
-                        se->KillSE_voice();
+                        //se->KillSE_voice();
                         enemy[i]->Dead();
                     }
                 }
 
                 //ゲームオーバー処理           
                 if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
-                    se->DiscoverSE_voice();
+                    //se->DiscoverSE_voice();
                     player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
                 }
             }
@@ -611,14 +611,14 @@ int WINAPI WinMain(
                 //ナイフと敵との当たり判定
                 if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
                     if (player->GetHitFlag() == 1) {
-                        se->KillSE_voice();
+                        //se->KillSE_voice();
                         enemy[i]->Dead();
                     }
                 }
 
                 //ゲームオーバー処理           
                 if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
-                    se->DiscoverSE_voice();
+                    //se->DiscoverSE_voice();
                     player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
                 }
             }
@@ -822,14 +822,14 @@ int WINAPI WinMain(
                 //ナイフと敵との当たり判定
                 if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
                     if (player->GetHitFlag() == 1) {
-                        se->KillSE_voice();
+                        //se->KillSE_voice();
                         enemy[i]->Dead();
                     }
                 }
 
                 //ゲームオーバー処理           
                 if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
-                    se->DiscoverSE_voice();
+                    //se->DiscoverSE_voice();
                     player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
                 }
             }
@@ -1036,14 +1036,14 @@ int WINAPI WinMain(
                 //ナイフと敵との当たり判定
                 if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
                     if (player->GetHitFlag() == 1) {
-                        se->KillSE_voice();
+                        //se->KillSE_voice();
                         enemy[i]->Dead();
                     }
                 }
 
                 //ゲームオーバー処理           
                 if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
-                    se->DiscoverSE_voice();
+                    //se->DiscoverSE_voice();
                     player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
                 }
 
@@ -1115,7 +1115,7 @@ int WINAPI WinMain(
             if (mapChip->OnCollisionWarp_20(player->GetPosition_X(), player->GetPosition_Y(),
                 player->GetPlayerSizeX(), player->GetPlayerSizeY()))
             {
-                if (CheckHitKey(KEY_INPUT_LSHIFT) == 1) {
+                if (CheckHitKey(KEY_INPUT_S) == 1) {
                     //位置を瞬間移動すればよい
                     player->SetPosition(mapChip->GetPosition_21_X(), mapChip->GetPosition_21_Y());
                     mapChip->SetScroll_Y(1);
@@ -1125,7 +1125,7 @@ int WINAPI WinMain(
             if (mapChip->OnCollisionWarp_22(player->GetPosition_X(), player->GetPosition_Y(),
                 player->GetPlayerSizeX(), player->GetPlayerSizeY()))
             {
-                if (CheckHitKey(KEY_INPUT_RSHIFT) == 1) {
+                if (CheckHitKey(KEY_INPUT_W) == 1) {
                     //位置を瞬間移動すればよい
                     mapChip->SetScroll_Y(0);
                     player->SetPosition(mapChip->GetPosition_23_X(), mapChip->GetPosition_23_Y());

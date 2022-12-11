@@ -27,7 +27,7 @@ void Vase::Update()
 
 void Vase::LoadTexture()
 {
-	gHandle = LoadGraph("Resources/Item/break.png");
+	gHandle = LoadGraph("Resources/Map/Vase.png");
 }
 
 void Vase::Draw()
