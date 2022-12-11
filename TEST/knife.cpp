@@ -20,11 +20,10 @@ void Knife::Initialize()
 	vector_x = 15.0f;
 	vector_y = 1.05f;
 	front = 0;
-	Counter = 0;
 	stock = 10;
 }
 
-void Knife::Ready_Throw(float Ppos_x, float Ppos_y)
+void Knife::Ready_Throw(float Ppos_x, float Ppos_y,int flont)
 {
 	//ナイフが画面内に無ければ
 	if (Getis_throw() == 0) {
@@ -36,87 +35,20 @@ void Knife::Ready_Throw(float Ppos_x, float Ppos_y)
 		//更新：ナイフが画面内にある
 		is_throw = 1;
 	}
+	front = flont;
+	SetDirection();
 }
 
 void Knife::Throw()
 {
-	if (front == 0)
-	{
+	if (front == 0) {
 		//右にとんでく
-		position_X += vector_x;
+		position_X = position_X + vector_x;
 		position_Y += vector_y;
-
-		//if (life >= 10)
-		//{
-		//	position_X += vector_x;
-		//}
-		////なんか最後フォークっぽくなる
-		//else if (life < 10 && life >= 0)
-		//{
-		//	position_X += vector_x;
-		//	position_Y = position_Y + (vector_y * vector_y);
-		//}
-		
-		
 	}
-	else if (front == 1)
-	{
-		//左にとんでく
-		position_X -= vector_x;
+	else if (front == 1) {
+		position_X = position_X - vector_x;
 		position_Y += vector_y;
-
-		//if (life >= 5)
-		//{
-		//	position_X -= vector_x;
-		//}
-		////なんか最後フォークっぽくなる
-		//else if (life < 5 && life >= 0)
-		//{
-		//	position_Y += vector_x;
-		//	position_Y = position_Y + (vector_y * vector_y);
-		//}
-		
-	}
-
-	//移動方向によって向きを変える
-	if (CheckHitKey(KEY_INPUT_A))
-	{
-		Counter++;
-	}
-	else
-	{
-		if (Counter > 0)
-		{
-			Counter = -1;
-		}
-		else
-		{
-			Counter = 0;
-		}
-	}
-	if (Counter == 1)
-	{
-		front = 1;
-	}
-
-	if (CheckHitKey(KEY_INPUT_D))
-	{
-		Counter++;
-	}
-	else
-	{
-		if (Counter > 0)
-		{
-			Counter = -1;
-		}
-		else
-		{
-			Counter = 0;
-		}
-	}
-	if (Counter == 1)
-	{
-		front = 0;
 	}
 
 	//生存時間を減らす
@@ -148,8 +80,6 @@ void Knife::Update()
 		Throw();
 		//lifeが0以上なら描画それ以外は死亡処理
 		life >= 0 ? Draw() : Dead();
-		
-		
 	}
 	DrawFormatString(0, 225, GetColor(255, 255, 255), "stock : %d", stock);
 	DrawFormatString(0, 200, GetColor(255, 255, 255), "life : %d", life);
@@ -157,22 +87,17 @@ void Knife::Update()
 }
 
 void Knife::Draw()
+{	
+	//右方向
+	DrawRotaGraph(position_X, position_Y, 1.0f, PI * (1 / 4 * (float)direction), knifetex[front], TRUE);
+}
+
+void Knife::Cariculate()
 {
-	
-	if (front == 0)
-	{
-		//右方向
-		DrawRotaGraph(position_X, position_Y, 1.0f, PI * 1 / 4, knifetexR, TRUE);
-	}
-	else if (front == 1)
-	{
-		//左方向
-		DrawRotaGraph(position_X, position_Y, 1.0f, PI * -1 / 4, knifetexL, TRUE);
-	}
 }
 
 void Knife::LoadTexture()
 {
-	knifetexR = LoadGraph("Resources/Player/KnifeR.png");
-	knifetexL = LoadGraph("Resources/Player/KnifeL.png");
+	knifetex[0] = LoadGraph("Resources/Player/KnifeR.png");
+	knifetex[1] = LoadGraph("Resources/Player/KnifeL.png");
 }

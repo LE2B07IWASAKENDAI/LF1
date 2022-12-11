@@ -13,7 +13,7 @@ public:
 	//初期化
 	void Initialize();
 	//投げるボタンを押したら位置とフラグを更新
-	void Ready_Throw(float Ppos_X, float Ppos_y);
+	void Ready_Throw(float Ppos_X, float Ppos_y,int flont);
 	//投げた後の挙動
 	void Throw();
 	//ナイフ死亡時
@@ -24,6 +24,8 @@ public:
 	void LoadTexture();
 	//描画
 	void Draw();
+
+	void Cariculate();
 
 /*Setter,Getter*/
 
@@ -42,15 +44,13 @@ public:
 	//座標置
 	float GetPosition() { return position_X; }
 	
+	void SetDirection() { if (front == 0)direction = 1; else if (front == 1)direction = -1; }
 
 	//グラフィックハンドル
-	int knifetexR = 0;
-	int knifetexL = 0;
+	int knifetex[2];
 
 	//前向いてるか？
 	int front = 0;  //0:前、1:後ろ
-
-	int Counter = 0;
 
 private:
 	float position_X = 0;//プレイヤーの現在位置から取得する
@@ -67,4 +67,7 @@ private:
 	int life = 100;
 
 	int stock = 10;
+
+	//向いてる方向
+	int direction = 0;
 };
