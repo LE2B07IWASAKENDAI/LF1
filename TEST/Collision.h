@@ -10,6 +10,8 @@ public:
 public:
 	float Found(float player, float enemy, int flont); //“G‚Ìõ“G”ÍˆÍ‚É“ü‚Á‚½‚©
 
+	float FoundXY(float player_X, float player_Y, float enemy_X, float enemy_Y, int flont);
+
 	/// <summary>
 	/// ƒiƒCƒt‚Æ“G
 	/// </summary>
