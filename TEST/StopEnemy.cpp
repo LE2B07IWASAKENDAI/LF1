@@ -16,9 +16,10 @@ void StopEnemy::Initialize()
 	flont = 0;
 	death = 0;
 	count = 0;
+	checkCount = 0;
 	//âºç¿ïW(åàÇﬂë≈Çø)
-	position_X = 500;
-	position_Y = 500;
+	//position_X = 500;
+	//position_Y = 500;
 }
 
 void StopEnemy::Horizon()
@@ -48,18 +49,84 @@ void StopEnemy::Dead()
 
 void StopEnemy::Monitoring()
 {
-	count++;
-	if (count <= 100)
+	switch (Mode)
 	{
-		flont = 1;
-	}
-	else if (count >= 101 && count < 200)
-	{
-		flont = 0;
-	}
-	else if (count > 200)
-	{
-		count = 0;
+	case Normal:
+		count++;
+		if (count <= 100)
+		{
+			flont = 1;
+		}
+		else if (count >= 101 && count < 200)
+		{
+			flont = 0;
+		}
+		else if (count > 200)
+		{
+			count = 0;
+		}
+		break;
+	case Check:
+		if (position_X > BreakPoint)
+		{
+			flont = 0;
+			if (EqualFlag == 0)
+			{
+				speed_ = -5;
+			}
+		}
+		if (position_X < BreakPoint)
+		{
+			flont = 1;
+			if (EqualFlag == 0)
+			{
+				speed = 5;
+			}
+		}
+
+		if (position_X + 10 > BreakPoint && position_X - 10 < BreakPoint)
+		{
+			speed = 0;
+			speed_ = 0;
+			EqualFlag = 1;
+		}
+
+		if (EqualFlag == 1)
+		{
+			checkCount++;
+		}
+
+		if (checkCount >= 1 && checkCount < 100)
+		{
+			flont = 0;
+		}
+		else if (checkCount >= 101 && checkCount < 200)
+		{
+			flont = 1;
+		}
+		else if (checkCount >= 201)
+		{
+			Mode = Back;
+			checkCount = 0;
+			EqualFlag = 0;
+		}
+		break;
+	case Back:
+		if (position_X > before_position_X)
+		{
+			speed_ = -5;
+		}
+		else if (position_X < before_position_X)
+		{
+			speed = 5;
+		}
+
+		if (position_X == before_position_X)
+		{
+			speed = 0;
+			speed_ = 0;
+			Mode = Normal;
+		}
 	}
 }
 
@@ -97,4 +164,16 @@ void StopEnemy::Set_position(float position_x, float position_y)
 {
 	position_X = position_x;
 	position_Y = position_y;
+
+	before_position_X = position_X;
+}
+
+void StopEnemy::Breaking(float x)
+{
+	BreakPoint = x;
+}
+
+void StopEnemy::CheckSound()
+{
+	Mode = Check;
 }

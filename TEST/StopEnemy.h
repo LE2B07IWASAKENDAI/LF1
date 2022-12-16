@@ -40,6 +40,16 @@ public:
 	//向いている方向
 	int GetFlont() { return flont; }
 
+	void CheckSound();
+	void Breaking(float x);
+	int Mode;
+	enum Mode
+	{
+		Normal,
+		Check,
+		Back,
+	};
+
 public:
 	//グラフィックハンドル
 	int StopEtexture;
@@ -49,6 +59,10 @@ public:
 
 	int death = 0; //生死　0:生きている 1:死んでいる
 	int flont = 0;//0:前　1:後ろ
+	//生成時の位置
+	float before_position_X;
+	float BreakPoint = 0;
+	int EqualFlag = 0; //0:未到達　1:到達
 
 private:
 	//右、左に進む速度
@@ -58,4 +72,6 @@ private:
 	float vector = 0.0f;
 	//振り向きのカウント
 	float count = 0;
+	//チェック用カウント
+	float checkCount = 0;
 };
