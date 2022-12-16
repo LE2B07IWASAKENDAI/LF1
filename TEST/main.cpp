@@ -8,10 +8,15 @@
 #include "SE.h"
 #include "Collision.h"
 
-void SetItem(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int mapNumber);
+void SetItem(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int chipNumber);
 void SetItemX_28(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int chipNumber);
 void DrawItem(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int ghandle);
 void DeleteItem(std::vector<float>& posx, std::vector<float>& posy);
+
+void AllDelete(std::vector<float>& eposx, std::vector<float>& eposy, std::vector<float>& open_doorx, std::vector<float>& open_doory,
+    std::vector<float>& doorx, std::vector<float>& doory, std::vector<float>& chairx, std::vector<float>& chairy,
+    std::vector<float>& deskx, std::vector<float>& desky, std::vector<float>& vasex, std::vector<float>& vasey);
+
 
 int WINAPI WinMain(
     HINSTANCE hInstance,
@@ -185,15 +190,22 @@ int WINAPI WinMain(
             if (SCounter == 1)
             {
                 //vector型の変数の要素を全削除、メモリ解放。
-                DeleteItem(open_doorx, open_doory);
-                DeleteItem(doorx, doory);
-                DeleteItem(eposx, eposy);
-                DeleteItem(vasex, vasey);
+                //DeleteItem(open_doorx, open_doory);
+                //DeleteItem(doorx, doory);
+                //DeleteItem(eposx, eposy);
+                //DeleteItem(vasex, vasey);
+
+                AllDelete(eposx, eposy, open_doorx, open_doory, doorx, doory, chairx, chairy, deskx, desky, vasex, vasey);
 
                 for (int i = 0; i < enemy.size(); i++) {
                     enemy.clear();
                     //コンテナのサイズまでメモリを解放
                     enemy.shrink_to_fit();
+                }
+                for (int i = 0; i < vase.size(); i++) {
+                    vase.clear();
+                    //コンテナのサイズまでメモリを解放
+                    vase.shrink_to_fit();
                 }
 
                 mapChip->SetScroll_Y(0);
@@ -202,22 +214,12 @@ int WINAPI WinMain(
                 mapChip->SetMapNumber(0);
 
                 //マップチップ番号の位置を保存する
-                    //マップチップから位置を挿入
+                //マップチップから位置を挿入
                 SetItem(open_doorx, open_doory, mapChip, 4);
                 SetItem(doorx, doory, mapChip, 5);
+                SetItem(eposx, eposy, mapChip, 8);
 
-                for (int i = 0; i < 14; i++) {
-                    for (int j = 0; j < 84; j++) {
-
-                        switch (mapChip->mapData[mapChip->GetMapNumber()].data[i][j]) {
-                        case 8:
-                            eposx.push_back(float(j * 64));
-                            eposy.push_back(float(i * 64));
-                            break;
-                        }
-                    }
-                }
-
+                //エネミー生成
                 //enemy push_backをしていく
                 for (int i = 0; i < 14; i++) {
                     for (int j = 0; j < 84; j++) {
@@ -248,7 +250,6 @@ int WINAPI WinMain(
 
             player->Update();
 
-
             //マップチップの描画
             DrawItem(open_doorx, open_doory, mapChip, ghandleOPD);
             DrawItem(doorx, doory, mapChip, ghandleCLD);
@@ -272,6 +273,7 @@ int WINAPI WinMain(
                         
                     }
                 }
+
                 //ゲームオーバー処理           
                 if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
                     //se->DiscoverSE_voice();
@@ -305,14 +307,20 @@ int WINAPI WinMain(
                 player->GetPlayerSizeX(), player->GetPlayerSizeY()))
             {
                 //vector型の変数の要素を全削除、メモリ解放。
-                DeleteItem(open_doorx, open_doory);
-                DeleteItem(doorx, doory);
-                DeleteItem(eposx, eposy);
+                //DeleteItem(open_doorx, open_doory);
+                //DeleteItem(doorx, doory);
+                //DeleteItem(eposx, eposy);
+                AllDelete(eposx, eposy, open_doorx, open_doory, doorx, doory, chairx, chairy, deskx, desky, vasex, vasey);
 
                 for (int i = 0; i < enemy.size(); i++) {
                     enemy.clear();
                     //コンテナのサイズまでメモリを解放
                     enemy.shrink_to_fit();
+                }
+                for (int i = 0; i < vase.size(); i++) {
+                    vase.clear();
+                    //コンテナのサイズまでメモリを解放
+                    vase.shrink_to_fit();
                 }
 
                 mapChip->Initialize();
@@ -329,20 +337,16 @@ int WINAPI WinMain(
                 SetItem(doorx, doory, mapChip, 5);
                 SetItem(chairx, chairy, mapChip, 6);
                 SetItem(deskx, desky, mapChip, 7);
+                SetItem(eposx, eposy, mapChip, 8);
+                SetItem(vasex, vasey, mapChip, 10);
 
                 for (int i = 0; i < 14; i++) {
                     for (int j = 0; j < 84; j++) {
-
                         switch (mapChip->mapData[mapChip->GetMapNumber()].data[i][j]) {
                         case 8:
-                            eposx.push_back(float(j * 64));
-                            eposy.push_back(float(i * 64));
                             enemy.push_back(new Enemy());
                             break;
-
                         case 10:
-                            vasex.push_back(float(j * 64));
-                            vasey.push_back(float(i * 64));
                             vase.push_back(new Vase());
                             break;
                         }
@@ -486,13 +490,14 @@ int WINAPI WinMain(
                 player->GetPlayerSizeX(), player->GetPlayerSizeY()))
             {
                 //vector型の変数の要素を全削除、メモリ解放。
-                DeleteItem(open_doorx, open_doory);
-                DeleteItem(doorx, doory);
-                DeleteItem(deskx, desky);
-                DeleteItem(chairx, chairy);
+                //DeleteItem(open_doorx, open_doory);
+                //DeleteItem(doorx, doory);
+                //DeleteItem(deskx, desky);
+                //DeleteItem(chairx, chairy);
 
-                DeleteItem(eposx, eposy);
-                DeleteItem(vasex, vasey);
+                //DeleteItem(eposx, eposy);
+                //DeleteItem(vasex, vasey);
+                AllDelete(eposx, eposy, open_doorx, open_doory, doorx, doory, chairx, chairy, deskx, desky, vasex, vasey);
 
                 for (int i = 0; i < enemy.size(); i++) {
                     enemy.clear();
@@ -504,6 +509,7 @@ int WINAPI WinMain(
                     //コンテナのサイズまでメモリを解放
                     vase.shrink_to_fit();
                 }
+
 
                 mapChip->Initialize();
                 player->Initialize();
@@ -702,18 +708,24 @@ int WINAPI WinMain(
                 player->GetPlayerSizeX(), player->GetPlayerSizeY()))
             {
                 //vector型の変数の要素を全削除、メモリ解放。
-                DeleteItem(open_doorx, open_doory);
-                DeleteItem(doorx, doory);
-                DeleteItem(deskx, desky);
-                DeleteItem(chairx, chairy);
+                //DeleteItem(open_doorx, open_doory);
+                //DeleteItem(doorx, doory);
+                //DeleteItem(deskx, desky);
+                //DeleteItem(chairx, chairy);
 
-                DeleteItem(eposx, eposy);
-                DeleteItem(vasex, vasey);
+                //DeleteItem(eposx, eposy);
+                //DeleteItem(vasex, vasey);
+                AllDelete(eposx, eposy, open_doorx, open_doory, doorx, doory, chairx, chairy, deskx, desky, vasex, vasey);
 
                 for (int i = 0; i < enemy.size(); i++) {
                     enemy.clear();
                     //コンテナのサイズまでメモリを解放
                     enemy.shrink_to_fit();
+                }
+                for (int i = 0; i < vase.size(); i++) {
+                    vase.clear();
+                    //コンテナのサイズまでメモリを解放
+                    vase.shrink_to_fit();
                 }
 
                 mapChip->Initialize();
@@ -912,13 +924,14 @@ int WINAPI WinMain(
                 player->GetPlayerSizeX(), player->GetPlayerSizeY()))
             {
                 //vector型の変数の要素を全削除、メモリ解放。
-                DeleteItem(open_doorx, open_doory);
-                DeleteItem(doorx, doory);
-                DeleteItem(deskx, desky);
-                DeleteItem(chairx, chairy);
+                //DeleteItem(open_doorx, open_doory);
+                //DeleteItem(doorx, doory);
+                //DeleteItem(deskx, desky);
+                //DeleteItem(chairx, chairy);
 
-                DeleteItem(eposx, eposy);
-                DeleteItem(vasex, vasey);
+                //DeleteItem(eposx, eposy);
+                //DeleteItem(vasex, vasey);
+                AllDelete(eposx, eposy, open_doorx, open_doory, doorx, doory, chairx, chairy, deskx, desky, vasex, vasey);
 
                 for (int i = 0; i < enemy.size(); i++) {
                     enemy.clear();
@@ -995,6 +1008,7 @@ int WINAPI WinMain(
 #pragma endregion
             break;
         case GamePlay5:
+
 #pragma region Stage5
             mapChip->SetMapNumber(4);
 
@@ -1145,13 +1159,14 @@ int WINAPI WinMain(
                 player->GetPlayerSizeX(), player->GetPlayerSizeY()))
             {
                 //vector型の変数の要素を全削除、メモリ解放。
-                DeleteItem(open_doorx, open_doory);
-                DeleteItem(doorx, doory);
-                DeleteItem(deskx, desky);
-                DeleteItem(chairx, chairy);
+                //DeleteItem(open_doorx, open_doory);
+                //DeleteItem(doorx, doory);
+                //DeleteItem(deskx, desky);
+                //DeleteItem(chairx, chairy);
 
-                DeleteItem(eposx, eposy);
-                DeleteItem(vasex, vasey);
+                //DeleteItem(eposx, eposy);
+                //DeleteItem(vasex, vasey);
+                AllDelete(eposx, eposy, open_doorx, open_doory, doorx, doory, chairx, chairy, deskx, desky, vasex, vasey);
 
                 for (int i = 0; i < enemy.size(); i++) {
                     enemy.clear();
@@ -1171,6 +1186,8 @@ int WINAPI WinMain(
 #pragma endregion
             break;
         case GameOver:
+
+#pragma region GameOver
             //ゲームオーバー画面描画
             DrawGraph(0, 0, gameoverscene, FALSE);
 
@@ -1218,7 +1235,11 @@ int WINAPI WinMain(
             }
             break;
 
+#pragma endregion
+
+
         case GameClear:
+#pragma region GameClear
             //ゲームクリア画面描画
             DrawGraph(0, 0, gameclearscene, FALSE);
 
@@ -1246,6 +1267,8 @@ int WINAPI WinMain(
             }
             break;
         }
+
+#pragma endregion
 
         ScreenFlip();
 
@@ -1306,4 +1329,17 @@ void DeleteItem(std::vector<float>& posx, std::vector<float>& posy) {
         posy.clear();
         posy.shrink_to_fit();
     }
+}
+
+//マップチップ上のアイテム全削除関数
+void AllDelete(std::vector<float>& eposx, std::vector<float>& eposy, std::vector<float>& open_doorx, std::vector<float>& open_doory,
+    std::vector<float>& doorx, std::vector<float>& doory, std::vector<float>& chairx, std::vector<float>& chairy,
+    std::vector<float>& deskx, std::vector<float>& desky, std::vector<float>& vasex, std::vector<float>& vasey) {
+
+    DeleteItem(eposx, eposy);
+    DeleteItem(open_doorx, open_doory);
+    DeleteItem(doorx, doory);
+    DeleteItem(chairx, chairy);
+    DeleteItem(deskx, desky);
+    DeleteItem(vasex, vasey);
 }
