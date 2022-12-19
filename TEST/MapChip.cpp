@@ -68,11 +68,11 @@ void MapChip::MapDraw()
 				break;
 			case 4:
 				//  "‹ó‚¢‚Ä‚é”à" •`‰æˆ—
-				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE, gHandle[4], FALSE);
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE, gHandle[1], FALSE);
 				break;
 			case 5:
 				//  "•Â‚¶‚Ä‚é”à" •`‰æˆ—
-				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE, gHandle[5], FALSE);
+				DrawGraph(j * MAP_SIZE + scroll_X, i * MAP_SIZE, gHandle[1], FALSE);
 				break;
 			case 6:
 				//  " ˆÖ@q " •`‰æˆ—
