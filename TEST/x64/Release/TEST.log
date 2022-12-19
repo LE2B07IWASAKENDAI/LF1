@@ -1,34 +1,159 @@
-﻿  main.cpp
-C:\後期チーム卒業制作_No11\TEST\knife.h(2,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-C:\後期チーム卒業制作_No11\TEST\knife.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-C:\後期チーム卒業制作_No11\TEST\Vase.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-C:\後期チーム卒業制作_No11\TEST\Vase.h(4,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-C:\後期チーム卒業制作_No11\TEST\main.cpp(279,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\main.cpp(435,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\main.cpp(496,58): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\main.cpp(654,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\main.cpp(717,58): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\main.cpp(875,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\main.cpp(937,58): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\main.cpp(1095,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\main.cpp(1155,58): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\main.cpp(1328,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\main.cpp(1390,58): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\main.cpp(1561,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\main.cpp(1623,58): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\main.cpp(1864,59): warning C4244: '引数': '_Ty' から 'int' への変換です。データが失われる可能性があります。
+﻿  BGM.cpp
+  Collision.cpp
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Collision.cpp(34,9): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Collision.cpp(60,9): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
+  DebugClass.cpp
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\knife.h(2,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\knife.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+  Enemy.cpp
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\knife.h(2,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\knife.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Vase.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Vase.h(4,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Enemy.cpp(139,74): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Enemy.cpp(139,56): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Enemy.cpp(139,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Enemy.cpp(139,24): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Enemy.cpp(144,80): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Enemy.cpp(144,62): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Enemy.cpp(144,34): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Enemy.cpp(144,27): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Enemy.cpp(171,25): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Enemy.cpp(171,13): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  knife.cpp
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\knife.h(2,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\knife.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\knife.cpp(92,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\knife.cpp(92,16): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  main.cpp
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\knife.h(2,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\knife.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Vase.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Vase.h(4,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\main.cpp(278,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\main.cpp(432,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\main.cpp(493,58): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\main.cpp(651,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\main.cpp(714,58): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\main.cpp(871,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\main.cpp(933,58): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\main.cpp(1090,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\main.cpp(1150,58): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\main.cpp(1323,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\main.cpp(1385,58): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\main.cpp(1557,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\main.cpp(1619,58): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\main.cpp(1860,59): warning C4244: '引数': '_Ty' から 'int' への変換です。データが失われる可能性があります。
           with
           [
               _Ty=float
           ]
-C:\後期チーム卒業制作_No11\TEST\main.cpp(1864,27): warning C4244: '引数': '_Ty' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\main.cpp(1860,27): warning C4244: '引数': '_Ty' から 'int' への変換です。データが失われる可能性があります。
           with
           [
               _Ty=float
           ]
+  MapChip.cpp
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(55,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(59,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(67,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(71,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(75,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(79,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(83,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(87,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(92,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(96,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(101,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(105,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(121,53): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(121,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(125,53): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(125,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(133,53): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(133,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(137,53): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(137,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(141,53): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(141,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(145,53): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(145,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(149,53): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(149,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(153,53): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(153,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(158,53): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(158,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(162,53): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(162,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(167,53): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(167,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(171,53): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(171,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(175,53): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(175,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(179,53): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(179,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(183,53): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(183,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(187,53): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(187,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(492,23): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(518,23): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(545,9): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(545,6): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(567,9): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(567,6): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(589,9): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(589,6): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(611,9): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(611,6): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(633,9): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(633,6): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(656,9): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(656,6): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(678,9): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(678,6): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(700,9): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(700,6): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(723,9): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\MapChip.cpp(723,6): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  MapLoader.cpp
+  Player.cpp
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\knife.h(2,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\knife.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Player.cpp(58,42): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Player.cpp(58,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Player.cpp(63,23): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Player.cpp(63,15): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Player.cpp(68,27): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Player.cpp(68,15): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Player.cpp(76,42): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Player.cpp(76,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Player.cpp(81,23): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Player.cpp(81,15): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Player.cpp(86,27): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Player.cpp(86,15): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  SE.cpp
+  StopEnemy.cpp
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(33,64): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(33,46): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(33,23): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(33,11): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(39,70): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(39,52): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(39,29): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(39,22): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(149,25): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\StopEnemy.cpp(149,13): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  Vase.cpp
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Vase.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Vase.h(4,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Vase.cpp(36,24): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1373\Desktop\seisakuLast\TEST\Vase.cpp(36,12): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
   コード生成しています。
-  1 of 352 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+  345 of 352 functions (98.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   コード生成が終了しました。
-  TEST.vcxproj -> C:\後期チーム卒業制作_No11\TEST\x64\Release\TEST.exe
+  TEST.vcxproj -> C:\Users\K019G1373\Desktop\seisakuLast\TEST\x64\Release\TEST.exe
