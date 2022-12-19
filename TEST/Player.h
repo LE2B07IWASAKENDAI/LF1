@@ -69,7 +69,7 @@ private:
 	int size_x = 200, size_y = 200;//プレイヤー画像のサイズ(11/10に津村が追加 ※後で消去)
 	float position_X = 0.0f;   //X座標
 	float position_Y = 576.0f; //Y座標
-	float speed = 7.5f;        //移動速度
+	float speed = 30.0f;        //移動速度
 	int hide = 0;//1：隠れている　0:そうでない
 	//bool drawPlayer = false;//隠れているときは描画しない
 	bool keyPermission = false;//扉の中にいるときは、移動出来ないようにする。
