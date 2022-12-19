@@ -1,24 +1,9 @@
 #include "DxLib.h" 
 
-#include "MapChip.h"
-#include "Player.h"
-#include "Enemy.h"
-#include "Vase.h"
-#include "BGM.h"
-#include "SE.h"
-#include "Collision.h"
 
-void SetItem(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int chipNumber);
+#include "Stage.h"
 
-void SetItemX_28(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int chipNumber);
 
-void DrawItem(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int ghandle);
-
-void DeleteItem(std::vector<float>& posx, std::vector<float>& posy);
-
-void AllDelete(std::vector<float>& eposx, std::vector<float>& eposy, std::vector<float>& open_doorx, std::vector<float>& open_doory,
-    std::vector<float>& doorx, std::vector<float>& doory, std::vector<float>& chairx, std::vector<float>& chairy,
-    std::vector<float>& deskx, std::vector<float>& desky, std::vector<float>& vasex, std::vector<float>& vasey);
 
 
 int WINAPI WinMain(
@@ -37,8 +22,7 @@ int WINAPI WinMain(
     const int WIN_HEIGHT = 900;
     const int WIN_WITDH = 1800;
 
-
-
+    
     // ウィンドウのタイトル
     //SetMainWindowText("title01");
     //ウィンドウサイズを手動では変更できず、 
@@ -61,20 +45,6 @@ int WINAPI WinMain(
         return -1;
     }
     SetDrawScreen(DX_SCREEN_BACK);
-
-
-
-    MapChip* mapChip = new MapChip();
-    Player* player = new Player();
-    BGM* bgm = new BGM();
-    SE* se = new SE();
-    std::vector<Enemy*> enemy;
-    std::vector<Vase*> vase;
-
-    Collision* collision = new Collision();
-
-    mapChip->Initialize();
-    player->Initialize();
 
     //ゲームループ
     int GameState;
@@ -105,18 +75,7 @@ int WINAPI WinMain(
     int SCounter = 0;
 
 
-    int ghandleOPD = LoadGraph("Resources/Map/Open_door.png");
-    int ghandleCLD = LoadGraph("Resources/Map/Door.png");
-    int ghandleCHR = LoadGraph("Resources/Map/Chair.png");
-    int ghandleDSK = LoadGraph("Resources/Map/Desk.png");
-
-
-    //花瓶フラグ
-    int BreakFlag = 0;
-
-    static bool mapInit = true;
-
-    int mapWarp = 0;
+  
     //ループテスト用
     //int StartTime;
 
@@ -124,26 +83,10 @@ int WINAPI WinMain(
     double dNextTime = GetNowCount();
 
 
-    //マップチップで標示する物の座標格納変数
-    std::vector<float>eposx;
-    std::vector<float>eposy;
+    //クラス呼び出し
+    Stage* stage = new Stage();
 
-    std::vector<float>open_doorx;
-    std::vector<float>open_doory;
-
-    std::vector<float>doorx;
-    std::vector<float>doory;
-
-    std::vector<float>chairx;
-    std::vector<float>chairy;
-
-    std::vector<float>deskx;
-    std::vector<float>desky;
-
-    std::vector<float>vasex;
-    std::vector<float>vasey;
-
-    bgm->PlayBGM();
+    
 
 
     while (1)
@@ -165,8 +108,7 @@ int WINAPI WinMain(
         {
         case Title:
             //初期化
-            mapChip->Initialize();
-            player->Initialize();
+            stage->Initialize();
             //Knife->Initialize();
 
             //StartTime = GetNowCount();
@@ -194,45 +136,9 @@ int WINAPI WinMain(
             if (SCounter == 1)
             {
                 //vector型の変数の要素を全削除、メモリ解放。
-                AllDelete(eposx, eposy, open_doorx, open_doory, doorx, doory, chairx, chairy, deskx, desky, vasex, vasey);
+                stage-> Release();
 
-                for (int i = 0; i < enemy.size(); i++) {
-                    enemy.clear();
-                    //コンテナのサイズまでメモリを解放
-                    enemy.shrink_to_fit();
-                }
-                for (int i = 0; i < vase.size(); i++) {
-                    vase.clear();
-                    //コンテナのサイズまでメモリを解放
-                    vase.shrink_to_fit();
-                }
-
-                mapChip->SetScroll_Y(0);
-
-                //マップ番号をセット
-                mapChip->SetMapNumber(0);
-
-                //マップチップ番号の位置を保存する
-                //マップチップから位置を挿入
-                //SetItem(open_doorx, open_doory, mapChip, 4);
-                //SetItem(doorx, doory, mapChip, 5);
-                SetItem(eposx, eposy, mapChip, 8);
-
-                //エネミー生成
-                //enemy push_backをしていく
-                for (int i = 0; i < 14; i++) {
-                    for (int j = 0; j < 84; j++) {
-                        //プレイヤーが扉の前に来たら当たりの判定を入れる
-                        if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 8) {
-                            //※この状態：全て同じ位置に生成されている
-                            enemy.push_back(new Enemy());
-                        }
-                    }
-                }
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    enemy[i]->Initialize();
-                }
+                stage->Generate(0);
 
                 GameState = GamePlay1;
 
@@ -242,575 +148,76 @@ int WINAPI WinMain(
         case GamePlay1:
 
 #pragma region Stage1
-            //マップ番号をセット
-            mapChip->SetMapNumber(0);
-            mapChip->Draw(player->GetPosition_X());
-            mapChip->MapDraw();
-
-
-            //マップチップの描画
-            DrawItem(open_doorx, open_doory, mapChip, ghandleOPD);
-            DrawItem(doorx, doory, mapChip, ghandleCLD);
-
-            //プレイヤーの更新
-            player->Update();
-
-            /*敵の位置挿入*/
-            for (int i = 0; i < enemy.size(); i++) {
-                enemy[i]->Set_position(eposx[i] + mapChip->GetScroll(), eposy[i]);
-            }
-
-            for (int i = 0; i < enemy.size(); i++) {
-                enemy[i]->Update();
-
-                //ナイフと敵との当たり判定
-                if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
-                    if (player->GetHitFlag() == 1) {
-                        //se->KillSE_voice();
-                        enemy[i]->Dead();
-                        
-                    }
-                }
-
-                //ゲームオーバー処理           
-                if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
-                    //se->DiscoverSE_voice();
-                    player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
-                }
-            }
-
-            /*敵の描画処理*/
-            for (int i = 0; i < enemy.size(); i++) {
-                enemy[i]->Draw();
-            }
-            
-
-            //扉⇔プレイヤー　の当たり判定
-            if (mapChip->OnCollisionDoor(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-            {             
-                player->Hidding();
-            }
-
-            //ゲームオーバー画面へ遷移
-            if (player->death == 1)
+   
+            //描画
+            stage->Drow();
+            stage->Update_01();
+           
+            if (stage->SetGameOver() ==1)
             {
-                DrawFormatString(1607, 210, GetColor(255, 255, 255), "当たっている！！！");
                 GameState = GameOver;
             }
 
             //ステージ2へ
-            if (mapChip->OnCollisionGoal(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
+            if (stage->SetGool() == 1)
             {
-                AllDelete(eposx, eposy, open_doorx, open_doory, doorx, doory, chairx, chairy, deskx, desky, vasex, vasey);
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    enemy.clear();
-                    //コンテナのサイズまでメモリを解放
-                    enemy.shrink_to_fit();
-                }
-                for (int i = 0; i < vase.size(); i++) {
-                    vase.clear();
-                    //コンテナのサイズまでメモリを解放
-                    vase.shrink_to_fit();
-                }
-
-
-                mapChip->Initialize();
-                player->Initialize();
+                stage->Release();
+                stage->Generate(1);
                 GameState = GamePlay2;
 
-                //マップ番号をセット
-                mapChip->SetMapNumber(1);
+                stage->Initialize();
 
-
-                //マップチップ番号の位置を保存する
-                   //マップチップから位置を挿入
-                SetItem(open_doorx, open_doory, mapChip, 4);
-                SetItem(doorx, doory, mapChip, 5);
-                SetItem(chairx, chairy, mapChip, 6);
-                SetItem(deskx, desky, mapChip, 7);
-
-                for (int i = 0; i < 14; i++) {
-                    for (int j = 0; j < 84; j++) {
-
-                        switch (mapChip->mapData[mapChip->GetMapNumber()].data[i][j]) {
-                        case 8:
-                            eposx.push_back(float(j * 64));
-                            eposy.push_back(float(i * 64));
-                            break;
-
-                        case 10:
-                            vasex.push_back(float(j * 64));
-                            vasey.push_back(float(i * 64));
-                            break;
-                        }
-                    }
-                }
-
-                //enemy push_backをしていく
-                for (int i = 0; i < 14; i++) {
-                    for (int j = 0; j < 84; j++) {
-                        //プレイヤーが扉の前に来たら当たりの判定を入れる
-                        if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 8) {
-                            //enemyのオブジェクト生成
-                            enemy.push_back(new Enemy());
-                        }
-                    }
-                }
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    enemy[i]->Initialize();
-                }
-
-                for (int i = 0; i < 14; i++) {
-                    for (int j = 0; j < 84; j++) {
-                        //プレイヤーが扉の前に来たら当たりの判定を入れる
-                        if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 10) {
-                            //enemyのオブジェクト生成
-                            vase.push_back(new Vase());
-                        }
-                    }
-                }
-
-                for (int i = 0; i < vase.size(); i++) {
-                    vase[i]->Initialize();
-                }
             }
+
 #pragma endregion
             break;
         case GamePlay2:
 
 #pragma region Stage2
 
-            mapChip->Draw(player->GetPosition_X());
-            mapChip->MapDraw();
-            
-            //マップチップの描画
-            DrawItem(open_doorx, open_doory, mapChip, ghandleOPD);
-            DrawItem(doorx, doory, mapChip, ghandleCLD);
-            DrawItem(chairx, chairy, mapChip, ghandleCHR);
-            DrawItem(deskx, desky, mapChip, ghandleDSK);
+            //描画
+            stage->Drow();
+            stage->Update_01();
 
-
-            /*花瓶の更新*/
-            for (int i = 0; i < vasex.size(); i++) {
-                vase[i]->SetPosition(vasex[i] + mapChip->GetScroll(), vasey[i]);
-            }
-
-            /*敵の更新*/
-            for (int i = 0; i < eposx.size(); i++) {
-                enemy[i]->Set_position(eposx[i] + mapChip->GetScroll(), eposy[i]);
-            }
-
-            for (int i = 0; i < vase.size(); i++) {
-                vase[i]->Draw();
-            }
-
-            //プレイヤーの更新
-            player->Update();
-
-            for (int i = 0; i < enemy.size(); i++) {
-
-                for (int j = 0; j < vasex.size(); j++)
-                {
-                    enemy[i]->Breaking(vasex[j] + mapChip->GetScroll());
-                }
-                enemy[i]->Update();
-                //ナイフと敵との当たり判定
-                if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
-                    if (player->GetHitFlag() == 1) {
-                        //se->KillSE_voice();
-                        enemy[i]->Dead();
-                    }
-                }
-
-                //ゲームオーバー処理           
-                if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
-                    //se->DiscoverSE_voice();
-                    player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
-                }
-            }
-
-            for (int i = 0; i < enemy.size(); i++) {
-                enemy[i]->Draw();
-            }
-
-            for (int i = 0; i < vase.size(); i++) {
-                //ナイフと花瓶の当たり判定
-                if (collision->KnifetoVase(player->GetKnifePos(), vase[i]->GetPosition())) {
-                    //まだ花瓶があるなら
-                    if (player->GetHitFlag() == 1) {
-                        if (vase[i]->GetDead() == 0) {
-                            se->CrackSE();
-                            vase[i]->SetDead(1);
-                            player->SetDisapperKnifeTrigger(1);
-
-                        }
-                    }
-                }
-
-                if (vase[i]->GetDead() == 1)
-                {
-                    for (int j = 0; j < enemy.size(); j++) {
-                        enemy[j]->CheckSound();
-                    }
-                    vase[i]->SetDead(2);
-                }
-            }
-
-            //扉⇔プレイヤー　の当たり判定
-            if (mapChip->OnCollisionDoor(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
+            if (stage->SetGameOver() == 1)
             {
-                player->Hidding();
+                GameState = GameOver;
             }
 
-            //イス⇔プレイヤー　の当たり判定 /*対右*/
-            if (mapChip->OnCollisionChair_Right(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
+            //ステージ2へ
+            if (stage->SetGool() == 1)
             {
-                player->Hidding();
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    if (enemy[i]->GetFlont() == 1 && enemy[i]->GetDeath() == 0 &&
-                        collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()))
-                    {
-                        player->SetHide(0);
-                    }
-                }
-            }
-
-            //イス⇔プレイヤー　の当たり判定　/*対左*/
-            else if (mapChip->OnCollisionChair_Left(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-            {
-                player->Hidding();
-                for (int i = 0; i < enemy.size(); i++) {
-
-                    if (enemy[i]->GetFlont() == 0 && enemy[i]->GetDeath() == 0 &&
-                        player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont())))
-                    {
-                        player->SetHide(0);
-                    }
-                }
-            }
-
-            //ゲームオーバー画面へ遷移
-            if (player->death == 1)
-            {
-                DrawFormatString(1607, 210, GetColor(255, 255, 255), "当たっている！！！");
-
-                //GameState = GameOver;
-            }
-
-            //ステージ3へ
-            if (mapChip->OnCollisionGoal(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-            {
-                //vector型の変数の要素を全削除、メモリ解放。
-                //DeleteItem(open_doorx, open_doory);
-                //DeleteItem(doorx, doory);
-                //DeleteItem(deskx, desky);
-                //DeleteItem(chairx, chairy);
-
-                //DeleteItem(eposx, eposy);
-                //DeleteItem(vasex, vasey);
-                AllDelete(eposx, eposy, open_doorx, open_doory, doorx, doory, chairx, chairy, deskx, desky, vasex, vasey);
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    enemy.clear();
-                    //コンテナのサイズまでメモリを解放
-                    enemy.shrink_to_fit();
-                }
-                for (int i = 0; i < vase.size(); i++) {
-                    vase.clear();
-                    //コンテナのサイズまでメモリを解放
-                    vase.shrink_to_fit();
-                }
-
-
-                mapChip->Initialize();
-                player->Initialize();
+                stage->Release();
+                stage->Generate(2);
                 GameState = GamePlay3;
 
-                //マップ番号をセット
-                mapChip->SetMapNumber(2);
+                stage->Initialize();
 
-
-                //マップチップ番号の位置を保存する
-                   //マップチップから位置を挿入
-                SetItem(open_doorx, open_doory, mapChip, 4);
-                SetItem(doorx, doory, mapChip, 5);
-                SetItem(chairx, chairy, mapChip, 6);
-                SetItem(deskx, desky, mapChip, 7);
-
-                for (int i = 0; i < 14; i++) {
-                    for (int j = 0; j < 84; j++) {
-
-                        switch (mapChip->mapData[mapChip->GetMapNumber()].data[i][j]) {
-                        case 8:
-                            eposx.push_back(float(j * 64));
-                            eposy.push_back(float(i * 64));
-                            break;
-
-                        case 10:
-                            vasex.push_back(float(j * 64));
-                            vasey.push_back(float(i * 64));
-                            break;
-                        }
-                    }
-                }
-
-                //enemy push_backをしていく
-                for (int i = 0; i < 14; i++) {
-                    for (int j = 0; j < 84; j++) {
-                        //プレイヤーが扉の前に来たら当たりの判定を入れる
-                        if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 8) {
-                            //enemyのオブジェクト生成
-                            enemy.push_back(new Enemy());
-                        }
-                    }
-                }
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    enemy[i]->Initialize();
-                }
-
-                for (int i = 0; i < 14; i++) {
-                    for (int j = 0; j < 84; j++) {
-                        //プレイヤーが扉の前に来たら当たりの判定を入れる
-                        if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 10) {
-                            //enemyのオブジェクト生成
-                            vase.push_back(new Vase());
-                        }
-                    }
-                }
-
-                for (int i = 0; i < vase.size(); i++) {
-                    vase[i]->Initialize();
-                }
             }
-
+         
 #pragma endregion
             break;
         case GamePlay3:
 
 #pragma region Stage3
-            //マップ番号をセット
-            mapChip->Draw(player->GetPosition_X());
-            mapChip->MapDraw();
+          
+            //描画
+            stage->Drow();
+            stage->Update_01();
 
-
-            //マップチップの描画
-            DrawItem(open_doorx, open_doory, mapChip, ghandleOPD);
-            DrawItem(doorx, doory, mapChip, ghandleCLD);
-            DrawItem(chairx, chairy, mapChip, ghandleCHR);
-            DrawItem(deskx, desky, mapChip, ghandleDSK);
-
-
-
-
-            /*花瓶の更新*/
-            for (int i = 0; i < vasex.size(); i++) {
-                vase[i]->SetPosition(vasex[i] + mapChip->GetScroll(), vasey[i]);
-            }
-            /*敵の更新*/
-            for (int i = 0; i < eposx.size(); i++) {
-                enemy[i]->Set_position(eposx[i] + mapChip->GetScroll(), eposy[i]);
-            }
-
-            //花瓶の描画
-            for (int i = 0; i < vase.size(); i++) {
-                vase[i]->Draw();
-            }
-            //プレイヤーの更新
-            player->Update();
-
-            //敵の毎フレーム処理
-            for (int i = 0; i < enemy.size(); i++) {
-
-                for (int j = 0; j < vasex.size(); j++)
-                {
-                    enemy[i]->Breaking(vasex[j] + mapChip->GetScroll());
-                }
-                enemy[i]->Update();
-
-                //ナイフと敵との当たり判定
-                if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
-                    if (player->GetHitFlag() == 1) {
-                        //se->KillSE_voice();
-                        enemy[i]->Dead();
-                    }
-                }
-
-                //ゲームオーバー処理           
-                if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
-                    //se->DiscoverSE_voice();
-                    player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
-                }
-            }
-
-            //敵の描画
-            for (int i = 0; i < enemy.size(); i++) {
-                enemy[i]->Draw();
-            }
-
-            //花瓶の毎フレーム処理
-            for (int i = 0; i < vase.size(); i++) {
-                //ナイフと花瓶の当たり判定
-                if (collision->KnifetoVase(player->GetKnifePos(), vase[i]->GetPosition())) {
-                    //まだ花瓶があるなら
-                    if (player->GetHitFlag() == 1) {
-                        if (vase[i]->GetDead() == 0) {
-                            se->CrackSE();
-                            vase[i]->SetDead(1);
-                            player->SetDisapperKnifeTrigger(1);
-
-                        }
-                    }
-                }
-
-                if (vase[i]->GetDead() == 1)
-                {
-                    for (int j = 0; j < enemy.size(); j++) {
-                        enemy[j]->CheckSound();
-                    }
-                    vase[i]->SetDead(2);
-                }
-            }
-
-            //扉⇔プレイヤー　の当たり判定
-            if (mapChip->OnCollisionDoor(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
+            if (stage->SetGameOver() == 1)
             {
-                player->Hidding();
+                GameState = GameOver;
             }
 
-            //イス⇔プレイヤー　の当たり判定 /*対右*/
-            if (mapChip->OnCollisionChair_Right(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
+            //ステージ2へ
+            if (stage->SetGool() == 1)
             {
-                player->Hidding();
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    if (enemy[i]->GetFlont() == 1 && enemy[i]->GetDeath() == 0 &&
-                        collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()))
-                    {
-                        player->SetHide(0);
-                    }
-                }
-            }
-
-            //イス⇔プレイヤー　の当たり判定　/*対左*/
-            else if (mapChip->OnCollisionChair_Left(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-            {
-                player->Hidding();
-                for (int i = 0; i < enemy.size(); i++) {
-
-                    if (enemy[i]->GetFlont() == 0 && enemy[i]->GetDeath() == 0 &&
-                        player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont())))
-                    {
-                        player->SetHide(0);
-                    }
-                }
-            }
-
-            //ゲームオーバー画面へ遷移
-            if (player->death == 1)
-            {
-                DrawFormatString(1607, 210, GetColor(255, 255, 255), "当たっている！！！");
-
-                //GameState = GameOver;
-            }
-
-            //クリア
-            if (mapChip->OnCollisionGoal(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-            {
-                //vector型の変数の要素を全削除、メモリ解放。
-                //DeleteItem(open_doorx, open_doory);
-                //DeleteItem(doorx, doory);
-                //DeleteItem(deskx, desky);
-                //DeleteItem(chairx, chairy);
-
-                //DeleteItem(eposx, eposy);
-                //DeleteItem(vasex, vasey);
-                AllDelete(eposx, eposy, open_doorx, open_doory, doorx, doory, chairx, chairy, deskx, desky, vasex, vasey);
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    enemy.clear();
-                    //コンテナのサイズまでメモリを解放
-                    enemy.shrink_to_fit();
-                }
-                for (int i = 0; i < vase.size(); i++) {
-                    vase.clear();
-                    //コンテナのサイズまでメモリを解放
-                    vase.shrink_to_fit();
-                }
-
-                mapChip->Initialize();
-                player->Initialize();
+                stage->Release();
+                stage->Generate(3);
                 GameState = GamePlay4;
 
-                //マップ番号をセット
-                mapChip->SetMapNumber(3);
-
-
-                //マップチップ番号の位置を保存する
-                   //マップチップから位置を挿入
-                SetItem(open_doorx, open_doory, mapChip, 4);
-                SetItem(doorx, doory, mapChip, 5);
-                SetItem(chairx, chairy, mapChip, 6);
-                SetItem(deskx, desky, mapChip, 7);
-
-                for (int i = 0; i < 14; i++) {
-                    for (int j = 0; j < 84; j++) {
-
-                        switch (mapChip->mapData[mapChip->GetMapNumber()].data[i][j]) {
-                        case 8:
-                            eposx.push_back(float(j * 64));
-                            eposy.push_back(float(i * 64));
-                            break;
-
-                        case 10:
-                            vasex.push_back(float(j * 64));
-                            vasey.push_back(float(i * 64));
-                            break;
-                        }
-                    }
-                }
-
-                //enemy push_backをしていく
-                for (int i = 0; i < 14; i++) {
-                    for (int j = 0; j < 84; j++) {
-                        //プレイヤーが扉の前に来たら当たりの判定を入れる
-                        if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 8) {
-                            //enemyのオブジェクト生成
-                            enemy.push_back(new Enemy());
-                        }
-                    }
-                }
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    enemy[i]->Initialize();
-                }
-
-                for (int i = 0; i < 14; i++) {
-                    for (int j = 0; j < 84; j++) {
-                        //プレイヤーが扉の前に来たら当たりの判定を入れる
-                        if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 10) {
-                            //enemyのオブジェクト生成
-                            vase.push_back(new Vase());
-                        }
-                    }
-                }
-
-                for (int i = 0; i < vase.size(); i++) {
-                    vase[i]->Initialize();
-                }
+                stage->Initialize();
 
             }
 #pragma endregion
@@ -818,910 +225,101 @@ int WINAPI WinMain(
         case GamePlay4:
 
 #pragma region Stage4
-            //マップ番号をセット
-            mapChip->Draw(player->GetPosition_X());
-            mapChip->MapDraw();
+            //描画
+            stage->Drow();
+            stage->Update_01();
 
-
-            //マップチップの描画
-            DrawItem(open_doorx, open_doory, mapChip, ghandleOPD);
-            DrawItem(doorx, doory, mapChip, ghandleCLD);
-            DrawItem(chairx, chairy, mapChip, ghandleCHR);
-            DrawItem(deskx, desky, mapChip, ghandleDSK);
-
-
-
-
-            /*花瓶の更新*/
-            for (int i = 0; i < vasex.size(); i++) {
-                vase[i]->SetPosition(vasex[i] + mapChip->GetScroll(), vasey[i]);
-            }
-            /*敵の更新*/
-            for (int i = 0; i < eposx.size(); i++) {
-                enemy[i]->Set_position(eposx[i] + mapChip->GetScroll(), eposy[i]);
-            }
-
-            //花瓶の描画
-            for (int i = 0; i < vase.size(); i++) {
-                vase[i]->Draw();
-            }
-            //プレイヤーの更新
-            player->Update();
-
-            //敵の毎フレーム処理
-            for (int i = 0; i < enemy.size(); i++) {
-
-                for (int j = 0; j < vasex.size(); j++)
-                {
-                    enemy[i]->Breaking(vasex[j] + mapChip->GetScroll());
-                }
-                enemy[i]->Update();
-
-                //ナイフと敵との当たり判定
-                if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
-                    if (player->GetHitFlag() == 1) {
-                        //se->KillSE_voice();
-                        enemy[i]->Dead();
-                    }
-                }
-
-                //ゲームオーバー処理           
-                if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
-                    //se->DiscoverSE_voice();
-                    player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
-                }
-            }
-
-            //敵の描画
-            for (int i = 0; i < enemy.size(); i++) {
-                enemy[i]->Draw();
-            }
-
-            //花瓶の毎フレーム処理
-            for (int i = 0; i < vase.size(); i++) {
-                //ナイフと花瓶の当たり判定
-                if (collision->KnifetoVase(player->GetKnifePos(), vase[i]->GetPosition())) {
-                    //まだ花瓶があるなら
-                    if (player->GetHitFlag() == 1) {
-                        if (vase[i]->GetDead() == 0) {
-                            se->CrackSE();
-                            vase[i]->SetDead(1);
-                            player->SetDisapperKnifeTrigger(1);
-                        }
-                    }
-                }
-
-                if (vase[i]->GetDead() == 1)
-                {
-                    for (int j = 0; j < enemy.size(); j++) {
-                        enemy[j]->CheckSound();
-                    }
-                    vase[i]->SetDead(2);
-                }
-            }
-
-            //扉⇔プレイヤー　の当たり判定
-            if (mapChip->OnCollisionDoor(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
+            if (stage->SetGameOver() == 1)
             {
-                player->Hidding();
+                GameState = GameOver;
             }
 
-            //イス⇔プレイヤー　の当たり判定 /*対右*/
-            if (mapChip->OnCollisionChair_Right(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
+            //ステージ2へ
+            if (stage->SetGool() == 1)
             {
-                player->Hidding();
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    if (enemy[i]->GetFlont() == 1 && enemy[i]->GetDeath() == 0 &&
-                        collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()))
-                    {
-                        player->SetHide(0);
-                    }
-                }
-            }
-
-            //イス⇔プレイヤー　の当たり判定　/*対左*/
-            else if (mapChip->OnCollisionChair_Left(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-            {
-                player->Hidding();
-                for (int i = 0; i < enemy.size(); i++) {
-
-                    if (enemy[i]->GetFlont() == 0 && enemy[i]->GetDeath() == 0 &&
-                        player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont())))
-                    {
-                        player->SetHide(0);
-                    }
-                }
-            }
-
-            //ゲームオーバー画面へ遷移
-            if (player->death == 1)
-            {
-                DrawFormatString(1607, 210, GetColor(255, 255, 255), "当たっている！！！");
-
-                //GameState = GameOver;
-            }
-
-            //クリア
-            if (mapChip->OnCollisionGoal(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-            {
-                //vector型の変数の要素を全削除、メモリ解放。
-                //DeleteItem(open_doorx, open_doory);
-                //DeleteItem(doorx, doory);
-                //DeleteItem(deskx, desky);
-                //DeleteItem(chairx, chairy);
-
-                //DeleteItem(eposx, eposy);
-                //DeleteItem(vasex, vasey);
-                AllDelete(eposx, eposy, open_doorx, open_doory, doorx, doory, chairx, chairy, deskx, desky, vasex, vasey);
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    enemy.clear();
-                    //コンテナのサイズまでメモリを解放
-                    enemy.shrink_to_fit();
-                }
-                for (int i = 0; i < vase.size(); i++) {
-                    vase.clear();
-                    //コンテナのサイズまでメモリを解放
-                    vase.shrink_to_fit();
-                }
-
-                mapChip->Initialize();
-                player->Initialize();
+                stage->Release();
+                stage->Generate(4);
                 GameState = GamePlay5;
 
-                //マップ番号をセット
-                mapChip->SetMapNumber(4);
+                stage->Initialize();
 
-
-                //マップチップ番号の位置を保存する
-                 //マップチップから位置を挿入
-                SetItemX_28(open_doorx, open_doory, mapChip, 4);
-                SetItemX_28(doorx, doory, mapChip, 5);
-                SetItemX_28(chairx, chairy, mapChip, 6);
-                SetItemX_28(deskx, desky, mapChip, 7);
-
-                for (int i = 0; i < 28; i++) {
-                    for (int j = 0; j < 84; j++) {
-
-                        switch (mapChip->mapData[mapChip->GetMapNumber()].data[i][j]) {
-                        case 8:
-                            eposx.push_back(float(j * 64));
-                            eposy.push_back(float(i * 64));
-                            break;
-
-                        case 10:
-                            vasex.push_back(float(j * 64));
-                            vasey.push_back(float(i * 64));
-                            break;
-                        }
-                    }
-                }
-
-                //enemy push_backをしていく
-                for (int i = 0; i < 28; i++) {
-                    for (int j = 0; j < 84; j++) {
-                        //プレイヤーが扉の前に来たら当たりの判定を入れる
-                        if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 8) {
-                            //enemyのオブジェクト生成
-                            enemy.push_back(new Enemy());
-                        }
-                    }
-                }
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    enemy[i]->Initialize();
-                }
-
-                for (int i = 0; i < 28; i++) {
-                    for (int j = 0; j < 84; j++) {
-                        //プレイヤーが扉の前に来たら当たりの判定を入れる
-                        if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 10) {
-                            //enemyのオブジェクト生成
-                            vase.push_back(new Vase());
-                        }
-                    }
-                }
-
-                for (int i = 0; i < vase.size(); i++) {
-                    vase[i]->Initialize();
-                }
             }
+           
 #pragma endregion
             break;
         case GamePlay5:
 
 #pragma region Stage5
-            mapChip->SetMapNumber(4);
+            //描画
+            stage->Drow();
+            stage->Update_02();
 
-            //マップ番号をセット
-            mapChip->Draw(player->GetPosition_X());
-            mapChip->MapDraw5();
-
-
-            //マップチップの描画
-            DrawItem(open_doorx, open_doory, mapChip, ghandleOPD);
-            DrawItem(doorx, doory, mapChip, ghandleCLD);
-            DrawItem(chairx, chairy, mapChip, ghandleCHR);
-            DrawItem(deskx, desky, mapChip, ghandleDSK);
-
-
-
-            /*花瓶の更新*/
-            for (int i = 0; i < vasex.size(); i++) {
-                vase[i]->SetPosition(vasex[i] + mapChip->GetScroll(), vasey[i] + mapChip->GetScroll_Y());
-            }
-            /*敵の更新*/
-            for (int i = 0; i < eposx.size(); i++) {
-                enemy[i]->Set_position(eposx[i] + mapChip->GetScroll(), eposy[i] + mapChip->GetScroll_Y());
-            }
-
-            //花瓶の描画
-            for (int i = 0; i < vase.size(); i++) {
-                vase[i]->Draw();
-            }
-
-            //プレイヤーの更新
-            player->Update();
-            //敵の毎フレーム処理
-            for (int i = 0; i < enemy.size(); i++) {
-
-                for (int j = 0; j < vasex.size(); j++)
-                {
-                    enemy[i]->Breaking(vasex[j] + mapChip->GetScroll());
-                }
-                enemy[i]->Update();
-
-                //ナイフと敵との当たり判定
-                if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
-                    if (player->GetHitFlag() == 1) {
-                        //se->KillSE_voice();
-                        enemy[i]->Dead();
-                    }
-                }
-
-                //ゲームオーバー処理           
-                if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
-                    //se->DiscoverSE_voice();
-                    player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
-                }
-
-                enemy[i]->Draw();
-            }
-
-            //花瓶の毎フレーム処理
-            for (int i = 0; i < vase.size(); i++) {
-                //ナイフと花瓶の当たり判定
-                if (collision->KnifetoVase(player->GetKnifePos(), vase[i]->GetPosition())) {
-                    //まだ花瓶があるなら
-                    if (player->GetHitFlag() == 1) {
-                        if (vase[i]->GetDead() == 0) {
-                            se->CrackSE();
-                            vase[i]->SetDead(1);
-                            player->SetDisapperKnifeTrigger(1);
-
-                        }
-                    }
-                }
-
-                if (vase[i]->GetDead() == 1)
-                {
-                    for (int j = 0; j < enemy.size(); j++) {
-                        enemy[j]->CheckSound();
-                    }
-                    vase[i]->SetDead(2);
-                }
-            }
-
-            //扉⇔プレイヤー　の当たり判定
-            if (mapChip->OnCollisionDoor_28(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
+            if (stage->SetGameOver() == 1)
             {
-                player->Hidding();
+                GameState = GameOver;
             }
 
-            //イス⇔プレイヤー　の当たり判定 /*対右*/
-            if (mapChip->OnCollisionChair_Right_28(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
+            //ステージ2へ
+            if (stage->SetGool() == 1)
             {
-                player->Hidding();
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    if (enemy[i]->GetFlont() == 1 && enemy[i]->GetDeath() == 0 &&
-                        collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()))
-                    {
-                        player->SetHide(0);
-                    }
-                }
-            }
-
-            //イス⇔プレイヤー　の当たり判定　/*対左*/
-            else if (mapChip->OnCollisionChair_Left_28(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-            {
-                player->Hidding();
-                for (int i = 0; i < enemy.size(); i++) {
-
-                    if (enemy[i]->GetFlont() == 0 && enemy[i]->GetDeath() == 0 &&
-                        player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont())))
-                    {
-                        player->SetHide(0);
-                    }
-                }
-            }
-
-            //分岐
-            if (mapChip->OnCollisionWarp_20(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-            {
-                if (CheckHitKey(KEY_INPUT_S) == 1) {
-                    //位置を瞬間移動すればよい
-                    player->SetPosition(mapChip->GetPosition_21_X(), mapChip->GetPosition_21_Y());
-                    mapChip->SetScroll_Y(1);
-                }
-            }
-
-            if (mapChip->OnCollisionWarp_22(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-            {
-                if (CheckHitKey(KEY_INPUT_W) == 1) {
-                    //位置を瞬間移動すればよい
-                    mapChip->SetScroll_Y(0);
-                    player->SetPosition(mapChip->GetPosition_23_X(), mapChip->GetPosition_23_Y());
-                }
-            }
-
-            //ゲームオーバー画面へ遷移
-            if (player->death == 1)
-            {
-                DrawFormatString(1607, 210, GetColor(255, 255, 255), "当たっている！！！");
-
-                //GameState = GameOver;
-            }
-
-            //クリア
-            if (mapChip->OnCollisionGoal(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-            {
-                //vector型の変数の要素を全削除、メモリ解放。
-                AllDelete(eposx, eposy, open_doorx, open_doory, doorx, doory, chairx, chairy, deskx, desky, vasex, vasey);
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    enemy.clear();
-                    //コンテナのサイズまでメモリを解放
-                    enemy.shrink_to_fit();
-                }
-                for (int i = 0; i < vase.size(); i++) {
-                    vase.clear();
-                    //コンテナのサイズまでメモリを解放
-                    vase.shrink_to_fit();
-                }
-
-                mapChip->Initialize();
-                player->Initialize();
+                stage->Release();
+                stage->Generate(5);
                 GameState = GamePlay6;
 
-                //マップ番号をセット
-                mapChip->SetMapNumber(5);
+                stage->Initialize();
 
-
-                //マップチップ番号の位置を保存する
-                 //マップチップから位置を挿入
-                SetItemX_28(open_doorx, open_doory, mapChip, 4);
-                SetItemX_28(doorx, doory, mapChip, 5);
-                SetItemX_28(chairx, chairy, mapChip, 6);
-                SetItemX_28(deskx, desky, mapChip, 7);
-
-                for (int i = 0; i < 28; i++) {
-                    for (int j = 0; j < 84; j++) {
-
-                        switch (mapChip->mapData[mapChip->GetMapNumber()].data[i][j]) {
-                        case 8:
-                            eposx.push_back(float(j * 64));
-                            eposy.push_back(float(i * 64));
-                            break;
-
-                        case 10:
-                            vasex.push_back(float(j * 64));
-                            vasey.push_back(float(i * 64));
-                            break;
-                        }
-                    }
-                }
-
-                //enemy push_backをしていく
-                for (int i = 0; i < 28; i++) {
-                    for (int j = 0; j < 84; j++) {
-                        //プレイヤーが扉の前に来たら当たりの判定を入れる
-                        if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 8) {
-                            //enemyのオブジェクト生成
-                            enemy.push_back(new Enemy());
-                        }
-                    }
-                }
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    enemy[i]->Initialize();
-                }
-
-                for (int i = 0; i < 28; i++) {
-                    for (int j = 0; j < 84; j++) {
-                        //プレイヤーが扉の前に来たら当たりの判定を入れる
-                        if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 10) {
-                            //enemyのオブジェクト生成
-                            vase.push_back(new Vase());
-                        }
-                    }
-                }
-
-                for (int i = 0; i < vase.size(); i++) {
-                    vase[i]->Initialize();
-                }
             }
-
 
 #pragma endregion
             break;
         case GamePlay6:
 
 #pragma region Stage6
-            //マップ番号をセット
-            mapChip->Draw(player->GetPosition_X());
-            mapChip->MapDraw5();
+            //描画
+            stage->Drow();
+            stage->Update_02();
 
-            player->Update();
-
-            //マップチップの描画
-            DrawItem(open_doorx, open_doory, mapChip, ghandleOPD);
-            DrawItem(doorx, doory, mapChip, ghandleCLD);
-            DrawItem(chairx, chairy, mapChip, ghandleCHR);
-            DrawItem(deskx, desky, mapChip, ghandleDSK);
-
-
-
-
-            /*花瓶の更新*/
-            for (int i = 0; i < vasex.size(); i++) {
-                vase[i]->SetPosition(vasex[i] + mapChip->GetScroll(), vasey[i]);
-            }
-            /*敵の更新*/
-            for (int i = 0; i < eposx.size(); i++) {
-                enemy[i]->Set_position(eposx[i] + mapChip->GetScroll(), eposy[i]);
-            }
-
-            //花瓶の描画
-            for (int i = 0; i < vase.size(); i++) {
-                vase[i]->Draw();
-            }
-            //プレイヤーの更新
-            player->Update();
-
-            //敵の毎フレーム処理
-            for (int i = 0; i < enemy.size(); i++) {
-
-                for (int j = 0; j < vasex.size(); j++)
-                {
-                    enemy[i]->Breaking(vasex[j] + mapChip->GetScroll());
-                }
-                enemy[i]->Update();
-
-                //ナイフと敵との当たり判定
-                if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
-                    if (player->GetHitFlag() == 1) {
-                        //se->KillSE_voice();
-                        enemy[i]->Dead();
-                    }
-                }
-
-                //ゲームオーバー処理           
-                if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
-                    //se->DiscoverSE_voice();
-                    player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
-                }
-            }
-
-            //敵の描画
-            for (int i = 0; i < enemy.size(); i++) {
-                enemy[i]->Draw();
-            }
-
-            //花瓶の毎フレーム処理
-            for (int i = 0; i < vase.size(); i++) {
-                //ナイフと花瓶の当たり判定
-                if (collision->KnifetoVase(player->GetKnifePos(), vase[i]->GetPosition())) {
-                    //まだ花瓶があるなら
-                    if (player->GetHitFlag() == 1) {
-                        if (vase[i]->GetDead() == 0) {
-                            se->CrackSE();
-                            vase[i]->SetDead(1);
-                            player->SetDisapperKnifeTrigger(1);
-                        }
-                    }
-                }
-
-                if (vase[i]->GetDead() == 1)
-                {
-                    for (int j = 0; j < enemy.size(); j++) {
-                        enemy[j]->CheckSound();
-                    }
-                    vase[i]->SetDead(2);
-                }
-            }
-
-            //扉⇔プレイヤー　の当たり判定
-            if (mapChip->OnCollisionDoor(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
+            if (stage->SetGameOver() == 1)
             {
-                player->Hidding();
+                GameState = GameOver;
             }
 
-            //イス⇔プレイヤー　の当たり判定 /*対右*/
-            if (mapChip->OnCollisionChair_Right(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
+            //ステージ2へ
+            if (stage->SetGool() == 1)
             {
-                player->Hidding();
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    if (enemy[i]->GetFlont() == 1 && enemy[i]->GetDeath() == 0 &&
-                        collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()))
-                    {
-                        player->SetHide(0);
-                    }
-                }
-            }
-
-            //イス⇔プレイヤー　の当たり判定　/*対左*/
-            else if (mapChip->OnCollisionChair_Left(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-            {
-                player->Hidding();
-                for (int i = 0; i < enemy.size(); i++) {
-
-                    if (enemy[i]->GetFlont() == 0 && enemy[i]->GetDeath() == 0 &&
-                        player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont())))
-                    {
-                        player->SetHide(0);
-                    }
-                }
-            }
-
-            //分岐
-            if (mapChip->OnCollisionWarp_20(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-            {
-                if (CheckHitKey(KEY_INPUT_S) == 1) {
-                    //位置を瞬間移動すればよい
-                    player->SetPosition(mapChip->GetPosition_21_X(), mapChip->GetPosition_21_Y());
-                    mapChip->SetScroll_Y(1);
-                }
-            }
-
-            if (mapChip->OnCollisionWarp_22(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-            {
-                if (CheckHitKey(KEY_INPUT_W) == 1) {
-                    //位置を瞬間移動すればよい
-                    mapChip->SetScroll_Y(0);
-                    player->SetPosition(mapChip->GetPosition_23_X(), mapChip->GetPosition_23_Y());
-                }
-            }
-
-            //ゲームオーバー画面へ遷移
-            if (player->death == 1)
-            {
-                DrawFormatString(1607, 210, GetColor(255, 255, 255), "当たっている！！！");
-
-                //GameState = GameOver;
-            }
-
-            //クリア
-            if (mapChip->OnCollisionGoal(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-            {
-                //vector型の変数の要素を全削除、メモリ解放。
-                AllDelete(eposx, eposy, open_doorx, open_doory, doorx, doory, chairx, chairy, deskx, desky, vasex, vasey);
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    enemy.clear();
-                    //コンテナのサイズまでメモリを解放
-                    enemy.shrink_to_fit();
-                }
-                for (int i = 0; i < vase.size(); i++) {
-                    vase.clear();
-                    //コンテナのサイズまでメモリを解放
-                    vase.shrink_to_fit();
-                }
-
-                mapChip->Initialize();
-                player->Initialize();
+                stage->Release();
+                stage->Generate(6);
                 GameState = GamePlay7;
 
-                //マップ番号をセット
-                mapChip->SetMapNumber(6);
+                stage->Initialize();
 
-
-                //マップチップ番号の位置を保存する
-                 //マップチップから位置を挿入
-                SetItemX_28(open_doorx, open_doory, mapChip, 4);
-                SetItemX_28(doorx, doory, mapChip, 5);
-                SetItemX_28(chairx, chairy, mapChip, 6);
-                SetItemX_28(deskx, desky, mapChip, 7);
-
-                for (int i = 0; i < 28; i++) {
-                    for (int j = 0; j < 84; j++) {
-
-                        switch (mapChip->mapData[mapChip->GetMapNumber()].data[i][j]) {
-                        case 8:
-                            eposx.push_back(float(j * 64));
-                            eposy.push_back(float(i * 64));
-                            break;
-
-                        case 10:
-                            vasex.push_back(float(j * 64));
-                            vasey.push_back(float(i * 64));
-                            break;
-                        }
-                    }
-                }
-
-                //enemy push_backをしていく
-                for (int i = 0; i < 28; i++) {
-                    for (int j = 0; j < 84; j++) {
-                        //プレイヤーが扉の前に来たら当たりの判定を入れる
-                        if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 8) {
-                            //enemyのオブジェクト生成
-                            enemy.push_back(new Enemy());
-                        }
-                    }
-                }
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    enemy[i]->Initialize();
-                }
-
-                for (int i = 0; i < 28; i++) {
-                    for (int j = 0; j < 84; j++) {
-                        //プレイヤーが扉の前に来たら当たりの判定を入れる
-                        if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 10) {
-                            //enemyのオブジェクト生成
-                            vase.push_back(new Vase());
-                        }
-                    }
-                }
-
-                for (int i = 0; i < vase.size(); i++) {
-                    vase[i]->Initialize();
-                }
             }
+         
+            
 #pragma endregion
             break;
         case GamePlay7:
 
 #pragma region Stage7
-            //マップ番号をセット
-            mapChip->Draw(player->GetPosition_X());
-            mapChip->MapDraw5();
+            //描画
+            stage->Drow();
+            stage->Update_02();
 
-            player->Update();
-
-            //マップチップの描画
-            DrawItem(open_doorx, open_doory, mapChip, ghandleOPD);
-            DrawItem(doorx, doory, mapChip, ghandleCLD);
-            DrawItem(chairx, chairy, mapChip, ghandleCHR);
-            DrawItem(deskx, desky, mapChip, ghandleDSK);
-
-
-
-
-            /*花瓶の更新*/
-            for (int i = 0; i < vasex.size(); i++) {
-                vase[i]->SetPosition(vasex[i] + mapChip->GetScroll(), vasey[i]);
-            }
-            /*敵の更新*/
-            for (int i = 0; i < eposx.size(); i++) {
-                enemy[i]->Set_position(eposx[i] + mapChip->GetScroll(), eposy[i]);
-            }
-
-            //花瓶の描画
-            for (int i = 0; i < vase.size(); i++) {
-                vase[i]->Draw();
-            }
-
-            //プレイヤーの更新
-            player->Update();
-
-            //敵の毎フレーム処理
-            for (int i = 0; i < enemy.size(); i++) {
-
-                for (int j = 0; j < vasex.size(); j++)
-                {
-                    enemy[i]->Breaking(vasex[j] + mapChip->GetScroll());
-                }
-                enemy[i]->Update();
-
-                //ナイフと敵との当たり判定
-                if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
-                    if (player->GetHitFlag() == 1) {
-                        //se->KillSE_voice();
-                        enemy[i]->Dead();
-                    }
-                }
-
-                //ゲームオーバー処理           
-                if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
-                    //se->DiscoverSE_voice();
-                    player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
-                }
-            }
-
-            //敵の描画
-            for (int i = 0; i < enemy.size(); i++) {
-                enemy[i]->Draw();
-            }
-
-            //花瓶の毎フレーム処理
-            for (int i = 0; i < vase.size(); i++) {
-                //ナイフと花瓶の当たり判定
-                if (collision->KnifetoVase(player->GetKnifePos(), vase[i]->GetPosition())) {
-                    //まだ花瓶があるなら
-                    if (player->GetHitFlag() == 1) {
-                        if (vase[i]->GetDead() == 0) {
-                            se->CrackSE();
-                            vase[i]->SetDead(1);
-                            player->SetDisapperKnifeTrigger(1);
-                        }
-                    }
-                }
-
-                if (vase[i]->GetDead() == 1)
-                {
-                    for (int j = 0; j < enemy.size(); j++) {
-                        enemy[j]->CheckSound();
-                    }
-                    vase[i]->SetDead(2);
-                }
-            }
-
-            //扉⇔プレイヤー　の当たり判定
-            if (mapChip->OnCollisionDoor(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
+            if (stage->SetGameOver() == 1)
             {
-                player->Hidding();
+                GameState = GameOver;
             }
 
-            //イス⇔プレイヤー　の当たり判定 /*対右*/
-            if (mapChip->OnCollisionChair_Right(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
+            //ステージ2へ
+            if (stage->SetGool() == 1)
             {
-                player->Hidding();
+                stage->Release();
 
-                for (int i = 0; i < enemy.size(); i++) {
-                    if (enemy[i]->GetFlont() == 1 && enemy[i]->GetDeath() == 0 &&
-                        collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()))
-                    {
-                        player->SetHide(0);
-                    }
-                }
-            }
-
-            //イス⇔プレイヤー　の当たり判定　/*対左*/
-            else if (mapChip->OnCollisionChair_Left(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-            {
-                player->Hidding();
-                for (int i = 0; i < enemy.size(); i++) {
-
-                    if (enemy[i]->GetFlont() == 0 && enemy[i]->GetDeath() == 0 &&
-                        player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont())))
-                    {
-                        player->SetHide(0);
-                    }
-                }
-            }
-
-            //分岐
-            if (mapChip->OnCollisionWarp_20(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-            {
-                if (CheckHitKey(KEY_INPUT_S) == 1) {
-                    //位置を瞬間移動すればよい
-                    player->SetPosition(mapChip->GetPosition_21_X(), mapChip->GetPosition_21_Y());
-                    mapChip->SetScroll_Y(1);
-                }
-            }
-
-            if (mapChip->OnCollisionWarp_22(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-            {
-                if (CheckHitKey(KEY_INPUT_W) == 1) {
-                    //位置を瞬間移動すればよい
-                    mapChip->SetScroll_Y(0);
-                    player->SetPosition(mapChip->GetPosition_23_X(), mapChip->GetPosition_23_Y());
-                }
-            }
-
-            //ゲームオーバー画面へ遷移
-            if (player->death == 1)
-            {
-                DrawFormatString(1607, 210, GetColor(255, 255, 255), "当たっている！！！");
-
-                //GameState = GameOver;
-            }
-
-            //クリア
-            if (mapChip->OnCollisionGoal(player->GetPosition_X(), player->GetPosition_Y(),
-                player->GetPlayerSizeX(), player->GetPlayerSizeY()))
-            {
-                //vector型の変数の要素を全削除、メモリ解放。
-                AllDelete(eposx, eposy, open_doorx, open_doory, doorx, doory, chairx, chairy, deskx, desky, vasex, vasey);
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    enemy.clear();
-                    //コンテナのサイズまでメモリを解放
-                    enemy.shrink_to_fit();
-                }
-                for (int i = 0; i < vase.size(); i++) {
-                    vase.clear();
-                    //コンテナのサイズまでメモリを解放
-                    vase.shrink_to_fit();
-                }
-
-                mapChip->Initialize();
-                player->Initialize();
                 GameState = GameClear;
+
+                stage->Initialize();
+
             }
-                //マップ番号をセット
-                //mapChip->SetMapNumber(6);
-                //マップチップ番号の位置を保存する
-                 //マップチップから位置を挿入
-            //    SetItemX_28(open_doorx, open_doory, mapChip, 4);
-            //    SetItemX_28(doorx, doory, mapChip, 5);
-            //    SetItemX_28(chairx, chairy, mapChip, 6);
-            //    SetItemX_28(deskx, desky, mapChip, 7);
-            //    for (int i = 0; i < 28; i++) {
-            //        for (int j = 0; j < 84; j++) {
-            //            switch (mapChip->mapData[mapChip->GetMapNumber()].data[i][j]) {
-            //            case 8:
-            //                eposx.push_back(float(j * 64));
-            //                eposy.push_back(float(i * 64));
-            //                break;
-            //            case 10:
-            //                vasex.push_back(float(j * 64));
-            //                vasey.push_back(float(i * 64));
-            //                break;
-            //            }
-            //        }
-            //    }
-            //    //enemy push_backをしていく
-            //    for (int i = 0; i < 28; i++) {
-            //        for (int j = 0; j < 84; j++) {
-            //            //プレイヤーが扉の前に来たら当たりの判定を入れる
-            //            if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 8) {
-            //                //enemyのオブジェクト生成
-            //                enemy.push_back(new Enemy());
-            //            }
-            //        }
-            //    }
-            //    for (int i = 0; i < enemy.size(); i++) {
-            //        enemy[i]->Initialize();
-            //    }
-            //    for (int i = 0; i < 28; i++) {
-            //        for (int j = 0; j < 84; j++) {
-            //            //プレイヤーが扉の前に来たら当たりの判定を入れる
-            //            if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 10) {
-            //                //enemyのオブジェクト生成
-            //                vase.push_back(new Vase());
-            //            }
-            //        }
-            //    }
-            //    for (int i = 0; i < vase.size(); i++) {
-            //        vase[i]->Initialize();
-            //    }
-            //}
 #pragma endregion
             break;
 
@@ -1752,25 +350,7 @@ int WINAPI WinMain(
             {
                 GameState = Title;
                 //vector型の変数の要素を全削除、メモリ解放。
-
-                DeleteItem(open_doorx, open_doory);
-                DeleteItem(doorx, doory);
-                DeleteItem(chairx, chairy);
-                DeleteItem(deskx, desky);
-
-                DeleteItem(eposx, eposy);
-                DeleteItem(vasex, vasey);
-
-                for (int i = 0; i < enemy.size(); i++) {
-                    enemy.clear();
-                    //コンテナのサイズまでメモリを解放
-                    enemy.shrink_to_fit();
-                }
-                for (int i = 0; i < vase.size(); i++) {
-                    vase.clear();
-                    //コンテナのサイズまでメモリを解放
-                    vase.shrink_to_fit();
-                }
+                stage->Release();
             }
 
 #pragma endregion
@@ -1821,64 +401,10 @@ int WINAPI WinMain(
     }
     //何か押されるまで待機 
     //WaitKey();
-    delete mapChip;
+
     //Dxライブラリ終了処理 
     DxLib_End();
 
     return 0;
 }
 
-//マップチップ上のアイテム生成関数
-void SetItem(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int chipNumber)
-{
-    for (int i = 0; i < 14; i++) {
-        for (int j = 0; j < 84; j++) {
-            if (mapchip->mapData[mapchip->GetMapNumber()].data[i][j] == chipNumber)
-            {
-                posx.push_back(float(j * 64));
-                posy.push_back(float(i * 64));
-            }
-        }
-    }
-}
-
-void SetItemX_28(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int chipNumber) {
-    for (int i = 0; i < 28; i++) {
-        for (int j = 0; j < 84; j++) {
-            if (mapchip->mapData[mapchip->GetMapNumber()].data[i][j] == chipNumber)
-            {
-                posx.push_back(float(j * 64));
-                posy.push_back(float(i * 64));
-            }
-        }
-    }
-}
-//マップチップ上のアイテム描画関数
-void DrawItem(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int ghandle) {
-
-    for (int i = 0; i < posx.size(); i++) {
-        DrawGraph(posx[i] + mapchip->GetScroll(), posy[i] + mapchip->GetScroll_Y(), ghandle, TRUE);
-    }
-}
-//マップチップ上のアイテム削除関数
-void DeleteItem(std::vector<float>& posx, std::vector<float>& posy) {
-    for (int i = 0; i < posx.size(); i++) {
-        posx.clear();
-        posx.shrink_to_fit();
-        posy.clear();
-        posy.shrink_to_fit();
-    }
-}
-
-//マップチップ上のアイテム全削除関数
-void AllDelete(std::vector<float>& eposx, std::vector<float>& eposy, std::vector<float>& open_doorx, std::vector<float>& open_doory,
-    std::vector<float>& doorx, std::vector<float>& doory, std::vector<float>& chairx, std::vector<float>& chairy,
-    std::vector<float>& deskx, std::vector<float>& desky, std::vector<float>& vasex, std::vector<float>& vasey) {
-
-    DeleteItem(eposx, eposy);
-    DeleteItem(open_doorx, open_doory);
-    DeleteItem(doorx, doory);
-    DeleteItem(chairx, chairy);
-    DeleteItem(deskx, desky);
-    DeleteItem(vasex, vasey);
-}

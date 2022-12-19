@@ -164,6 +164,7 @@
     <ClCompile Include="MapLoader.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SE.cpp" />
+    <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StopEnemy.cpp" />
     <ClCompile Include="Vase.cpp" />
   </ItemGroup>
@@ -178,6 +179,7 @@
     <ClInclude Include="MapLoader.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SE.h" />
+    <ClInclude Include="Stage.h" />
     <ClInclude Include="StopEnemy.h" />
     <ClInclude Include="Vase.h" />
   </ItemGroup>
