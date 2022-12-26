@@ -19,7 +19,7 @@ public:
 
 	void SetItem(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int chipNumber);
 
-	void SetItemX_28(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int chipNumber);
+	void SetItem_28(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int chipNumber);
 
 	void DrawItem(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int ghandle);
 
@@ -27,11 +27,13 @@ public:
 
 	void AllDelete(std::vector<float>& eposx, std::vector<float>& eposy, std::vector<float>& open_doorx, std::vector<float>& open_doory,
 		std::vector<float>& doorx, std::vector<float>& doory, std::vector<float>& chairx, std::vector<float>& chairy,
-		std::vector<float>& deskx, std::vector<float>& desky, std::vector<float>& vasex, std::vector<float>& vasey);
+		std::vector<float>& deskx, std::vector<float>& desky, std::vector<float>& vasex, std::vector<float>& vasey,
+		std::vector<float>& hidex_left, std::vector<float>& hidey_left, std::vector<float>& hidex_right, std::vector<float>& hidey_right);
 
 	void Release();
 
 	void Generate(int map);
+	void Generate2(int map);
 
 	void SetMap(int map);
 
@@ -75,10 +77,18 @@ private:
 	std::vector<float>vasex;
 	std::vector<float>vasey;
 
+	std::vector<float>hidex_left;
+	std::vector<float>hidey_left;
+
+	std::vector<float>hidex_right;
+	std::vector<float>hidey_right;
+
 	int ghandleOPD ;
 	int ghandleCLD ;
 	int ghandleCHR ;
 	int ghandleDSK ;
+	int ghandleHID_L;
+	int ghandleHID_R;
 	
 	// ‰Ô•rƒtƒ‰ƒO
 	int BreakFlag = 0;

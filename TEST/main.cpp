@@ -82,11 +82,8 @@ int WINAPI WinMain(
     //FPSの固定で使う変数
     double dNextTime = GetNowCount();
 
-
     //クラス呼び出し
     Stage* stage = new Stage();
-
-    
 
 
     while (1)
@@ -147,11 +144,10 @@ int WINAPI WinMain(
 
         case GamePlay1:
 
-#pragma region Stage1
-   
+#pragma region Stage1  
+            stage->Update_01();
             //描画
             stage->Drow();
-            stage->Update_01();
            
             if (stage->SetGameOver() ==1)
             {
@@ -163,61 +159,47 @@ int WINAPI WinMain(
             {
                 stage->Release();
                 stage->Generate(1);
-                GameState = GamePlay2;
-
                 stage->Initialize();
-
+                GameState = GamePlay2;
             }
-
 #pragma endregion
             break;
         case GamePlay2:
 
 #pragma region Stage2
-
+            stage->Update_01();
             //描画
             stage->Drow();
-            stage->Update_01();
-
             if (stage->SetGameOver() == 1)
             {
                 GameState = GameOver;
             }
-
-            //ステージ2へ
+            //ステージ3へ
             if (stage->SetGool() == 1)
             {
                 stage->Release();
                 stage->Generate(2);
-                GameState = GamePlay3;
-
                 stage->Initialize();
-
-            }
-         
+                GameState = GamePlay3;
+            }        
 #pragma endregion
             break;
         case GamePlay3:
-
-#pragma region Stage3
-          
+#pragma region Stage3       
+            stage->Update_01();
             //描画
             stage->Drow();
-            stage->Update_01();
-
             if (stage->SetGameOver() == 1)
             {
                 GameState = GameOver;
             }
-
-            //ステージ2へ
+            //ステージ4へ
             if (stage->SetGool() == 1)
             {
-                stage->Release();
+                //stage->Release();
                 stage->Generate(3);
-                GameState = GamePlay4;
-
                 stage->Initialize();
+                GameState = GamePlay4;
 
             }
 #pragma endregion
@@ -234,11 +216,11 @@ int WINAPI WinMain(
                 GameState = GameOver;
             }
 
-            //ステージ2へ
+            //ステージ5へ
             if (stage->SetGool() == 1)
             {
                 stage->Release();
-                stage->Generate(4);
+                stage->Generate2(4);
                 GameState = GamePlay5;
 
                 stage->Initialize();
@@ -263,7 +245,7 @@ int WINAPI WinMain(
             if (stage->SetGool() == 1)
             {
                 stage->Release();
-                stage->Generate(5);
+                stage->Generate2(5);
                 GameState = GamePlay6;
 
                 stage->Initialize();
@@ -288,7 +270,7 @@ int WINAPI WinMain(
             if (stage->SetGool() == 1)
             {
                 stage->Release();
-                stage->Generate(6);
+                stage->Generate2(6);
                 GameState = GamePlay7;
 
                 stage->Initialize();
@@ -314,7 +296,6 @@ int WINAPI WinMain(
             if (stage->SetGool() == 1)
             {
                 stage->Release();
-
                 GameState = GameClear;
 
                 stage->Initialize();

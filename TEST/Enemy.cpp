@@ -156,7 +156,6 @@ void Enemy::Update()
 {
 	if (GetDeath() == 0) {
 		Movement();
-		Horizon();
 	}
 }
 
@@ -169,6 +168,7 @@ void Enemy::Draw()
 {
 	if (GetDeath() == 0) {
 		DrawGraph(position_X, position_Y, Etexture, TRUE);
+		Horizon();
 	}
 	DebugLog();
 }

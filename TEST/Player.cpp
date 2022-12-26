@@ -47,48 +47,6 @@ void Player::Update()
 		}
 	}
 
-	//‰B‚ê‚Ä‚¢‚éŽžˆÈŠO‚Í•`‰æ‚·‚é
-	if (hide == 0 || !GetHide()) {
-		//‰æ‘œ“Ç‚Ýž‚Ý
-		
-		if (rl == 0) {
-			if (position_X >= end)
-			{
-				return_Positin = position_X - end + center;
-				DrawGraph(position_X - end + center, position_Y, ptexture_R, TRUE);
-			}
-			else if (position_X >= center)
-			{
-				return_Positin = center;
-				DrawGraph(center, position_Y, ptexture_R, TRUE);
-			}
-			else
-			{
-				return_Positin = position_X;
-				DrawGraph(position_X, position_Y, ptexture_R, TRUE);
-			}
-		}
-		else if(rl ==1)
-		{
-			if (position_X >= end)
-			{
-				return_Positin = position_X - end + center;
-				DrawGraph(position_X - end + center, position_Y, ptexture_L, TRUE);
-			}
-			else if (position_X >= center)
-			{
-				return_Positin = center;
-				DrawGraph(center, position_Y, ptexture_L, TRUE);
-			}
-			else
-			{
-				return_Positin = position_X;
-				DrawGraph(position_X, position_Y, ptexture_L, TRUE);
-			}
-		}
-		
-		SetkeyPermission(false);
-	}
 
 	//‰B‚ê‚Ä‚éI‚Ì•`‰æ
 	if (hide == 1) { DrawGraph(1602, 0, hidetext, FALSE); SetkeyPermission(true); }
@@ -126,8 +84,6 @@ void Player::Update()
 		knife->Dead();
 	}
 
-	//ƒiƒCƒtXVˆ—
-	knife->Update();
 
 	SetKnifePos(knife->GetPosition());
 	hitFlag = knife->Getis_throw();
@@ -135,7 +91,51 @@ void Player::Update()
 
 void Player::Draw()
 {
+	//ƒiƒCƒtXVˆ—
+	knife->Update();
 
+	//‰B‚ê‚Ä‚¢‚éŽžˆÈŠO‚Í•`‰æ‚·‚é
+	if (hide == 0 || !GetHide()) {
+		//‰æ‘œ“Ç‚Ýž‚Ý
+
+		if (rl == 0) {
+			if (position_X >= end)
+			{
+				return_Positin = position_X - end + center;
+				DrawGraph(position_X - end + center, position_Y, ptexture_R, TRUE);
+			}
+			else if (position_X >= center)
+			{
+				return_Positin = center;
+				DrawGraph(center, position_Y, ptexture_R, TRUE);
+			}
+			else
+			{
+				return_Positin = position_X;
+				DrawGraph(position_X, position_Y, ptexture_R, TRUE);
+			}
+		}
+		else if (rl == 1)
+		{
+			if (position_X >= end)
+			{
+				return_Positin = position_X - end + center;
+				DrawGraph(position_X - end + center, position_Y, ptexture_L, TRUE);
+			}
+			else if (position_X >= center)
+			{
+				return_Positin = center;
+				DrawGraph(center, position_Y, ptexture_L, TRUE);
+			}
+			else
+			{
+				return_Positin = position_X;
+				DrawGraph(position_X, position_Y, ptexture_L, TRUE);
+			}
+		}
+
+		SetkeyPermission(false);
+	}
 }
 
 bool Player::GetHide()

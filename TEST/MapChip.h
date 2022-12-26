@@ -94,6 +94,10 @@ public:
 	//イスに潜伏中に見つかる
 	void SetHideFalse_Chair() { hide = 0; }
 
+	//マップチップ描画
+	void DrawItem(int chipNumber,int drwaNumber);
+	//マップチップ描画
+	void DrawItem2(int chipNumber,int drwaNumber);
 
 	//マップスクロール
 	void Scroll(float position);

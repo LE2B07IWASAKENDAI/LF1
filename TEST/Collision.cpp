@@ -8,10 +8,11 @@ Collision::~Collision()
 {
 }
 
-float Collision::Found(float player, float enemy, int flont)
+float Collision::Found(float playerx, float playery, float enemyx, float enemyy,int flont)
 {
 	if (flont == 0) {
-		if (player > enemy - range && player < enemy + character_Size )
+		if (playerx > enemyx - range && playerx < enemyx + character_Size
+			&& playery == enemyy)
 		{
 			found = 1;
 		}
@@ -21,7 +22,7 @@ float Collision::Found(float player, float enemy, int flont)
 		}
 	}
 	else if (flont == 1) {
-		if (player+ character_Size > enemy  && player < enemy + range)
+		if (playerx+ character_Size > enemyx  && playerx < enemyx + range)
 		{
 			found = 1;
 		}

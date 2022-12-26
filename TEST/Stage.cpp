@@ -9,11 +9,13 @@ Stage::Stage()
     ghandleCLD = LoadGraph("Resources/Map/Door.png");
     ghandleCHR = LoadGraph("Resources/Map/Chair.png");
     ghandleDSK = LoadGraph("Resources/Map/Desk.png");
+    ghandleHID_L = LoadGraph("Resources/Map/light_left.png");
+    ghandleHID_R = LoadGraph("Resources/Map/light_right.png");
 }
 
 Stage::~Stage()
 {
-    delete mapChip;
+    //delete mapChip;
 }
 
 void Stage::Initialize()
@@ -39,8 +41,7 @@ void Stage::SetItem(std::vector<float>& posx, std::vector<float>& posy, MapChip*
     }
 }
 
-
-void Stage::SetItemX_28(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int chipNumber) {
+void Stage::SetItem_28(std::vector<float>& posx, std::vector<float>& posy, MapChip* mapchip, int chipNumber) {
     for (int i = 0; i < 28; i++) {
         for (int j = 0; j < 84; j++) {
             if (mapchip->mapData[mapchip->GetMapNumber()].data[i][j] == chipNumber)
@@ -71,7 +72,8 @@ void Stage::DeleteItem(std::vector<float>& posx, std::vector<float>& posy) {
 //マップチップ上のアイテム全削除関数
 void Stage::AllDelete(std::vector<float>& eposx, std::vector<float>& eposy, std::vector<float>& open_doorx, std::vector<float>& open_doory,
     std::vector<float>& doorx, std::vector<float>& doory, std::vector<float>& chairx, std::vector<float>& chairy,
-    std::vector<float>& deskx, std::vector<float>& desky, std::vector<float>& vasex, std::vector<float>& vasey) {
+    std::vector<float>& deskx, std::vector<float>& desky, std::vector<float>& vasex, std::vector<float>& vasey,
+    std::vector<float>& hidex_left, std::vector<float>& hidey_left, std::vector<float>& hidex_right, std::vector<float>& hidey_right) {
 
     DeleteItem(eposx, eposy);
     DeleteItem(open_doorx, open_doory);
@@ -79,11 +81,13 @@ void Stage::AllDelete(std::vector<float>& eposx, std::vector<float>& eposy, std:
     DeleteItem(chairx, chairy);
     DeleteItem(deskx, desky);
     DeleteItem(vasex, vasey);
+    DeleteItem(hidex_left, hidey_left);
+    DeleteItem(hidex_right, hidey_right);
 }
 
 void Stage::Release()
 {
-    AllDelete(eposx, eposy, open_doorx, open_doory, doorx, doory, chairx, chairy, deskx, desky, vasex, vasey);
+    AllDelete(eposx, eposy, open_doorx, open_doory, doorx, doory, chairx, chairy, deskx, desky, vasex, vasey, hidex_left, hidey_left, hidex_right, hidey_right);
 
     for (int i = 0; i < enemy.size(); i++) {
         enemy.clear();
@@ -95,8 +99,6 @@ void Stage::Release()
         //コンテナのサイズまでメモリを解放
         vase.shrink_to_fit();
     }
-
-
 }
 
 void Stage::Generate(int map)
@@ -108,12 +110,9 @@ void Stage::Generate(int map)
 
     //マップチップ番号の位置を保存する
     //マップチップから位置を挿入
-    SetItem(open_doorx, open_doory, mapChip, 4);
-    SetItem(doorx, doory, mapChip, 5);
-    SetItem(chairx, chairy, mapChip, 6);
-    SetItem(deskx, desky, mapChip, 7);
     SetItem(eposx, eposy, mapChip, 8);
     SetItem(vasex, vasey, mapChip, 10);
+    SetItem(vasex, vasey, mapChip, 18);
 
     //エネミー生成
     //enemy push_backをしていく
@@ -134,7 +133,8 @@ void Stage::Generate(int map)
     for (int i = 0; i < 14; i++) {
         for (int j = 0; j < 84; j++) {
             //プレイヤーが扉の前に来たら当たりの判定を入れる
-            if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 10) {
+            if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 10||
+                mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 18) {
                 //enemyのオブジェクト生成
                 vase.push_back(new Vase());
             }
@@ -146,6 +146,52 @@ void Stage::Generate(int map)
     }
 }
 
+void Stage::Generate2(int map)
+{
+    mapChip->SetScroll_Y(0);
+
+    //マップ番号をセット
+    mapChip->SetMapNumber(map);
+
+    //マップチップ番号の位置を保存する
+    //マップチップから位置を挿入
+    SetItem_28(eposx, eposy, mapChip, 8);
+    SetItem_28(vasex, vasey, mapChip, 10);
+    SetItem_28(vasex, vasey, mapChip, 18);
+
+    //エネミー生成
+    //enemy push_backをしていく
+    for (int i = 0; i < 28; i++) {
+        for (int j = 0; j < 84; j++) {
+            //プレイヤーが扉の前に来たら当たりの判定を入れる
+            if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 8) {
+                //※この状態：全て同じ位置に生成されている
+                enemy.push_back(new Enemy());
+            }
+        }
+    }
+
+    for (int i = 0; i < enemy.size(); i++) {
+        enemy[i]->Initialize();
+    }
+
+    for (int i = 0; i < 28; i++) {
+        for (int j = 0; j < 84; j++) {
+            //プレイヤーが扉の前に来たら当たりの判定を入れる
+            if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 10 ||
+                mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 18) {
+                //enemyのオブジェクト生成
+                vase.push_back(new Vase());
+            }
+        }
+    }
+
+    for (int i = 0; i < vase.size(); i++) {
+        vase[i]->Initialize();
+    }
+
+}
+
 void Stage::SetMap(int map)
 {
     mapChip->SetMapNumber(map);
@@ -154,38 +200,48 @@ void Stage::SetMap(int map)
 void Stage::Drow()
 {
     mapChip->Draw(player->GetPosition_X());
-    mapChip->MapDraw();
+    if (mapChip->GetMapNumber() <= 3) {
+        mapChip->MapDraw();
+    }
+    else
+    {
+        mapChip->MapDraw5();
+    }
 
+    DrawFormatString(0, 100, GetColor(255, 255, 255), "マップ番号 : %d ", mapChip->GetMapNumber() + 1);
 
     //マップチップの描画
-    DrawItem(open_doorx, open_doory, mapChip, ghandleOPD);
-    DrawItem(doorx, doory, mapChip, ghandleCLD);
-    DrawItem(chairx, chairy, mapChip, ghandleCHR);
-    DrawItem(deskx, desky, mapChip, ghandleDSK);
+    //DrawItem(open_doorx, open_doory, mapChip, ghandleOPD);
+    //DrawItem(doorx, doory, mapChip, ghandleCLD);
+    //DrawItem(chairx, chairy, mapChip, ghandleCHR);
+    //DrawItem(deskx, desky, mapChip, ghandleDSK);
+    //DrawItem(hidex_left, hidey_left, mapChip, ghandleHID_L);
+    //DrawItem(hidex_right, hidey_right, mapChip, ghandleHID_R);
 
-    /*花瓶の更新*/
-    for (int i = 0; i < vasex.size(); i++) {
-        vase[i]->SetPosition(vasex[i] + mapChip->GetScroll(), vasey[i] + mapChip->GetScroll_Y());
-    }
-    /*敵の更新*/
-    for (int i = 0; i < eposx.size(); i++) {
-        enemy[i]->Set_position(eposx[i] + mapChip->GetScroll(), eposy[i] + mapChip->GetScroll_Y());
+    /*敵の描画処理*/
+    for (int i = 0; i < enemy.size(); i++) {
+        enemy[i]->Draw();
     }
 
     //花瓶の描画
     for (int i = 0; i < vase.size(); i++) {
-        vase[i]->Draw();
+       if (vase.size() >= 2) {
+           vase[i]->Draw();
+       }
     }
-
+    player->Draw();
 }
 
 void Stage::Update_01()
 {
     //プレイヤーの更新
     player->Update();
-
-    /*敵の位置挿入*/
-    for (int i = 0; i < enemy.size(); i++) {
+    /*花瓶の更新*/
+    for (int i = 0; i < vasex.size(); i++) {
+        vase[i]->SetPosition(vasex[i] + mapChip->GetScroll(), vasey[i] + mapChip->GetScroll_Y());
+    }
+    /*敵の更新*/
+    for (int i = 0; i < eposx.size(); i++) {
         enemy[i]->Set_position(eposx[i] + mapChip->GetScroll(), eposy[i]);
     }
 
@@ -197,21 +253,15 @@ void Stage::Update_01()
             if (player->GetHitFlag() == 1) {
                 //se->KillSE_voice();
                 enemy[i]->Dead();
-
             }
         }
-
         //ゲームオーバー処理           
         if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
             //se->DiscoverSE_voice();
-            player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
+            player->SetDeath(collision->Found(player->GetPosition_x(),player->GetPosition_Y(), enemy[i]->GetPosition_X(),enemy[i]->Getposition_Y(), enemy[i]->GetFlont()));
         }
     }
 
-    /*敵の描画処理*/
-    for (int i = 0; i < enemy.size(); i++) {
-        enemy[i]->Draw();
-    }
 
     //花瓶の毎フレーム処理
     for (int i = 0; i < vase.size(); i++) {
@@ -222,7 +272,7 @@ void Stage::Update_01()
                 if (vase[i]->GetDead() == 0) {
                     se->CrackSE();
                     vase[i]->SetDead(1);
-                    player->SetDisapperKnifeTrigger(1);
+                    //player->SetDisapperKnifeTrigger(1);
                 }
             }
         }
@@ -258,7 +308,7 @@ void Stage::Update_01()
 
         for (int i = 0; i < enemy.size(); i++) {
             if (enemy[i]->GetFlont() == 1 && enemy[i]->GetDeath() == 0 &&
-                collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()))
+                collision->Found(player->GetPosition_x(), player->GetPosition_Y(), enemy[i]->GetPosition_X(), enemy[i]->Getposition_Y(), enemy[i]->GetFlont()))
             {
                 player->SetHide(0);
             }
@@ -273,18 +323,25 @@ void Stage::Update_01()
         for (int i = 0; i < enemy.size(); i++) {
 
             if (enemy[i]->GetFlont() == 0 && enemy[i]->GetDeath() == 0 &&
-                player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont())))
+                player->SetDeath(collision->Found(player->GetPosition_x(), player->GetPosition_Y(), enemy[i]->GetPosition_X(), enemy[i]->Getposition_Y(), enemy[i]->GetFlont())))
             {
                 player->SetHide(0);
             }
         }
     }
 
+    if (mapChip->OnCollisionGoal(player->GetPosition_X(), player->GetPosition_Y(),
+        player->GetPlayerSizeX(), player->GetPlayerSizeY()))
+    {
+        gool = 1;
+        Release();
+    }
+
     //ゲームオーバー画面へ遷移
     if (player->death == 1)
     {
         DrawFormatString(1607, 210, GetColor(255, 255, 255), "当たっている！！！");
-        over = 1;
+        //over = 1;
     }
 }
 
@@ -295,7 +352,7 @@ void Stage::Update_02()
 
     /*敵の位置挿入*/
     for (int i = 0; i < enemy.size(); i++) {
-        enemy[i]->Set_position(eposx[i] + mapChip->GetScroll(), eposy[i]);
+        enemy[i]->Set_position(eposx[i] + mapChip->GetScroll(), eposy[i] + mapChip->GetScroll_Y());
     }
 
     for (int i = 0; i < enemy.size(); i++) {
@@ -313,7 +370,7 @@ void Stage::Update_02()
         //ゲームオーバー処理           
         if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
             //se->DiscoverSE_voice();
-            player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()));
+            player->SetDeath(collision->FoundXY(player->GetPosition_x(), player->GetPosition_Y(), enemy[i]->GetPosition_X(), enemy[i]->Getposition_Y(), enemy[i]->GetFlont()));
         }
     }
 
@@ -367,7 +424,7 @@ void Stage::Update_02()
 
         for (int i = 0; i < enemy.size(); i++) {
             if (enemy[i]->GetFlont() == 1 && enemy[i]->GetDeath() == 0 &&
-                collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont()))
+                collision->FoundXY(player->GetPosition_x(), player->GetPosition_Y(), enemy[i]->GetPosition_X(), enemy[i]->Getposition_Y(), enemy[i]->GetFlont()))
             {
                 player->SetHide(0);
             }
@@ -382,7 +439,7 @@ void Stage::Update_02()
         for (int i = 0; i < enemy.size(); i++) {
 
             if (enemy[i]->GetFlont() == 0 && enemy[i]->GetDeath() == 0 &&
-                player->SetDeath(collision->Found(player->GetPosition_x(), enemy[i]->GetPosition_X(), enemy[i]->GetFlont())))
+                player->SetDeath(collision->FoundXY(player->GetPosition_x(), player->GetPosition_Y(), enemy[i]->GetPosition_X(), enemy[i]->Getposition_Y(), enemy[i]->GetFlont())))
             {
                 player->SetHide(0);
             }
@@ -410,6 +467,13 @@ void Stage::Update_02()
         }
     }
 
+    if (mapChip->OnCollisionGoal(player->GetPosition_X(), player->GetPosition_Y(),
+        player->GetPlayerSizeX(), player->GetPlayerSizeY()))
+    {
+        gool = 1;
+        Release();
+    }
+
     //ゲームオーバー画面へ遷移
     if (player->death == 1)
     {
@@ -420,12 +484,6 @@ void Stage::Update_02()
 
 int Stage::SetGool()
 {
-    if (mapChip->OnCollisionGoal(player->GetPosition_X(), player->GetPosition_Y(),
-        player->GetPlayerSizeX(), player->GetPlayerSizeY())) 
-    {
-        gool = 1;
-    }
-
     return gool;
 }
 
