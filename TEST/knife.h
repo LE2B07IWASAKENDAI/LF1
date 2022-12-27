@@ -1,5 +1,6 @@
 #pragma once
 #include "DxLib.h";
+#include "Timer.h"
 #include <vector>;
 
 using namespace std;
@@ -61,6 +62,7 @@ private:
 	float position = 0.0f; //“Š‚°‚½uŠÔ‚ÌÀ•W•âŠÔ
 	float distance = 0.0f; //”ò‹——£
 	float point = 170.0f;
+	float _point = -170.0f;
 
 	//•Ï‰»—Ê
 	float vector_x = 0.0f;
@@ -76,4 +78,6 @@ private:
 
 	//Œü‚¢‚Ä‚é•ûŒü
 	int direction = 0;
+
+	Timer* timer = new Timer();
 };

@@ -21,6 +21,7 @@ void Knife::Initialize()
 	vector_y = 1.05f;
 	front = 0;
 	stock = 10;
+
 }
 
 void Knife::Ready_Throw(float Ppos_x, float Ppos_y,int flont)
@@ -33,6 +34,7 @@ void Knife::Ready_Throw(float Ppos_x, float Ppos_y,int flont)
 		position_Y = Ppos_y;
 
 		//更新：ナイフが画面内にある
+
 		is_throw = 1;
 	}
 	front = flont;
@@ -67,7 +69,8 @@ void Knife::Dead()
 	position = 0.0f;
 	distance = 0.0f;
 	//投げるフラグ
-	is_throw = 0;
+	timer->startTimer();
+	is_throw = 2;
 	//位置
 	position_X = 0;
 	//残機
@@ -82,6 +85,7 @@ void Knife::Dead()
 
 void Knife::Update()
 {
+	timer->Update();
 	if (is_throw == 1) {
 		Throw();
 		//lifeが0以上なら描画それ以外は死亡処理
@@ -92,11 +96,16 @@ void Knife::Update()
 		}
 		else if(front ==1 )
 		{
-			direction <= point * -1 ? Dead() : Draw();
+			distance <= _point ? Dead() : Draw();
 		}
 	}
+	if (timer->elapsedTimer() >= 4 && is_throw ==2)
+	{
+		is_throw = 0;
+	}
+
+
 	DrawFormatString(0, 225, GetColor(255, 255, 255), "stock : %d", stock);
-	//DrawFormatString(0, 200, GetColor(255, 255, 255), "life : %d", life);
 	//DrawFormatString(0, 250, GetColor(255, 255, 255), "position_X : %f", GetPosition());
 }
 

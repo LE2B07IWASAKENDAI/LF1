@@ -1,20 +1,2 @@
-﻿  Stage.cpp
-D:\FL1\TEST\knife.h(2,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-D:\FL1\TEST\knife.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-D:\FL1\TEST\Vase.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-D:\FL1\TEST\Vase.h(4,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-D:\FL1\TEST\Stage.cpp(58,59): warning C4244: '引数': '_Ty' から 'int' への変換です。データが失われる可能性があります。
-          with
-          [
-              _Ty=float
-          ]
-D:\FL1\TEST\Stage.cpp(58,27): warning C4244: '引数': '_Ty' から 'int' への変換です。データが失われる可能性があります。
-          with
-          [
-              _Ty=float
-          ]
-D:\FL1\TEST\Stage.cpp(207,46): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\Stage.cpp(276,50): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\Stage.cpp(316,46): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\Stage.cpp(385,50): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  TEST.vcxproj -> D:\FL1\TEST\x64\Debug\TEST.exe
+﻿Stage.obj : error LNK2019: 未解決の外部シンボル "public: float __cdecl Collision::Found(float,float,float,float,int)" (?Found@Collision@@QEAAMMMMMH@Z) が関数 "public: void __cdecl Stage::Update_01(void)" (?Update_01@Stage@@QEAAXXZ) で参照されました
+D:\FL1\TEST\x64\Debug\TEST.exe : fatal error LNK1120: 1 件の未解決の外部参照
