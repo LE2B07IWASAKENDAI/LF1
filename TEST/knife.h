@@ -43,6 +43,8 @@ public:
 
 	//座標置
 	float GetPosition() { return position_X; }
+
+	float SetPosition(float x);
 	
 	void SetDirection() { if (front == 0)direction = 1; else if (front == 1)direction = -1; }
 
@@ -55,6 +57,10 @@ public:
 private:
 	float position_X = 0;//プレイヤーの現在位置から取得する
 	float position_Y = 0;
+
+	float position = 0.0f; //投げた瞬間の座標補間
+	float distance = 0.0f; //飛距離
+	float point = 170.0f;
 
 	//変化量
 	float vector_x = 0.0f;

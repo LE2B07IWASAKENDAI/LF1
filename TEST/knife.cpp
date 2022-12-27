@@ -45,21 +45,27 @@ void Knife::Throw()
 		//右にとんでく
 		position_X = position_X + vector_x;
 		position_Y += vector_y;
+		
 	}
 	else if (front == 1) {
 		position_X = position_X - vector_x;
 		position_Y += vector_y;
+		
 	}
 
 	//生存時間を減らす
 	life--;
+	distance = position_X - position;
+	
 }
 
 void Knife::Dead()
 {
 	//リセット
 	//ライフ
-	life = 30;
+	life = 20;
+	position = 0.0f;
+	distance = 0.0f;
 	//投げるフラグ
 	is_throw = 0;
 	//位置
@@ -79,7 +85,15 @@ void Knife::Update()
 	if (is_throw == 1) {
 		Throw();
 		//lifeが0以上なら描画それ以外は死亡処理
-		life >= 0 ? Draw() : Dead();
+		/*life >= 0 ? Draw() : Dead();*/
+		if (front == 0)
+		{
+			distance >= point ? Dead() : Draw();
+		}
+		else if(front ==1 )
+		{
+			direction <= point * -1 ? Dead() : Draw();
+		}
 	}
 	DrawFormatString(0, 225, GetColor(255, 255, 255), "stock : %d", stock);
 	//DrawFormatString(0, 200, GetColor(255, 255, 255), "life : %d", life);
@@ -94,6 +108,12 @@ void Knife::Draw()
 
 void Knife::Cariculate()
 {
+}
+
+float Knife::SetPosition(float x)
+{
+	position = x;
+	return 0.0f;
 }
 
 void Knife::LoadTexture()

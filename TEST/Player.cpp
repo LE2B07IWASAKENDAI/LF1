@@ -76,6 +76,7 @@ void Player::Update()
 	if (keyCounter_knife == 1)
 	{
 		//ナイフの発射位置をセット
+		knife->SetPosition(GetPosition_x() + 100);
 		knife->Ready_Throw(GetPosition_x() + 100, GetPosition_Y() + 100 ,rl);
 		SetDisapperKnifeTrigger(0);
 	}
