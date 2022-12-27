@@ -25,4 +25,5 @@ void Timer::startTimer()
 void Timer::reset()
 {
 	start = 0.0f;
+	elapsed = 0.0f;
 }

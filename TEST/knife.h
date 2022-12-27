@@ -49,6 +49,9 @@ public:
 	
 	void SetDirection() { if (front == 0)direction = 1; else if (front == 1)direction = -1; }
 
+	int GetHiedCool() { return heidCool; }
+	int SetHiedCool(int set) { heidCool = set;  return 0; }
+
 	//グラフィックハンドル
 	int knifetex[2];
 
@@ -63,6 +66,7 @@ private:
 	float distance = 0.0f; //飛距離
 	float point = 170.0f;
 	float _point = -170.0f;
+	int heidCool = 0;
 
 	//変化量
 	float vector_x = 0.0f;

@@ -52,7 +52,7 @@ void Player::Update()
 	if (hide == 1) { DrawGraph(1602, 0, hidetext, FALSE); SetkeyPermission(true); }
 	//現在の座標を文字列描画
 	DrawPlayerPos();
-
+	heidCool = knife->GetHiedCool();
 
 ////////////////ナイフ投げ処理////////////////////////////////
 
@@ -76,6 +76,7 @@ void Player::Update()
 	if (keyCounter_knife == 1)
 	{
 		//ナイフの発射位置をセット
+		knife->SetHiedCool(1);
 		knife->SetPosition(GetPosition_x() + 100);
 		knife->Ready_Throw(GetPosition_x() + 100, GetPosition_Y() + 100 ,rl);
 		SetDisapperKnifeTrigger(0);
@@ -151,27 +152,30 @@ void Player::SetHide(bool sethide)
 
 void Player::Hidding()
 {
-	//隠れる
-	if (CheckHitKey(KEY_INPUT_LSHIFT))
-	{
-		keyCounter++;
-	}
-	else
-	{
-		//キー押されていない
-		if (keyCounter > 0)keyCounter = -1;//LSHIFTキーが離れた瞬間
-		else { keyCounter = 0; }           //LSHIFTキーが離れている状態
-	}
 
-	//押された瞬間の処理
-	if (keyCounter == 1 && hide == 0) {
-		//扉に隠れたという演出で、描画をしないようにしている
-		hide = 1;
-	}
-	else if (keyCounter == 1 && hide == 1) {
-		//描画されていない時にLSHIFT押すと？
-		hide = 0;//プレイヤーを描画する
-		SetkeyPermission(false);
+	if (heidCool == 0) {
+		//隠れる
+		if (CheckHitKey(KEY_INPUT_LSHIFT))
+		{
+			keyCounter++;
+		}
+		else
+		{
+			//キー押されていない
+			if (keyCounter > 0)keyCounter = -1;//LSHIFTキーが離れた瞬間
+			else { keyCounter = 0; }           //LSHIFTキーが離れている状態
+		}
+
+		//押された瞬間の処理
+		if (keyCounter == 1 && hide == 0) {
+			//扉に隠れたという演出で、描画をしないようにしている
+			hide = 1;
+		}
+		else if (keyCounter == 1 && hide == 1) {
+			//描画されていない時にLSHIFT押すと？
+			hide = 0;//プレイヤーを描画する
+			SetkeyPermission(false);
+		}
 	}
 }
 

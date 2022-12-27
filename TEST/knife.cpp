@@ -99,11 +99,19 @@ void Knife::Update()
 			distance <= _point ? Dead() : Draw();
 		}
 	}
-	if (timer->elapsedTimer() >= 4 && is_throw ==2)
+	if (timer->elapsedTimer() >= 4000 && is_throw ==2)
 	{
+		
+		
+		timer->reset();
 		is_throw = 0;
 	}
+	if (timer->elapsedTimer() >= 3000 && is_throw == 2)
+	{
 
+		heidCool = 0;
+		
+	}
 
 	DrawFormatString(0, 225, GetColor(255, 255, 255), "stock : %d", stock);
 	//DrawFormatString(0, 250, GetColor(255, 255, 255), "position_X : %f", GetPosition());

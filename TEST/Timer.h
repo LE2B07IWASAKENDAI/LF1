@@ -11,7 +11,7 @@ public:
 	void Update();
 	void startTimer();
 	void reset();
-	float elapsedTimer() { return elapsed/1000; }
+	float elapsedTimer() { return elapsed; }
 
 private:
 	DWORD start = 0.0f;

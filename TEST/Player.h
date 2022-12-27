@@ -73,6 +73,7 @@ private:
 	int hide = 0;//1：隠れている　0:そうでない
 	//bool drawPlayer = false;//隠れているときは描画しない
 	bool keyPermission = false;//扉の中にいるときは、移動出来ないようにする。
+	int heidCool = 0;
 
 	float return_Positin = 0.0f;
 	float center = 708.0f;//画面中心
