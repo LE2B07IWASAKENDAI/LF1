@@ -5,6 +5,7 @@ Stage::Stage()
     mapChip->Initialize();
     player->Initialize();
     bgm->PlayBGM();
+    se->Initialize();
     ghandleOPD = LoadGraph("Resources/Map/Open_door.png");
     ghandleCLD = LoadGraph("Resources/Map/Door.png");
     ghandleCHR = LoadGraph("Resources/Map/Chair.png");
@@ -251,13 +252,12 @@ void Stage::Update_01()
         //ナイフと敵との当たり判定
         if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
             if (player->GetHitFlag() == 1) {
-                //se->KillSE_voice();
+                se->KillSE_voice();
                 enemy[i]->Dead();
             }
         }
         //ゲームオーバー処理           
         if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
-            //se->DiscoverSE_voice();
             player->SetDeath(collision->Found(player->GetPosition_x(),player->GetPosition_Y(), enemy[i]->GetPosition_X(),enemy[i]->Getposition_Y(), enemy[i]->GetFlont()));
         }
     }
@@ -341,7 +341,8 @@ void Stage::Update_01()
     if (player->death == 1)
     {
         DrawFormatString(1607, 210, GetColor(255, 255, 255), "当たっている！！！");
-        //over = 1;
+        se->DiscoverSE_voice();
+        over = 1;
     }
 }
 
@@ -361,7 +362,7 @@ void Stage::Update_02()
         //ナイフと敵との当たり判定
         if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
             if (player->GetHitFlag() == 1) {
-                //se->KillSE_voice();
+                se->KillSE_voice();
                 enemy[i]->Dead();
 
             }
@@ -369,7 +370,6 @@ void Stage::Update_02()
 
         //ゲームオーバー処理           
         if (player->GetkeyPermission() == false && player->GetHide() == 0 && enemy[i]->GetDeath() == 0) {
-            //se->DiscoverSE_voice();
             player->SetDeath(collision->FoundXY(player->GetPosition_x(), player->GetPosition_Y(), enemy[i]->GetPosition_X(), enemy[i]->Getposition_Y(), enemy[i]->GetFlont()));
         }
     }
@@ -478,6 +478,7 @@ void Stage::Update_02()
     if (player->death == 1)
     {
         DrawFormatString(1607, 210, GetColor(255, 255, 255), "当たっている！！！");
+        se->DiscoverSE_voice();
         over = 1;
     }
 }

@@ -1,16 +1,23 @@
 #include "SE.h"
 
+void SE::Initialize()
+{
+	soundHandle[0] = LoadSoundMem("Resources/SE/SE01.mp3");
+	soundHandle[1] = LoadSoundMem("Resources/SE/EnemyVoice/DisVoice_SE.mp3");
+	soundHandle[2] = LoadSoundMem("Resources/SE/EnemyVoice/Dvoice_SE06.mp3");
+}
+
 void SE::CrackSE()
 {
-	PlaySoundFile("Resources/SE/SE01.mp3", DX_PLAYTYPE_BACK);
+	PlaySoundMem(soundHandle[0], DX_PLAYTYPE_BACK);
 }
 
 void SE::DiscoverSE_voice()
 {
-	PlaySoundFile("Resources/SE/EnemyVoice/DisVoice_SE.mp3", DX_PLAYTYPE_BACK);
+	PlaySoundMem(soundHandle[1], DX_PLAYTYPE_BACK);
 }
 
 void SE::KillSE_voice()
 {
-	PlaySoundFile("Resources/SE/EnemyVoice/Dvoice_SE06.mp3", DX_PLAYTYPE_BACK);
+	PlaySoundMem(soundHandle[2], DX_PLAYTYPE_BACK);
 }
