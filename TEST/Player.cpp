@@ -35,16 +35,32 @@ void Player::Update()
 
 	//ˆÚ“®ˆ—(‰B‚ê‚Ä‚¢‚È‚¢‚Æ‚«)
 	if (!GetkeyPermission()) {
-		if (CheckHitKey(KEY_INPUT_A))
-		{
-			position_X = position_X - speed;
-			rl = 1;
+		if (CheckHitKey(KEY_INPUT_A) || CheckHitKey(KEY_INPUT_D)) {
+			if (CheckHitKey(KEY_INPUT_A))
+			{
+				position_X = position_X - speed;
+				rl = 1;
+				stop_position = position_X;
+				walk_index++;
+			}
+			else if (CheckHitKey(KEY_INPUT_D))
+			{
+				position_X = position_X + speed;
+				rl = 0;
+				stop_position = position_X;
+				walk_index++;
+			}
 		}
-		if (CheckHitKey(KEY_INPUT_D))
+		else
 		{
-			position_X = position_X + speed;
-			rl = 0;
+			walk_index = -1;
 		}
+	}
+	
+
+	if (walk_index > 7)
+	{
+		walk_index = 0;
 	}
 
 
@@ -104,17 +120,41 @@ void Player::Draw()
 			if (position_X >= end)
 			{
 				return_Positin = position_X - end + center;
-				DrawGraph(position_X - end + center, position_Y, ptexture_R, TRUE);
+				if (walk_index == -1)
+				{
+					DrawGraph(position_X - end + center, position_Y, ptexture_R, TRUE);
+				}
+				else
+				{
+					DrawGraph(position_X - end + center, position_Y, walk_R[walk_index], TRUE);
+				}
+				
 			}
 			else if (position_X >= center)
 			{
 				return_Positin = center;
-				DrawGraph(center, position_Y, ptexture_R, TRUE);
+				if (walk_index == -1)
+				{
+					DrawGraph(center, position_Y, ptexture_R, TRUE);
+				}
+				else
+				{
+					DrawGraph(center, position_Y, walk_R[walk_index], TRUE);
+				}
 			}
 			else
 			{
 				return_Positin = position_X;
-				DrawGraph(position_X, position_Y, ptexture_R, TRUE);
+				if (walk_index == -1)
+				{
+					DrawGraph(position_X, position_Y, ptexture_R, TRUE);
+				}
+				else
+				{
+					DrawGraph(position_X, position_Y, walk_R[walk_index], TRUE);
+				}
+				
+
 			}
 		}
 		else if (rl == 1)
@@ -122,17 +162,40 @@ void Player::Draw()
 			if (position_X >= end)
 			{
 				return_Positin = position_X - end + center;
-				DrawGraph(position_X - end + center, position_Y, ptexture_L, TRUE);
+				if (walk_index == -1)
+				{
+					DrawGraph(position_X - end + center, position_Y, ptexture_L, TRUE);
+				}
+				else
+				{
+					DrawGraph(position_X - end + center, position_Y, walk_L[walk_index], TRUE);
+				}
+				
 			}
 			else if (position_X >= center)
 			{
 				return_Positin = center;
-				DrawGraph(center, position_Y, ptexture_L, TRUE);
+				if (walk_index == -1)
+				{
+					DrawGraph(center, position_Y, ptexture_L, TRUE);
+				}
+				else
+				{
+					DrawGraph(center, position_Y, walk_L[walk_index], TRUE);
+				}
+				
 			}
 			else
 			{
 				return_Positin = position_X;
-				DrawGraph(position_X, position_Y, ptexture_L, TRUE);
+				if(walk_index == -1)
+				{
+					DrawGraph(position_X, position_Y, ptexture_L, TRUE);
+				}
+				else
+				{
+					DrawGraph(position_X, position_Y, walk_L[walk_index], TRUE);
+				}
 			}
 		}
 
@@ -220,6 +283,8 @@ void Player::LoadTexture()
 	ptexture_R = LoadGraph("Resources/Player/Player_R.png");
 	ptexture_L = LoadGraph("Resources/Player/Player_L.png");
 	hidetext = LoadGraph("Resources/Player/hidding2.png");
+	LoadDivGraph("Resources/Player/playerAni_R.png", 8, 8, 1, 192, 192, walk_R);
+	LoadDivGraph("Resources/Player/playerAni_L.png", 8, 8, 1, 192, 192, walk_L);
 }
 
 void Player::DrawPlayerPos()

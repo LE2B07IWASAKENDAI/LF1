@@ -75,6 +75,13 @@ private:
 	bool keyPermission = false;//扉の中にいるときは、移動出来ないようにする。
 	int heidCool = 0;
 
+	//アニメーション
+	int walk_L[8];
+	int walk_R[8];
+	int max_index = 8;
+	int walk_index = -1;
+	float stop_position = 0.0f;
+
 	float return_Positin = 0.0f;
 	float center = 708.0f;//画面中心
 	float end = 4094.0f;//画面端
