@@ -1,1 +1,2 @@
-﻿  TEST.vcxproj -> D:\FL1\TEST\x64\Release\TEST.exe
+﻿Stage.obj : error LNK2001: 外部シンボル "public: void __cdecl SE::Initialize(void)" (?Initialize@SE@@QEAAXXZ) は未解決です
+D:\FL1\TEST\x64\Release\TEST.exe : fatal error LNK1120: 1 件の未解決の外部参照

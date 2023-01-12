@@ -167,6 +167,11 @@
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StopEnemy.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Title_main.cpp" />
+    <ClCompile Include="Title_enemy.cpp" />
+    <ClCompile Include="Title_knife.cpp" />
+    <ClCompile Include="Title_map.cpp" />
+    <ClCompile Include="Title_plaayer.cpp" />
     <ClCompile Include="Vase.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +188,11 @@
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StopEnemy.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Title_main.h" />
+    <ClInclude Include="Title_enemy.h" />
+    <ClInclude Include="Title_knife.h" />
+    <ClInclude Include="Title_map.h" />
+    <ClInclude Include="Title_plaayer.h" />
     <ClInclude Include="Vase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

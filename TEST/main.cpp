@@ -1,6 +1,6 @@
 #include "DxLib.h" 
 
-
+#include "Title_main.h"
 #include "Stage.h"
 
 
@@ -84,6 +84,7 @@ int WINAPI WinMain(
 
     //クラス呼び出し
     Stage* stage = new Stage();
+    Title_main* title = new Title_main();
 
 
     while (1)
@@ -110,7 +111,8 @@ int WINAPI WinMain(
 
             //StartTime = GetNowCount();
             //タイトル画面描画
-            DrawGraph(0, 0, titlescene, FALSE);
+            /*DrawGraph(0, 0, titlescene, FALSE);*/
+            title->Draw();
 
             //(テスト用)スペースキー押下でゲーム開始
             //スペースキー押したら
