@@ -167,8 +167,8 @@ void Enemy::LoadTexture()
 void Enemy::Draw()
 {
 	if (GetDeath() == 0) {
-		DrawGraph(position_X, position_Y, Etexture, TRUE);
 		Horizon();
+		DrawGraph(position_X, position_Y, Etexture, TRUE);
 	}
 	DebugLog();
 }

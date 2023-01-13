@@ -7,6 +7,7 @@
 #include "Vase.h"
 #include "BGM.h"
 #include "SE.h"
+#include "Chair.h"
 #include "Collision.h"
 
 class Stage
@@ -56,6 +57,8 @@ private:
 	SE* se = new SE();
 	std::vector<Enemy*> enemy;
 	std::vector<Vase*> vase;
+	std::vector<Chair*>chair;
+
 	Collision* collision = new Collision();
 
 	//マップチップで標示する物の座標格納変数

@@ -99,6 +99,9 @@
     <ClCompile Include="Title_knife.cpp">
       <Filter>ソース ファイル\Title</Filter>
     </ClCompile>
+    <ClCompile Include="Chair.cpp">
+      <Filter>ソース ファイル\Character</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MapChip.h">
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="Title_knife.h">
       <Filter>ヘッダー ファイル\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Chair.h">
+      <Filter>ヘッダー ファイル\Character</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

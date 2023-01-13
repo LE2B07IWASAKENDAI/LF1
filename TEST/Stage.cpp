@@ -100,6 +100,11 @@ void Stage::Release()
         //コンテナのサイズまでメモリを解放
         vase.shrink_to_fit();
     }
+    for (int i = 0; i < chair.size(); i++) {
+        chair.clear();
+        //コンテナのサイズまでメモリを解放
+        chair.shrink_to_fit();
+    }
 }
 
 void Stage::Generate(int map)
@@ -111,6 +116,7 @@ void Stage::Generate(int map)
 
     //マップチップ番号の位置を保存する
     //マップチップから位置を挿入
+    SetItem(chairx, chairy, mapChip, 6);
     SetItem(eposx, eposy, mapChip, 8);
     SetItem(vasex, vasey, mapChip, 10);
     SetItem(vasex, vasey, mapChip, 18);
@@ -133,7 +139,6 @@ void Stage::Generate(int map)
 
     for (int i = 0; i < 14; i++) {
         for (int j = 0; j < 84; j++) {
-            //プレイヤーが扉の前に来たら当たりの判定を入れる
             if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 10||
                 mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 18) {
                 //enemyのオブジェクト生成
@@ -144,6 +149,20 @@ void Stage::Generate(int map)
 
     for (int i = 0; i < vase.size(); i++) {
         vase[i]->Initialize();
+    }
+
+    for (int i = 0; i < 14; i++) {
+        for (int j = 0; j < 84; j++) {
+            //プレイヤーが扉の前に来たら当たりの判定を入れる
+            if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 6) {
+                //enemyのオブジェクト生成
+                chair.push_back(new Chair());
+            }
+        }
+    }
+
+    for (int i = 0; i < chair.size(); i++) {
+        chair[i]->Initialize();
     }
 }
 
@@ -156,6 +175,7 @@ void Stage::Generate2(int map)
 
     //マップチップ番号の位置を保存する
     //マップチップから位置を挿入
+    SetItem_28(chairx, chairy, mapChip, 6);
     SetItem_28(eposx, eposy, mapChip, 8);
     SetItem_28(vasex, vasey, mapChip, 10);
     SetItem_28(vasex, vasey, mapChip, 18);
@@ -178,7 +198,6 @@ void Stage::Generate2(int map)
 
     for (int i = 0; i < 28; i++) {
         for (int j = 0; j < 84; j++) {
-            //プレイヤーが扉の前に来たら当たりの判定を入れる
             if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 10 ||
                 mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 18) {
                 //enemyのオブジェクト生成
@@ -189,6 +208,19 @@ void Stage::Generate2(int map)
 
     for (int i = 0; i < vase.size(); i++) {
         vase[i]->Initialize();
+    }
+
+    for (int i = 0; i < 28; i++) {
+        for (int j = 0; j < 84; j++) {
+            if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 6) {
+                //enemyのオブジェクト生成
+                chair.push_back(new Chair());
+            }
+        }
+    }
+
+    for (int i = 0; i < chair.size(); i++) {
+        chair[i]->Initialize();
     }
 
 }
@@ -230,6 +262,13 @@ void Stage::Drow()
            vase[i]->Draw();
        }
     }
+
+    //花瓶の描画
+    for (int i = 0; i < chair.size(); i++) {
+       if (chair.size() >= 2) {
+           chair[i]->Draw();
+       }
+    }
     player->Draw();
 }
 
@@ -240,6 +279,9 @@ void Stage::Update_01()
     /*花瓶の更新*/
     for (int i = 0; i < vasex.size(); i++) {
         vase[i]->SetPosition(vasex[i] + mapChip->GetScroll(), vasey[i] + mapChip->GetScroll_Y());
+    }
+    for (int i = 0; i < chairx.size(); i++) {
+        chair[i]->SetPosition(chairx[i] + mapChip->GetScroll(), chairy[i] + mapChip->GetScroll_Y());
     }
     /*敵の更新*/
     for (int i = 0; i < eposx.size(); i++) {
@@ -354,6 +396,9 @@ void Stage::Update_02()
     /*敵の位置挿入*/
     for (int i = 0; i < enemy.size(); i++) {
         enemy[i]->Set_position(eposx[i] + mapChip->GetScroll(), eposy[i] + mapChip->GetScroll_Y());
+    }
+    for (int i = 0; i < chairx.size(); i++) {
+        chair[i]->SetPosition(chairx[i] + mapChip->GetScroll(), chairy[i] + mapChip->GetScroll_Y());
     }
 
     for (int i = 0; i < enemy.size(); i++) {
