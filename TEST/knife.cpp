@@ -88,6 +88,7 @@ void Knife::Dead()
 void Knife::Update()
 {
 	timer->Update();
+	counter++;
 	if (is_throw == 1) {
 		Throw();
 		//life‚ª0ˆÈã‚È‚ç•`‰æ‚»‚êˆÈŠO‚ÍŽ€–Sˆ—
@@ -105,13 +106,22 @@ void Knife::Update()
 	{
 		timer->reset();
 		is_throw = 0;
-
 	}
+
 	if (timer->elapsedTimer() >= 3000 && is_throw == 2)
 	{
 		heidCool = 0;
 	}
-	knifeCounter->Draw();
+
+	if (is_throw != 0) {
+		if (counter % 10 != 0) {
+			knifeCounter->Draw();
+		}
+	}
+	else {
+		knifeCounter->Draw();
+		counter = 0;
+	}
 
 	DrawFormatString(0, 225, GetColor(255, 255, 255), "stock : %d", stock);
 	//DrawFormatString(0, 250, GetColor(255, 255, 255), "position_X : %f", GetPosition());

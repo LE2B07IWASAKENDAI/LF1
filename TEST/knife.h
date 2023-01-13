@@ -2,6 +2,7 @@
 #include "DxLib.h";
 #include "Timer.h"
 #include "KnifeCounter.h"
+#include <math.h>
 #include <vector>;
 
 using namespace std;
@@ -69,6 +70,8 @@ private:
 	float _point = -170.0f;
 	int heidCool = 0;
 
+	//ナイフ点滅カウンター
+	int counter = 0;
 	//変化量
 	float vector_x = 0.0f;
 	float vector_y = 0.0f;
