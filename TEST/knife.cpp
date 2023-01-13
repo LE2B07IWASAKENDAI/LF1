@@ -123,7 +123,7 @@ void Knife::Update()
 		counter = 0;
 	}
 
-	DrawFormatString(0, 225, GetColor(255, 255, 255), "stock : %d", stock);
+	//DrawFormatString(0, 225, GetColor(255, 255, 255), "stock : %d", stock);
 	//DrawFormatString(0, 250, GetColor(255, 255, 255), "position_X : %f", GetPosition());
 }
 

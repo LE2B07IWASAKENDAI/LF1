@@ -384,7 +384,7 @@ void Stage::Update_01()
     {
         DrawFormatString(1607, 210, GetColor(255, 255, 255), "“–‚½‚Á‚Ä‚¢‚éIII");
         se->DiscoverSE_voice();
-        //over = 1;
+        over = 1;
     }
 }
 
