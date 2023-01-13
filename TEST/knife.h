@@ -1,6 +1,7 @@
 #pragma once
 #include "DxLib.h";
 #include "Timer.h"
+#include "KnifeCounter.h"
 #include <vector>;
 
 using namespace std;
@@ -84,4 +85,5 @@ private:
 	int direction = 0;
 
 	Timer* timer = new Timer();
+	KnifeCounter* knifeCounter = new KnifeCounter();
 };

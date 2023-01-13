@@ -21,7 +21,7 @@ void Knife::Initialize()
 	vector_y = 1.05f;
 	front = 0;
 	stock = 10;
-
+	knifeCounter->Initialize();
 }
 
 void Knife::Ready_Throw(float Ppos_x, float Ppos_y,int flont)
@@ -39,6 +39,7 @@ void Knife::Ready_Throw(float Ppos_x, float Ppos_y,int flont)
 	}
 	front = flont;
 	SetDirection();
+
 }
 
 void Knife::Throw()
@@ -80,7 +81,8 @@ void Knife::Dead()
 		is_throw = -1;
 		stock = 0;
 	}
-	
+	knifeCounter->Delete();
+
 }
 
 void Knife::Update()
@@ -101,17 +103,15 @@ void Knife::Update()
 	}
 	if (timer->elapsedTimer() >= 4000 && is_throw ==2)
 	{
-		
-		
 		timer->reset();
 		is_throw = 0;
+
 	}
 	if (timer->elapsedTimer() >= 3000 && is_throw == 2)
 	{
-
 		heidCool = 0;
-		
 	}
+	knifeCounter->Draw();
 
 	DrawFormatString(0, 225, GetColor(255, 255, 255), "stock : %d", stock);
 	//DrawFormatString(0, 250, GetColor(255, 255, 255), "position_X : %f", GetPosition());

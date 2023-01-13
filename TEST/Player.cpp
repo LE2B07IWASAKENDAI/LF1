@@ -58,7 +58,7 @@ void Player::Update()
 	}
 	
 
-	if (walk_index > 7)
+	if (walk_index > 9)
 	{
 		walk_index = 0;
 	}
@@ -283,7 +283,7 @@ void Player::LoadTexture()
 	ptexture_R = LoadGraph("Resources/Player/Player_R.png");
 	ptexture_L = LoadGraph("Resources/Player/Player_L.png");
 	hidetext = LoadGraph("Resources/Player/hidding2.png");
-	LoadDivGraph("Resources/Player/playerAni_R.png", 8, 8, 1, 192, 192, walk_R);
+	LoadDivGraph("Resources/Player/playerAni_R.png", 10, 10, 1, 192, 192, walk_R);
 	LoadDivGraph("Resources/Player/playerAni_L.png", 8, 8, 1, 192, 192, walk_L);
 }
 

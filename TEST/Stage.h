@@ -10,6 +10,7 @@
 #include "Chair.h"
 #include "Collision.h"
 
+
 class Stage
 {
 public:

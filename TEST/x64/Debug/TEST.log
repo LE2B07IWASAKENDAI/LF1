@@ -1,25 +1,10 @@
-﻿  Stage.cpp
+﻿  knife.cpp
 C:\後期チーム卒業制作_No11\TEST\knife.h(2,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
 C:\後期チーム卒業制作_No11\TEST\Timer.h(17,16): warning C4244: '初期化中': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
 C:\後期チーム卒業制作_No11\TEST\Timer.h(18,14): warning C4244: '初期化中': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
 C:\後期チーム卒業制作_No11\TEST\Timer.h(19,18): warning C4244: '初期化中': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
 C:\後期チーム卒業制作_No11\TEST\Timer.h(14,32): warning C4244: 'return': 'DWORD' から 'float' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\knife.h(4,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-C:\後期チーム卒業制作_No11\TEST\Vase.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-C:\後期チーム卒業制作_No11\TEST\Vase.h(4,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-C:\後期チーム卒業制作_No11\TEST\Chair.h(2,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-C:\後期チーム卒業制作_No11\TEST\Stage.cpp(60,59): warning C4244: '引数': '_Ty' から 'int' への変換です。データが失われる可能性があります。
-          with
-          [
-              _Ty=float
-          ]
-C:\後期チーム卒業制作_No11\TEST\Stage.cpp(60,27): warning C4244: '引数': '_Ty' から 'int' への変換です。データが失われる可能性があります。
-          with
-          [
-              _Ty=float
-          ]
-C:\後期チーム卒業制作_No11\TEST\Stage.cpp(303,46): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\Stage.cpp(368,50): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\Stage.cpp(418,48): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\後期チーム卒業制作_No11\TEST\Stage.cpp(487,52): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\後期チーム卒業制作_No11\TEST\knife.h(5,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\後期チーム卒業制作_No11\TEST\knife.cpp(123,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\後期チーム卒業制作_No11\TEST\knife.cpp(123,16): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
   TEST.vcxproj -> C:\後期チーム卒業制作_No11\TEST\x64\Debug\TEST.exe

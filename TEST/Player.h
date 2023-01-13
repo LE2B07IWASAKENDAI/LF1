@@ -77,7 +77,7 @@ private:
 
 	//アニメーション
 	int walk_L[8];
-	int walk_R[8];
+	int walk_R[10];
 	int max_index = 8;
 	int walk_index = -1;
 	float stop_position = 0.0f;

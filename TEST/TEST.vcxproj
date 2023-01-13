@@ -159,6 +159,7 @@
     <ClCompile Include="Chair.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="knife.cpp" />
+    <ClCompile Include="KnifeCounter.cpp" />
     <ClCompile Include="LandREnemy.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapChip.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="Chair.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="knife.h" />
+    <ClInclude Include="KnifeCounter.h" />
     <ClInclude Include="LandREnemy.h" />
     <ClInclude Include="MapChip.h" />
     <ClInclude Include="MapLoader.h" />
