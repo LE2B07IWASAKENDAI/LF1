@@ -113,6 +113,7 @@ int WINAPI WinMain(
             //タイトル画面描画
             /*DrawGraph(0, 0, titlescene, FALSE);*/
             title->Draw();
+            title->Update();
 
             //(テスト用)スペースキー押下でゲーム開始
             //スペースキー押したら

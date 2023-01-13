@@ -76,9 +76,9 @@ private:
 	int heidCool = 0;
 
 	//アニメーション
-	int walk_L[8];
-	int walk_R[10];
-	int max_index = 8;
+	int walk_L[6];
+	int walk_R[6];
+	int max_index = 6;
 	int walk_index = -1;
 	float stop_position = 0.0f;
 
