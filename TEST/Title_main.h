@@ -1,6 +1,7 @@
 #pragma once
 #include"Title_map.h"
-#include"Title_plaayer.h"
+#include"Title_player.h"
+#include"Title_obj.h"
 #include"DxLib.h"
 
 class Title_main
@@ -17,7 +18,8 @@ public:
 
 private:
 	Title_map* map = new Title_map;
-	Title_plaayer* player = new Title_plaayer;
+	Title_player* player = new Title_player;
+	Title_obj* obj = new Title_obj;
 	
 };
 
