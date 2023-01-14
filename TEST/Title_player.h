@@ -1,5 +1,6 @@
 #pragma once
 #include "DxLib.h"
+#include "Timer.h"
 #include <vector>
 class Title_player
 {
@@ -22,6 +23,8 @@ private:
 
 	int texture_R = 0;
 	int texture_L = 0;
+	int hide_R = 0;
+	int hide_L = 0;
 	int walk_R[10];
 	int walk_L[10];
 	int walk_index = 0;
@@ -29,6 +32,9 @@ private:
 	float witdh = 1800.0f;
 
 	int pattern_Nuber = 0;
+	int count = 0;
+
+	Timer* timer = new Timer();
 
 };
 
