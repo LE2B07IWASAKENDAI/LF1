@@ -20,6 +20,7 @@ private:
 	Title_map* map = new Title_map;
 	Title_player* player = new Title_player;
 	Title_obj* obj = new Title_obj;
+	int bg = 0;
 	
 };
 

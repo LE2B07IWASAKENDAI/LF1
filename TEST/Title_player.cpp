@@ -14,6 +14,7 @@ void Title_player::Initialize()
 	LoadTexture();
 	position_X = 0.0f;
 	position_Y = 576.0f;
+	count = 0;
 	pattern_Nuber = 0;
 	walk_index = 0;
 	direction = 0;

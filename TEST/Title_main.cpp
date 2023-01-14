@@ -5,6 +5,7 @@ Title_main::Title_main()
 	map->Initialize();
 	obj->Initialize();
 	player->Initialize();
+	bg = LoadGraph("Resources/Scene/title.png");
 }
 
 Title_main::~Title_main()
@@ -28,4 +29,5 @@ void Title_main::Draw()
 	map->Draw();
 	obj->Draw();
 	player->Draw();
+	DrawGraph(0, 0, bg, TRUE);
 }
