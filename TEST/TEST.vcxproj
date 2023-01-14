@@ -173,7 +173,8 @@
     <ClCompile Include="Title_enemy.cpp" />
     <ClCompile Include="Title_knife.cpp" />
     <ClCompile Include="Title_map.cpp" />
-    <ClCompile Include="Title_plaayer.cpp" />
+    <ClCompile Include="Title_obj.cpp" />
+    <ClCompile Include="Title_player.cpp" />
     <ClCompile Include="Vase.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -196,7 +197,8 @@
     <ClInclude Include="Title_enemy.h" />
     <ClInclude Include="Title_knife.h" />
     <ClInclude Include="Title_map.h" />
-    <ClInclude Include="Title_plaayer.h" />
+    <ClInclude Include="Title_obj.h" />
+    <ClInclude Include="Title_player.h" />
     <ClInclude Include="Vase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

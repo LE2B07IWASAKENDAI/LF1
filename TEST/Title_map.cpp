@@ -90,7 +90,6 @@ void Title_map::DrawItem(int chipNumber, int drwaNumber)
 {
 	for (int i = 0; i < MAP_HEIGHT; i++) {
 		for (int j = 0; j < MAP_WIDTH; j++) {
-			//プレイヤーが扉の前に来たら当たりの判定を入れる
 			if (mapdata[0].data[i][j] == chipNumber) {
 				DrawGraph(j * MAP_SIZE, i * MAP_SIZE, gHandle[drwaNumber], TRUE);
 			}
