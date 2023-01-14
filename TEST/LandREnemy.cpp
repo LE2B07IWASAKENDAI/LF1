@@ -28,13 +28,13 @@ void LandREnemy::Horizon()
 
 	if (flont == 1)
 	{
-		LandREtexture = LoadGraph("Resources/Enemy/01_Enemy_R.png");
+		LandREtexture = LoadGraph("Resources/Enemy/Yakuza2Light_R.png");
 		//DrawBox(GetPosition_X(), position_Y, GetPosition_X() + 450, position_Y + 192, GetColor(255, 0, 0), true);
 		DrawBox(position_X, position_Y, position_X + 450, position_Y + 192, GetColor(255, 0, 0), true);
 	}
 	else if (flont == 0)
 	{
-		LandREtexture = LoadGraph("Resources/Enemy/01_Enemy_L.png");
+		LandREtexture = LoadGraph("Resources/Enemy/Yakuza2Light_L.png");
 		//DrawBox(GetPosition_X() - 250, position_Y, GetPosition_X() + 192, position_Y + 192, GetColor(255, 0, 0), true);
 		DrawBox(position_X - 250, position_Y, position_X + 192, position_Y + 192, GetColor(255, 0, 0), true);
 	}
@@ -96,7 +96,7 @@ void LandREnemy::Update()
 
 void LandREnemy::LoadTexture()
 {
-	LandREtexture = LoadGraph("Resources/Enemy/01_Enemy_R.png");
+	LandREtexture = LoadGraph("Resources/Enemy/Yakuza2Light_R.png");
 }
 
 void LandREnemy::Draw()

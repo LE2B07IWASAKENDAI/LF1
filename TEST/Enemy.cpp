@@ -17,7 +17,6 @@ void Enemy::Initialize()
 	Mode = Normal;
 
 //オブジェクト生成
-	knife = new Knife();
 	collision = new Collision();
 	vase = new Vase();
 }

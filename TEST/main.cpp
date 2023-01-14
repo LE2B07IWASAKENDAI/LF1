@@ -199,7 +199,7 @@ int WINAPI WinMain(
             //ステージ4へ
             if (stage->SetGool() == 1)
             {
-                //stage->Release();
+                stage->Release();
                 stage->Generate(3);
                 stage->Initialize();
                 GameState = GamePlay4;

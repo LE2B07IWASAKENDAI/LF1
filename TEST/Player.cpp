@@ -32,7 +32,6 @@ void Player::Initialize()
 
 void Player::Update()
 {
-
 	//移動処理(隠れていないとき)
 	if (!GetkeyPermission()) {
 		if (CheckHitKey(KEY_INPUT_A) || CheckHitKey(KEY_INPUT_D)) {
@@ -56,7 +55,6 @@ void Player::Update()
 			walk_index = -1;
 		}
 	}
-	
 
 	if (walk_index > 5)
 	{
@@ -64,10 +62,14 @@ void Player::Update()
 	}
 
 
-	//隠れてる！の描画
-	if (hide == 1) { DrawGraph(1602, 0, hidetext, FALSE); SetkeyPermission(true); }
+	//隠れている間は行動制限
+	if (hide == 1 || hide == 2 || hide == 3) {
+		SetkeyPermission(true); }
+
 	//現在の座標を文字列描画
 	DrawPlayerPos();
+
+	//ナイフのクールタイム
 	heidCool = knife->GetHiedCool();
 
 ////////////////ナイフ投げ処理////////////////////////////////
@@ -128,8 +130,8 @@ void Player::Draw()
 				{
 					DrawGraph(position_X - end + center, position_Y, walk_R[walk_index], TRUE);
 				}
-				
 			}
+
 			else if (position_X >= center)
 			{
 				return_Positin = center;
@@ -153,8 +155,6 @@ void Player::Draw()
 				{
 					DrawGraph(position_X, position_Y, walk_R[walk_index], TRUE);
 				}
-				
-
 			}
 		}
 		else if (rl == 1)
@@ -170,7 +170,6 @@ void Player::Draw()
 				{
 					DrawGraph(position_X - end + center, position_Y, walk_L[walk_index], TRUE);
 				}
-				
 			}
 			else if (position_X >= center)
 			{
@@ -183,7 +182,6 @@ void Player::Draw()
 				{
 					DrawGraph(center, position_Y, walk_L[walk_index], TRUE);
 				}
-				
 			}
 			else
 			{
@@ -201,6 +199,14 @@ void Player::Draw()
 
 		SetkeyPermission(false);
 	}
+	else if(hide == 1)
+	{
+		DrawGraph(return_Positin, position_Y, hide_ghandleL, TRUE);
+	}
+	else if(hide == 2)
+	{
+		DrawGraph(return_Positin, position_Y, hide_ghandleR, TRUE);
+	}
 }
 
 bool Player::GetHide()
@@ -213,17 +219,72 @@ void Player::SetHide(bool sethide)
 	hide = sethide;
 }
 
-void Player::Hidding()
+void Player::Hidding_R()
 {
-
 	if (heidCool == 0) {
 		//隠れる
 		if (CheckHitKey(KEY_INPUT_LSHIFT))
 		{
 			keyCounter++;
 		}
-		else
+		else{
+			//キー押されていない
+			if (keyCounter > 0)keyCounter = -1;//LSHIFTキーが離れた瞬間
+			else { keyCounter = 0; }           //LSHIFTキーが離れている状態
+		}
+
+		//押された瞬間の処理
+		if (keyCounter == 1 && hide == 0) {
+			//イス、机に隠れたという演出で、描画をしないようにしている
+			hide = 1;
+		}
+		else if (keyCounter == 1 && hide == 1) {
+			//描画されていない時にLSHIFT押すと？
+			hide = 0;//プレイヤーを描画する
+
+			SetkeyPermission(false);
+		}
+	}
+}
+
+void Player::Hidding_L()
+{
+	if (heidCool == 0) {
+		//隠れる
+		if (CheckHitKey(KEY_INPUT_LSHIFT))
 		{
+			keyCounter++;
+		}
+		else {
+			//キー押されていない
+			if (keyCounter > 0)keyCounter = -1;//LSHIFTキーが離れた瞬間
+			else { keyCounter = 0; }           //LSHIFTキーが離れている状態
+		}
+
+		//押された瞬間の処理
+		if (keyCounter == 1 && hide == 0) {
+			//イス、机に隠れたという演出で、描画をしないようにしている
+			hide = 2;
+		}
+		else if (keyCounter == 1 && hide == 2) {
+			//描画されていない時にLSHIFT押すと？
+			hide = 0;//プレイヤーを描画する
+
+			SetkeyPermission(false);
+		}
+	}
+
+}
+
+void Player::Hidding_Door()
+{
+	if (heidCool == 0) {
+		//隠れる
+		if (CheckHitKey(KEY_INPUT_LSHIFT))
+		{
+			keyCounter++;
+		}
+		else {
 			//キー押されていない
 			if (keyCounter > 0)keyCounter = -1;//LSHIFTキーが離れた瞬間
 			else { keyCounter = 0; }           //LSHIFTキーが離れている状態
@@ -232,11 +293,12 @@ void Player::Hidding()
 		//押された瞬間の処理
 		if (keyCounter == 1 && hide == 0) {
 			//扉に隠れたという演出で、描画をしないようにしている
-			hide = 1;
+			hide = 3;
 		}
-		else if (keyCounter == 1 && hide == 1) {
+		else if (keyCounter == 1 &&  hide == 3) {
 			//描画されていない時にLSHIFT押すと？
 			hide = 0;//プレイヤーを描画する
+
 			SetkeyPermission(false);
 		}
 	}
@@ -282,7 +344,8 @@ void Player::LoadTexture()
 {
 	ptexture_R = LoadGraph("Resources/Player/Player_R.png");
 	ptexture_L = LoadGraph("Resources/Player/Player_L.png");
-	hidetext = LoadGraph("Resources/Player/hidding2.png");
+	hide_ghandleL = LoadGraph("Resources/Player/Assassin_Squat_L.png");
+	hide_ghandleR = LoadGraph("Resources/Player/Assassin_Squat_R.png");
 	LoadDivGraph("Resources/Player/playerAni_R.png", 6, 6, 1, 192, 192, walk_R);
 	LoadDivGraph("Resources/Player/playerAni_L.png", 6, 6, 1, 192, 192, walk_L);
 }

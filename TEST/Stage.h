@@ -4,6 +4,7 @@
 #include "MapChip.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "LandREnemy.h"
 #include "Vase.h"
 #include "BGM.h"
 #include "SE.h"
@@ -27,7 +28,7 @@ public:
 
 	void DeleteItem(std::vector<float>& posx, std::vector<float>& posy);
 
-	void AllDelete(std::vector<float>& eposx, std::vector<float>& eposy, std::vector<float>& open_doorx, std::vector<float>& open_doory,
+	void AllDelete(std::vector<float>& eposx, std::vector<float>& eposy, std::vector<float>& stay_eposx, std::vector<float>& stay_eposy, std::vector<float>& open_doorx, std::vector<float>& open_doory,
 		std::vector<float>& doorx, std::vector<float>& doory, std::vector<float>& chairx, std::vector<float>& chairy,
 		std::vector<float>& deskx, std::vector<float>& desky, std::vector<float>& vasex, std::vector<float>& vasey,
 		std::vector<float>& hidex_left, std::vector<float>& hidey_left, std::vector<float>& hidex_right, std::vector<float>& hidey_right);
@@ -57,6 +58,7 @@ private:
 	BGM* bgm = new BGM();
 	SE* se = new SE();
 	std::vector<Enemy*> enemy;
+	std::vector<LandREnemy*>stay_enemy;
 	std::vector<Vase*> vase;
 	std::vector<Chair*>chair;
 
@@ -65,6 +67,10 @@ private:
 	//マップチップで標示する物の座標格納変数
 	std::vector<float>eposx;
 	std::vector<float>eposy;
+
+	//止まっている敵のポジション
+	std::vector<float>sty_eposx;
+	std::vector<float>sty_eposy;
 
 	std::vector<float>open_doorx;
 	std::vector<float>open_doory;

@@ -18,8 +18,13 @@ public:
 	void Draw();
 
 
-	//隠れている時
-	void Hidding();
+	//イスor机に隠れている時
+		//右向き
+	void Hidding_R();
+	    //左向き
+	void Hidding_L();
+	//ドアに隠れているとき
+	void Hidding_Door();
 	//画像読み込み
 	void LoadTexture();
 
@@ -63,7 +68,9 @@ private:
 	int ptexture_R = 0;
 	int ptexture_L = 0;
 	int rl = 0;
-	int hidetext = 0;
+	int hide_ghandleR = 0;
+	int hide_ghandleL = 0;
+
 	int keyCounter_knife = 0;//キーを押した瞬間を取るためのカウンター
 	int keyCounter = 0;//キーを押した瞬間を取るためのカウンター
 	int size_x = 200, size_y = 200;//プレイヤー画像のサイズ(11/10に津村が追加 ※後で消去)
