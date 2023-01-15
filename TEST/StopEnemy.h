@@ -24,7 +24,7 @@ public:
 	//描画
 	void Draw();
 	//デバッグ表示
-	//void DebugLog();
+	void DebugLog();
 
 	/*Getter,Setter*/
 	//座標値
