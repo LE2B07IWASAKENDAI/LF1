@@ -68,13 +68,16 @@ int WINAPI WinMain(
     int titlescene = LoadGraph("Resources/Scene/title.png");
     int gameoverscene = LoadGraph("Resources/Scene/GameOver.png");
     int gameclearscene = LoadGraph("Resources/Scene/GameClear.png");
+    int cl_bg = LoadGraph("Resources/Scene/Escape_String.png");
     int bgscene1 = LoadGraph("Resources/Scene/bg1.png");
     int bgscene2 = LoadGraph("Resources/Scene/bg2.png");
     int bgscene3 = LoadGraph("Resources/Scene/bg3.png");
 
     int SCounter = 0;
-
-
+    float postionCL_x = 0.0f;
+    float postiomCL_y = 0.0f;
+    int count_CL_X = 0;
+    int count_CL_Y = 0;
   
     //ループテスト用
     //int StartTime;
@@ -112,6 +115,8 @@ int WINAPI WinMain(
             //StartTime = GetNowCount();
             //タイトル画面描画
             /*DrawGraph(0, 0, titlescene, FALSE);*/
+            postionCL_x = 0.0f;
+            count_CL_X = 0;
             title->Draw();
             title->Update();
 
@@ -342,9 +347,46 @@ int WINAPI WinMain(
 
         case GameClear:
 #pragma region GameClear
+
+            if (postionCL_x > 10) 
+            {
+                count_CL_X = 1;
+            }
+            if (postionCL_x < 0)
+            {
+                count_CL_X = 0;
+            }
+
+            if (postiomCL_y > 20)
+            {
+                count_CL_Y = 1;
+            }
+            if (postiomCL_y < 0)
+            {
+                count_CL_Y = 0;
+            }
+
+            if (count_CL_X == 0)
+            {
+                postionCL_x++;
+            }
+            else if(count_CL_X ==1)
+            {
+                postionCL_x--;
+            }
+
+            if (count_CL_Y == 0)
+            {
+                postiomCL_y++;
+            }
+            else if(count_CL_Y == 1)
+            {
+                postiomCL_y--;
+            }
+
             //ゲームクリア画面描画
             DrawGraph(0, 0, gameclearscene, FALSE);
-
+            DrawGraph(postionCL_x, postiomCL_y, cl_bg, TRUE);
             //(テスト用)スペース押下でタイトルへ戻る
             //スペースキー押したら
             if (CheckHitKey(KEY_INPUT_SPACE))
