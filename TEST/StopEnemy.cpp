@@ -17,6 +17,7 @@ void StopEnemy::Initialize()
 	death = 0;
 	count = 0;
 	checkCount = 0;
+	Mode = 0;
 	//‰¼À•W(Œˆ‚ß‘Å‚¿)
 	//position_X = 500;
 	//position_Y = 500;
@@ -28,13 +29,13 @@ void StopEnemy::Horizon()
 
 	if (flont == 1)
 	{
-		StopEtexture = LoadGraph("Resources/Enemy/01_Enemy_R.png");
+		StopEtexture = LoadGraph("Resources/Enemy/Yakuza2Light_R.png");
 		//DrawBox(GetPosition_X(), position_Y, GetPosition_X() + 450, position_Y + 192, GetColor(255, 0, 0), true);
 		DrawBox(position_X, position_Y, position_X + 450, position_Y + 192, GetColor(255, 0, 0), true);
 	}
 	else if (flont == 0)
 	{
-		StopEtexture = LoadGraph("Resources/Enemy/01_Enemy_L.png");
+		StopEtexture = LoadGraph("Resources/Enemy/Yakuza2Light_L.png");
 		//DrawBox(GetPosition_X() - 250, position_Y, GetPosition_X() + 192, position_Y + 192, GetColor(255, 0, 0), true);
 		DrawBox(position_X - 250, position_Y, position_X + 192, position_Y + 192, GetColor(255, 0, 0), true);
 	}
@@ -133,32 +134,29 @@ void StopEnemy::Monitoring()
 void StopEnemy::Update()
 {
 	if (GetDeath() == 0) {
-		Horizon();
 		Monitoring();
 	}
 }
 
 void StopEnemy::LoadTexture()
 {
-	StopEtexture = LoadGraph("Resources/Enemy/01_Enemy_R.png");
+	StopEtexture = LoadGraph("Resources/Enemy/Yakuza2Light_R.png");
 }
 
 void StopEnemy::Draw()
 {
 	if (GetDeath() == 0) {
+		Horizon();
 		DrawGraph(position_X, position_Y, StopEtexture, TRUE);
 	}
 	//DebugLog();
 }
 
-//void StopEnemy::DebugLog()
-//{
-//	DrawFormatString(1607, 180, GetColor(255, 255, 255), "vector + eye : %f", position_X);
-//	DrawFormatString(7, 180, GetColor(255, 255, 255), "FirstPosition : %f", before_position_X);
-//	DrawFormatString(7, 280, GetColor(255, 255, 255), "eye : %f", eye);
-//	DrawFormatString(7, 300, GetColor(255, 255, 255), "position_X : %f", position_X);
-//	DrawFormatString(7, 400, GetColor(255, 255, 255), "Knife_position_X : %f", knife->GetPosition());
-//}
+void StopEnemy::DebugLog()
+{
+	DrawFormatString(7, 300, GetColor(255, 255, 255), "count : %d", count);
+	DrawFormatString(7, 360, GetColor(255, 255, 255), "Mode : %d", Mode);
+}
 
 void StopEnemy::Set_position(float position_x, float position_y)
 {

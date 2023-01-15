@@ -4,7 +4,7 @@
 #include "MapChip.h"
 #include "Player.h"
 #include "Enemy.h"
-#include "LandREnemy.h"
+#include "StopEnemy.h"
 #include "Vase.h"
 #include "BGM.h"
 #include "SE.h"
@@ -58,7 +58,7 @@ private:
 	BGM* bgm = new BGM();
 	SE* se = new SE();
 	std::vector<Enemy*> enemy;
-	std::vector<LandREnemy*>stay_enemy;
+	std::vector<StopEnemy*>stop_enemy;
 	std::vector<Vase*> vase;
 	std::vector<Chair*>chair;
 

@@ -89,7 +89,6 @@ void LandREnemy::Monitoring()
 void LandREnemy::Update()
 {
 	if (GetDeath() == 0) {
-		Horizon();
 		Monitoring();
 	}
 }
@@ -102,6 +101,7 @@ void LandREnemy::LoadTexture()
 void LandREnemy::Draw()
 {
 	if (GetDeath() == 0) {
+		Horizon();
 		DrawGraph(position_X, position_Y, LandREtexture, TRUE);
 	}
 	//DebugLog();
