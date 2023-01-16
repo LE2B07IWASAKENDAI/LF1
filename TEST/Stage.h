@@ -9,6 +9,7 @@
 #include "BGM.h"
 #include "SE.h"
 #include "Chair.h"
+#include "Bonfire.h"
 #include "Collision.h"
 
 
@@ -60,6 +61,7 @@ private:
 	std::vector<Enemy*> enemy;
 	std::vector<StopEnemy*>stop_enemy;
 	std::vector<Vase*> vase;
+	std::vector<Bonfire*> bonfire;
 	std::vector<Chair*>chair;
 
 	Collision* collision = new Collision();
@@ -81,6 +83,9 @@ private:
 	std::vector<float>chairx;
 	std::vector<float>chairy;
 
+	std::vector<float>bonfirex;
+	std::vector<float>bonfirey;
+
 	std::vector<float>deskx;
 	std::vector<float>desky;
 
@@ -99,6 +104,7 @@ private:
 	int ghandleDSK ;
 	int ghandleHID_L;
 	int ghandleHID_R;
+	int ghandleBNF;
 	
 	// ‰Ô•rƒtƒ‰ƒO
 	int BreakFlag = 0;

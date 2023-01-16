@@ -154,6 +154,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BGM.cpp" />
+    <ClCompile Include="Bonfire.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="DebugClass.cpp" />
     <ClCompile Include="Chair.cpp" />
@@ -179,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BGM.h" />
+    <ClInclude Include="Bonfire.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="DebugClass.h" />
     <ClInclude Include="Chair.h" />

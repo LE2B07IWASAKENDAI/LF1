@@ -108,6 +108,9 @@
     <ClCompile Include="Title_obj.cpp">
       <Filter>ソース ファイル\Title</Filter>
     </ClCompile>
+    <ClCompile Include="Bonfire.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MapChip.h">
@@ -175,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="Title_obj.h">
       <Filter>ヘッダー ファイル\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Bonfire.h">
+      <Filter>ヘッダー ファイル\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

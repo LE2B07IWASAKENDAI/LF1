@@ -110,6 +110,11 @@ void Stage::Release()
         //コンテナのサイズまでメモリを解放
         chair.shrink_to_fit();
     }
+    for (int i = 0; i < bonfire.size(); i++) {
+        bonfire.clear();
+        //コンテナのサイズまでメモリを解放
+        bonfire.shrink_to_fit();
+    }
 }
 
 void Stage::Generate(int map)
@@ -126,6 +131,7 @@ void Stage::Generate(int map)
     SetItem(sty_eposx, sty_eposy, mapChip, 28);
     SetItem(vasex, vasey, mapChip, 10);
     SetItem(vasex, vasey, mapChip, 18);
+    SetItem(bonfirex, bonfirey, mapChip, 17);
 
     //エネミー生成
     //enemy push_backをしていく
@@ -184,6 +190,19 @@ void Stage::Generate(int map)
     for (int i = 0; i < chair.size(); i++) {
         chair[i]->Initialize();
     }
+    for (int i = 0; i < 14; i++) {
+        for (int j = 0; j < 84; j++) {
+            //
+            if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 17) {
+                //bonfireのオブジェクト生成
+                bonfire.push_back(new Bonfire());
+            }
+        }
+    }
+
+    for (int i = 0; i < bonfire.size(); i++) {
+        bonfire[i]->Initialize();
+    }
 }
 
 void Stage::Generate2(int map)
@@ -239,6 +258,17 @@ void Stage::Generate2(int map)
     for (int i = 0; i < vase.size(); i++) {
         vase[i]->Initialize();
     }
+    for (int i = 0; i < 28; i++) {
+        for (int j = 0; j < 84; j++) {
+            if (mapChip->mapData[mapChip->GetMapNumber()].data[i][j] == 17) {
+                bonfire.push_back(new Bonfire());
+            }
+        }
+    }
+
+    for (int i = 0; i < bonfire.size(); i++) {
+        bonfire[i]->Initialize();
+    }
 
     for (int i = 0; i < 28; i++) {
         for (int j = 0; j < 84; j++) {
@@ -273,16 +303,16 @@ void Stage::Drow()
     DrawFormatString(0, 100, GetColor(255, 255, 255), "マップ番号 : %d ", mapChip->GetMapNumber() + 1);
 
     //マップチップの描画
-    //DrawItem(open_doorx, open_doory, mapChip, ghandleOPD);
-    //DrawItem(doorx, doory, mapChip, ghandleCLD);
-    //DrawItem(chairx, chairy, mapChip, ghandleCHR);
-    //DrawItem(deskx, desky, mapChip, ghandleDSK);
-    //DrawItem(hidex_left, hidey_left, mapChip, ghandleHID_L);
-    //DrawItem(hidex_right, hidey_right, mapChip, ghandleHID_R);
         //花瓶の描画
     for (int i = 0; i < vase.size(); i++) {
         if (vase.size() >= 2) {
             vase[i]->Draw();
+        }
+    }
+    //かがり火の描画
+    for (int i = 0; i < bonfire.size(); i++) {
+        if (bonfire.size() >= 2) {
+            bonfire[i]->Draw();
         }
     }
 
@@ -313,6 +343,9 @@ void Stage::Update_01()
     /*花瓶の更新*/
     for (int i = 0; i < vasex.size(); i++) {
         vase[i]->SetPosition(vasex[i] + mapChip->GetScroll(), vasey[i] + mapChip->GetScroll_Y());
+    }
+    for (int i = 0; i < bonfirex.size(); i++) {
+        bonfire[i]->SetPosition(bonfirex[i] + mapChip->GetScroll(), bonfirey[i] + mapChip->GetScroll_Y());
     }
     for (int i = 0; i < chairx.size(); i++) {
         chair[i]->SetPosition(chairx[i] + mapChip->GetScroll(), chairy[i] + mapChip->GetScroll_Y());
