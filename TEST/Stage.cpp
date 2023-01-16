@@ -72,7 +72,7 @@ void Stage::DeleteItem(std::vector<float>& posx, std::vector<float>& posy) {
 
 //マップチップ上のアイテム全削除関数
 void Stage::AllDelete(std::vector<float>& eposx, std::vector<float>& eposy, std::vector<float>& stay_eposx, std::vector<float>& stay_eposy,std::vector<float>& open_doorx, std::vector<float>& open_doory,
-    std::vector<float>& doorx, std::vector<float>& doory, std::vector<float>& chairx, std::vector<float>& chairy,
+    std::vector<float>& doorx, std::vector<float>& doory, std::vector<float>& bonfirex, std::vector<float>& bonfirey,std::vector<float>& chairx, std::vector<float>& chairy,
     std::vector<float>& deskx, std::vector<float>& desky, std::vector<float>& vasex, std::vector<float>& vasey,
     std::vector<float>& hidex_left, std::vector<float>& hidey_left, std::vector<float>& hidex_right, std::vector<float>& hidey_right) {
 
@@ -82,13 +82,14 @@ void Stage::AllDelete(std::vector<float>& eposx, std::vector<float>& eposy, std:
     DeleteItem(chairx, chairy);
     DeleteItem(deskx, desky);
     DeleteItem(vasex, vasey);
+    DeleteItem(bonfirex, bonfirey);
     DeleteItem(hidex_left, hidey_left);
     DeleteItem(hidex_right, hidey_right);
 }
 
 void Stage::Release()
 {
-    AllDelete(eposx, eposy, sty_eposx,sty_eposy, open_doorx, open_doory, doorx, doory, chairx, chairy, deskx, desky, vasex, vasey, hidex_left, hidey_left, hidex_right, hidey_right);
+    AllDelete(eposx, eposy, sty_eposx,sty_eposy, open_doorx, open_doory, doorx, doory,bonfirex,bonfirey, chairx, chairy, deskx, desky, vasex, vasey, hidex_left, hidey_left, hidex_right, hidey_right);
 
     for (int i = 0; i < enemy.size(); i++) {
         enemy.clear();
@@ -344,8 +345,10 @@ void Stage::Update_01()
     for (int i = 0; i < vasex.size(); i++) {
         vase[i]->SetPosition(vasex[i] + mapChip->GetScroll(), vasey[i] + mapChip->GetScroll_Y());
     }
-    for (int i = 0; i < bonfirex.size(); i++) {
-        bonfire[i]->SetPosition(bonfirex[i] + mapChip->GetScroll(), bonfirey[i] + mapChip->GetScroll_Y());
+    if (bonfire.size() != 0) {
+        for (int i = 0; i < bonfirex.size(); i++) {
+            bonfire[i]->SetPosition(bonfirex[i] + mapChip->GetScroll(), bonfirey[i] + mapChip->GetScroll_Y());
+        }
     }
     for (int i = 0; i < chairx.size(); i++) {
         chair[i]->SetPosition(chairx[i] + mapChip->GetScroll(), chairy[i] + mapChip->GetScroll_Y());

@@ -30,7 +30,7 @@ public:
 	void DeleteItem(std::vector<float>& posx, std::vector<float>& posy);
 
 	void AllDelete(std::vector<float>& eposx, std::vector<float>& eposy, std::vector<float>& stay_eposx, std::vector<float>& stay_eposy, std::vector<float>& open_doorx, std::vector<float>& open_doory,
-		std::vector<float>& doorx, std::vector<float>& doory, std::vector<float>& chairx, std::vector<float>& chairy,
+		std::vector<float>& doorx, std::vector<float>& doory, std::vector<float>& bonfirex, std::vector<float>& bonfirey, std::vector<float>& chairx, std::vector<float>& chairy,
 		std::vector<float>& deskx, std::vector<float>& desky, std::vector<float>& vasex, std::vector<float>& vasey,
 		std::vector<float>& hidex_left, std::vector<float>& hidey_left, std::vector<float>& hidex_right, std::vector<float>& hidey_right);
 
