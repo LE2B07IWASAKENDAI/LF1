@@ -12,6 +12,7 @@ Stage::Stage()
     ghandleDSK = LoadGraph("Resources/Map/Desk.png");
     ghandleHID_L = LoadGraph("Resources/Map/light_left.png");
     ghandleHID_R = LoadGraph("Resources/Map/light_right.png");
+    ghandleDRK = LoadGraph("Resources/Map/Dark.png");
 }
 
 Stage::~Stage()
@@ -26,6 +27,9 @@ void Stage::Initialize()
     over = 0;
     BreakFlag = 0;
     gool = 0;
+    
+    dark_X = 0;
+    dark_Y = 0;
 }
 
 //ƒ}ƒbƒvƒ`ƒbƒvã‚ÌƒAƒCƒeƒ€¶¬ŠÖ”
@@ -208,6 +212,10 @@ void Stage::Generate(int map)
     for (int i = 0; i < bonfire.size(); i++) {
         bonfire[i]->Initialize();
     }
+
+
+    light = new E_Light();
+    light->Initialize();
 }
 
 void Stage::Generate2(int map)
@@ -287,6 +295,9 @@ void Stage::Generate2(int map)
         chair[i]->Initialize();
     }
 
+    light = new E_Light();
+    light->Initialize();
+
 }
 
 void Stage::SetMap(int map)
@@ -314,13 +325,6 @@ void Stage::Drow()
             vase[i]->Draw();
         }
     }
-    //‚©‚ª‚è‰Î‚Ì•`‰æ
-    for (int i = 0; i < bonfire.size(); i++) {
-        if (bonfire.size() >= 2) {
-            bonfire[i]->Draw();
-        }
-    }
-
     //ƒCƒX‚Ì•`‰æ
     for (int i = 0; i < chair.size(); i++) {
         if (chair.size() >= 2) {
@@ -328,7 +332,16 @@ void Stage::Drow()
         }
     }
 
+    //”wŒiˆÃ‚­‚·‚é
+    SetDrawBlendMode(DX_BLENDMODE_ALPHA, 150);
+    DrawGraph(dark_X, dark_Y, ghandleDRK, FALSE);
+    SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
+
     player->Draw();
+
+    /*“G‚Ì‰ù’†“d“”•`‰æˆ—*/
+    light->Draw();
 
     /*“G‚Ì•`‰æˆ—*/
     for (int i = 0; i < enemy.size(); i++) {
@@ -338,7 +351,12 @@ void Stage::Drow()
     for (int i = 0; i < stop_enemy.size(); i++) {
         stop_enemy[i]->Draw();
     }
-
+    //‚©‚ª‚è‰Î‚Ì•`‰æ
+    for (int i = 0; i < bonfire.size(); i++) {
+        if (bonfire.size() >= 2) {
+            bonfire[i]->Draw();
+        }
+    }
 }
 
 void Stage::Update_01()
@@ -372,6 +390,8 @@ void Stage::Update_01()
     //“®‚¢‚Ä‚¢‚é“G‚Ìˆ—
     for (int i = 0; i < enemy.size(); i++) {
         enemy[i]->Update();
+
+        light->Update(enemy[i]->GetPosition_X(), enemy[i]->Getposition_Y(), enemy[i]->GetFlont());
 
         //ƒiƒCƒt‚Æ“G‚Æ‚Ì“–‚½‚è”»’è
         if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
@@ -492,7 +512,7 @@ void Stage::Update_01()
     if (player->death == 1)
     {
         se->DiscoverSE_voice();
-        over = 1;
+        //over = 1;
     }
 }
 

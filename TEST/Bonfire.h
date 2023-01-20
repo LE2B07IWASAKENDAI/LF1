@@ -27,6 +27,7 @@ private:
 
 	//グラフィックハンドル
 	int gHandle = 0;
+	int ghandle_light = 0;
 
 };
 

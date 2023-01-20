@@ -135,12 +135,12 @@ void Enemy::Horizon()
 	if (flont == 1)
 	{
 		Etexture = LoadGraph("Resources/Enemy/01_Enemy_R.png");
-		DrawBox(GetPosition_X(), position_Y, GetPosition_X() + 450, position_Y + 192, GetColor(255, 0, 0), true);
+		//DrawBox(GetPosition_X(), position_Y, GetPosition_X() + 450, position_Y + 192, GetColor(255, 0, 0), true);
 	}
 	else if (flont == 0)
 	{
 		Etexture = LoadGraph("Resources/Enemy/01_Enemy_L.png");
-		DrawBox(GetPosition_X() - 250, position_Y, GetPosition_X() + 192, position_Y + 192, GetColor(255, 0, 0), true);
+		//DrawBox(GetPosition_X() - 250, position_Y, GetPosition_X() + 192, position_Y + 192, GetColor(255, 0, 0), true);
 	}
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 

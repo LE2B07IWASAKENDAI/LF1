@@ -19,7 +19,7 @@ void Knife::Initialize()
 	vector_x = 15.0f;
 	vector_y = 1.05f;
 	front = 0;
-	stock = 10;
+	stock = 5;
 	knifeCounter->Initialize();
 }
 

@@ -11,6 +11,7 @@
 #include "Chair.h"
 #include "Bonfire.h"
 #include "Collision.h"
+#include "E_Light.h"
 
 
 class Stage
@@ -63,6 +64,7 @@ private:
 	std::vector<Vase*> vase;
 	std::vector<Bonfire*> bonfire;
 	std::vector<Chair*>chair;
+	E_Light* light;
 
 	Collision* collision = new Collision();
 
@@ -98,6 +100,8 @@ private:
 	std::vector<float>hidex_right;
 	std::vector<float>hidey_right;
 
+	float dark_X, dark_Y;
+
 	int ghandleOPD ;
 	int ghandleCLD ;
 	int ghandleCHR ;
@@ -105,6 +109,8 @@ private:
 	int ghandleHID_L;
 	int ghandleHID_R;
 	int ghandleBNF;
+	//‰e
+	int ghandleDRK;
 	
 	// ‰Ô•rƒtƒ‰ƒO
 	int BreakFlag = 0;
