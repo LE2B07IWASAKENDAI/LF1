@@ -95,7 +95,7 @@ int WINAPI WinMain(
         //ゲームロジック
         //裏画面を消す
         ClearDrawScreen();
-        //60FPSでの固定
+        //60FPSでの固定//16.66f
         dNextTime += 16.66f;
         if (dNextTime > GetNowCount())
         {

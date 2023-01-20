@@ -159,6 +159,7 @@
     <ClCompile Include="DebugClass.cpp" />
     <ClCompile Include="Chair.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="E_Light.cpp" />
     <ClCompile Include="knife.cpp" />
     <ClCompile Include="KnifeCounter.cpp" />
     <ClCompile Include="LandREnemy.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="DebugClass.h" />
     <ClInclude Include="Chair.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="E_Light.h" />
     <ClInclude Include="knife.h" />
     <ClInclude Include="KnifeCounter.h" />
     <ClInclude Include="LandREnemy.h" />

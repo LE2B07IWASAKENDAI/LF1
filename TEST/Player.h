@@ -73,7 +73,7 @@ private:
 
 	int keyCounter_knife = 0;//キーを押した瞬間を取るためのカウンター
 	int keyCounter = 0;//キーを押した瞬間を取るためのカウンター
-	int size_x = 200, size_y = 200;//プレイヤー画像のサイズ(11/10に津村が追加 ※後で消去)
+	int size_x = 200, size_y = 200;//プレイヤー画像のサイズ
 	float position_X = 0.0f;   //X座標
 	float position_Y = 576.0f; //Y座標
 	float speed = 22.5f;        //移動速度

@@ -78,7 +78,7 @@ void Knife::Dead()
 		is_throw = -1;
 		stock = 0;
 	}
-	knifeCounter->Delete();
+	knifeCounter->DisCount();
 
 }
 
@@ -107,6 +107,8 @@ void Knife::Update()
 	{
 		heidCool = 0;
 	}
+
+	knifeCounter->AlwaysDraw();
 
 	if (is_throw != 0) {
 		if (counter % 10 != 0) {
