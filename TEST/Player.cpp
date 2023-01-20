@@ -201,11 +201,11 @@ void Player::Draw()
 	}
 	else if(hide == 1)
 	{
-		DrawGraph(return_Positin, position_Y, hide_ghandleL, TRUE);
+		DrawGraph(return_Positin, position_Y - 90, hide_ghandleL, TRUE);
 	}
 	else if(hide == 2)
 	{
-		DrawGraph(return_Positin, position_Y, hide_ghandleR, TRUE);
+		DrawGraph(return_Positin, position_Y - 90, hide_ghandleR, TRUE);
 	}
 }
 
@@ -273,7 +273,6 @@ void Player::Hidding_L()
 			SetkeyPermission(false);
 		}
 	}
-
 }
 
 void Player::Hidding_Door()
@@ -344,8 +343,8 @@ void Player::LoadTexture()
 {
 	ptexture_R = LoadGraph("Resources/Player/Player_R.png");
 	ptexture_L = LoadGraph("Resources/Player/Player_L.png");
-	hide_ghandleL = LoadGraph("Resources/Player/Assassin_Squat_L.png");
-	hide_ghandleR = LoadGraph("Resources/Player/Assassin_Squat_R.png");
+	hide_ghandleR = LoadGraph("Resources/Player/Assassin_Squat_L.png");
+	hide_ghandleL = LoadGraph("Resources/Player/Assassin_Squat_R.png");
 	LoadDivGraph("Resources/Player/playerAni_R.png", 6, 6, 1, 192, 192, walk_R);
 	LoadDivGraph("Resources/Player/playerAni_L.png", 6, 6, 1, 192, 192, walk_L);
 }

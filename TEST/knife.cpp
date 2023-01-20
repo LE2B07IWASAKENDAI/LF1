@@ -14,7 +14,6 @@ void Knife::Initialize()
 {
 	LoadTexture();
 	is_throw = 0;
-	life = 30;
 	position_X = 0;
 	position_Y = 0;
 	vector_x = 15.0f;
@@ -57,7 +56,6 @@ void Knife::Throw()
 	}
 
 	//生存時間を減らす
-	life--;
 	distance = position_X - position;
 	
 }
@@ -66,7 +64,6 @@ void Knife::Dead()
 {
 	//リセット
 	//ライフ
-	life = 20;
 	position = 0.0f;
 	distance = 0.0f;
 	//投げるフラグ
@@ -91,8 +88,6 @@ void Knife::Update()
 	counter++;
 	if (is_throw == 1) {
 		Throw();
-		//lifeが0以上なら描画それ以外は死亡処理
-		/*life >= 0 ? Draw() : Dead();*/
 		if (front == 0)
 		{
 			distance >= point ? Dead() : Draw();

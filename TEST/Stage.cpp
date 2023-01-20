@@ -96,21 +96,25 @@ void Stage::Release()
         //コンテナのサイズまでメモリを解放
         enemy.shrink_to_fit();
     }
+
     for (int i = 0; i < stop_enemy.size(); i++) {
         stop_enemy.clear();
         //コンテナのサイズまでメモリを解放
         stop_enemy.shrink_to_fit();
     }
+
     for (int i = 0; i < vase.size(); i++) {
         vase.clear();
         //コンテナのサイズまでメモリを解放
         vase.shrink_to_fit();
     }
+
     for (int i = 0; i < chair.size(); i++) {
         chair.clear();
         //コンテナのサイズまでメモリを解放
         chair.shrink_to_fit();
     }
+
     for (int i = 0; i < bonfire.size(); i++) {
         bonfire.clear();
         //コンテナのサイズまでメモリを解放

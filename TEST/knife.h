@@ -66,8 +66,8 @@ private:
 
 	float position = 0.0f; //投げた瞬間の座標補間
 	float distance = 0.0f; //飛距離
-	float point = 170.0f;
-	float _point = -170.0f;
+	float point = 255.0f;
+	float _point = -255.0f;
 	int heidCool = 0;
 
 	//ナイフ点滅カウンター
