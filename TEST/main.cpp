@@ -2,6 +2,7 @@
 
 #include "Title_main.h"
 #include "Stage.h"
+#include "FPSControl.h"
 
 
 
@@ -88,19 +89,15 @@ int WINAPI WinMain(
     //クラス呼び出し
     Stage* stage = new Stage();
     Title_main* title = new Title_main();
-
+    FPSControl* fps = new FPSControl();
+    fps->Initialize(60.0f, 800);
 
     while (1)
     {
         //ゲームロジック
         //裏画面を消す
         ClearDrawScreen();
-        //60FPSでの固定//16.66f
-        dNextTime += 16.66f;
-        if (dNextTime > GetNowCount())
-        {
-            WaitTimer((int)dNextTime - GetNowCount());
-        }
+      
 
 
 
@@ -414,12 +411,10 @@ int WINAPI WinMain(
 
 #pragma endregion
 
+        fps->Wait();
+        fps->Draw();
         ScreenFlip();
-
         //ゲームロジック
-
-        WaitTimer(20);
-
         if (ProcessMessage() == -1)break;
         if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)break;
         

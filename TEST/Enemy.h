@@ -75,6 +75,11 @@ private:
 	//停止時間のカウント
 	int count = 0;
 
+	//アニメーション
+	int walk_L[6];
+	int walk_R[6];
+	int walk_indec = -1;
+
 	//生成された時の座標
 	float before_position_X;
 	//初期位置と、現在位置との座標差

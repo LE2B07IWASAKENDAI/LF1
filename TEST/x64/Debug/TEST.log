@@ -1,2 +1,20 @@
-﻿  KnifeCounter.cpp
-  TEST.vcxproj -> C:\後期チーム卒業制作_No11\TEST\x64\Debug\TEST.exe
+﻿  FPSControl.cpp
+D:\FL1\TEST\FPSControl.cpp(14,19): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+  main.cpp
+D:\FL1\TEST\Timer.h(17,16): warning C4244: '初期化中': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
+D:\FL1\TEST\Timer.h(18,14): warning C4244: '初期化中': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
+D:\FL1\TEST\Timer.h(19,18): warning C4244: '初期化中': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
+D:\FL1\TEST\Timer.h(14,32): warning C4244: 'return': 'DWORD' から 'float' への変換です。データが失われる可能性があります。
+D:\FL1\TEST\MapChip.h(6,1): warning C4005: 'MAP_WIDTH': マクロが再定義されました。
+D:\FL1\TEST\Title_map.h(7): message : 'MAP_WIDTH' の以前の定義を確認してください
+D:\FL1\TEST\MapChip.h(9,1): warning C4005: 'MAP_COUNT': マクロが再定義されました。
+D:\FL1\TEST\Title_map.h(10): message : 'MAP_COUNT' の以前の定義を確認してください
+D:\FL1\TEST\knife.h(2,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+D:\FL1\TEST\knife.h(6,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+D:\FL1\TEST\Vase.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+D:\FL1\TEST\Vase.h(4,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+D:\FL1\TEST\Chair.h(2,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+D:\FL1\TEST\main.cpp(386,36): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+D:\FL1\TEST\main.cpp(386,23): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  コードを生成中...
+  TEST.vcxproj -> D:\FL1\TEST\x64\Debug\TEST.exe

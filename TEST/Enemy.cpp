@@ -27,10 +27,17 @@ void Enemy::Movement()
 	if (flont == 0)
 	{
 		vector += speed_;
+		walk_indec++;
 	}
 	else if(flont == 1)
 	{
 		vector += speed;
+		walk_indec++;
+	}
+
+	if (walk_indec > 5)
+	{
+		walk_indec = 0;
 	}
 
 	position_X += vector;
@@ -51,6 +58,7 @@ void Enemy::Movement()
 			{
 				speed = 0;
 				speed_ = 0;
+				walk_indec = -1;
 			}
 			else if (count >= 151)
 			{
@@ -58,6 +66,7 @@ void Enemy::Movement()
 				speed_ = -5;
 				count = 0;
 				flont = 1;
+				walk_indec++;
 			}
 		}
 		else if (movement_position_X >= 1000)
@@ -68,6 +77,7 @@ void Enemy::Movement()
 			{
 				speed = 0;
 				speed_ = 0;
+				walk_indec = -1;
 			}
 			else if (count >= 151)
 			{
@@ -75,6 +85,7 @@ void Enemy::Movement()
 				speed_ = -5;
 				count = 0;
 				flont = 0;
+				walk_indec++;
 			}
 		}
 		break;
@@ -161,13 +172,27 @@ void Enemy::Update()
 void Enemy::LoadTexture()
 {
 	Etexture = LoadGraph("Resources/Enemy/01_Enemy_R.png");
+	LoadDivGraph("Resources/Enemy/Yakuza_Animation_R.png", 6, 6, 1, 192, 192, walk_R);
+	LoadDivGraph("Resources/Enemy/Yakuza_Animation_L.png", 6, 6, 1, 192, 192, walk_L);
 }
 
 void Enemy::Draw()
 {
 	if (GetDeath() == 0) {
-		Horizon();
-		DrawGraph(position_X, position_Y, Etexture, TRUE);
+		if (walk_indec == -1)
+		{
+			Horizon();
+			DrawGraph(position_X, position_Y, Etexture, TRUE);
+		}
+		else if(flont == 1)
+		{
+			DrawGraph(position_X, position_Y, walk_R[walk_indec], TRUE);
+		}
+		else if(flont == 0)
+		{
+			DrawGraph(position_X, position_Y, walk_L[walk_indec], TRUE);
+		}
+		
 	}
 	DebugLog();
 }
