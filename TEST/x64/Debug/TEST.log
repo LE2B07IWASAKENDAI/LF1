@@ -1,20 +1,36 @@
-﻿  FPSControl.cpp
-D:\FL1\TEST\FPSControl.cpp(14,19): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-  main.cpp
-D:\FL1\TEST\Timer.h(17,16): warning C4244: '初期化中': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\Timer.h(18,14): warning C4244: '初期化中': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\Timer.h(19,18): warning C4244: '初期化中': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\Timer.h(14,32): warning C4244: 'return': 'DWORD' から 'float' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\MapChip.h(6,1): warning C4005: 'MAP_WIDTH': マクロが再定義されました。
-D:\FL1\TEST\Title_map.h(7): message : 'MAP_WIDTH' の以前の定義を確認してください
-D:\FL1\TEST\MapChip.h(9,1): warning C4005: 'MAP_COUNT': マクロが再定義されました。
-D:\FL1\TEST\Title_map.h(10): message : 'MAP_COUNT' の以前の定義を確認してください
-D:\FL1\TEST\knife.h(2,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-D:\FL1\TEST\knife.h(6,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-D:\FL1\TEST\Vase.h(3,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-D:\FL1\TEST\Vase.h(4,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-D:\FL1\TEST\Chair.h(2,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-D:\FL1\TEST\main.cpp(386,36): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\FL1\TEST\main.cpp(386,23): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  コードを生成中...
-  TEST.vcxproj -> D:\FL1\TEST\x64\Debug\TEST.exe
+﻿  Player.cpp
+C:\Users\K019G1412\Desktop\FL1\TEST\knife.h(2,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\Users\K019G1412\Desktop\FL1\TEST\Timer.h(17,16): warning C4244: '初期化中': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Timer.h(18,14): warning C4244: '初期化中': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Timer.h(19,18): warning C4244: '初期化中': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Timer.h(14,32): warning C4244: 'return': 'DWORD' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\knife.h(6,10): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(132,43): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(132,33): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(136,43): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(136,33): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(145,24): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(145,16): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(149,24): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(149,16): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(157,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(157,16): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(161,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(161,16): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(172,43): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(172,33): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(176,43): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(176,33): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(184,24): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(184,16): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(188,24): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(188,16): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(196,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(196,16): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(200,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(200,16): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(209,40): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(209,13): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(213,40): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K019G1412\Desktop\FL1\TEST\Player.cpp(213,13): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  TEST.vcxproj -> C:\Users\K019G1412\Desktop\FL1\TEST\x64\Debug\TEST.exe

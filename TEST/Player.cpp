@@ -61,6 +61,12 @@ void Player::Update()
 		walk_index = 0;
 	}
 
+	//¶’[ˆÚ“®§ŒÀ
+	if (position_X < 0)
+	{
+		position_X = 0;
+	}
+
 
 	//‰B‚ê‚Ä‚¢‚éŠÔ‚Ís“®§ŒÀ
 	if (hide == 1 || hide == 2 || hide == 3) {
