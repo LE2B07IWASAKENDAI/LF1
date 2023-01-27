@@ -28,6 +28,8 @@ private:
 	int walk_R[10];
 	int walk_L[10];
 	int walk_index = 0;
+	int anime_time = 0;
+	int anime_max = 2;
 
 	float witdh = 1800.0f;
 

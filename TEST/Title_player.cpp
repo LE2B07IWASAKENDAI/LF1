@@ -18,6 +18,7 @@ void Title_player::Initialize()
 	pattern_Nuber = 0;
 	walk_index = 0;
 	direction = 0;
+	anime_time = 0;
 }
 
 void Title_player::Update()
@@ -101,7 +102,13 @@ void Title_player::LoadTexture()
 
 void Title_player::Animation()
 {
-	walk_index++;
+	
+	anime_time++;
+	if (anime_time > anime_max)
+	{
+		anime_time = 0;
+		walk_index++;
+	}
 
 	if (walk_index > 5)
 	{

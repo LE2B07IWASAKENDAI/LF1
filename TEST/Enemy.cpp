@@ -14,6 +14,7 @@ void Enemy::Initialize()
 	count = 0;
 	flont = 0;
 	death = 0;
+	anime_time = 0;
 	Mode = Normal;
 
 //オブジェクト生成
@@ -27,12 +28,23 @@ void Enemy::Movement()
 	if (flont == 0)
 	{
 		vector += speed_;
-		walk_indec++;
+		anime_time++;
+		if (anime_time > anime_max)
+		{
+			walk_indec++;
+			anime_time = 0;
+		}
+		
 	}
 	else if(flont == 1)
 	{
 		vector += speed;
-		walk_indec++;
+		anime_time++;
+		if (anime_time > anime_max)
+		{
+			walk_indec++;
+			anime_time = 0;
+		}
 	}
 
 	if (walk_indec > 5)

@@ -79,6 +79,8 @@ private:
 	int walk_L[6];
 	int walk_R[6];
 	int walk_indec = -1;
+	int anime_time = 0;
+	int anime_max = 5;
 
 	//¶¬‚³‚ê‚½‚ÌÀ•W
 	float before_position_X;
