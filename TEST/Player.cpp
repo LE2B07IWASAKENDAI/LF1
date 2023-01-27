@@ -110,7 +110,6 @@ void Player::Update()
 		knife->Dead();
 	}
 
-
 	SetKnifePos(knife->GetPosition());
 	hitFlag = knife->Getis_throw();
 }
@@ -202,16 +201,22 @@ void Player::Draw()
 				}
 			}
 		}
-
 		SetkeyPermission(false);
 	}
+
+	//R•ûŒü‚É‰B‚ê‚Ä‚¢‚é
 	else if(hide == 1)
 	{
-		DrawGraph(return_Positin, position_Y - 90, hide_ghandleL, TRUE);
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 80);
+		DrawGraph(return_Positin - 45, position_Y - 90, hide_ghandleL, TRUE);
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	}
+	//L•ûŒü‚É‰B‚ê‚Ä‚¢‚é
 	else if(hide == 2)
 	{
-		DrawGraph(return_Positin, position_Y - 90, hide_ghandleR, TRUE);
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 80);
+		DrawGraph(return_Positin + 45, position_Y - 90, hide_ghandleR, TRUE);
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	}
 }
 
