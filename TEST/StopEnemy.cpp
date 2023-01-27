@@ -21,25 +21,23 @@ void StopEnemy::Initialize()
 	//‰¼À•W(Œˆ‚ß‘Å‚¿)
 	//position_X = 500;
 	//position_Y = 500;
+	light = new E_Light();
+	light->Initialize();
 }
 
 void StopEnemy::Horizon()
 {
-	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);
+	//SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);
 
 	if (flont == 1)
 	{
 		StopEtexture = LoadGraph("Resources/Enemy/Yakuza2Light_R.png");
-		//DrawBox(GetPosition_X(), position_Y, GetPosition_X() + 450, position_Y + 192, GetColor(255, 0, 0), true);
-		DrawBox(position_X, position_Y, position_X + 450, position_Y + 192, GetColor(255, 0, 0), true);
 	}
 	else if (flont == 0)
 	{
 		StopEtexture = LoadGraph("Resources/Enemy/Yakuza2Light_L.png");
-		//DrawBox(GetPosition_X() - 250, position_Y, GetPosition_X() + 192, position_Y + 192, GetColor(255, 0, 0), true);
-		DrawBox(position_X - 250, position_Y, position_X + 192, position_Y + 192, GetColor(255, 0, 0), true);
 	}
-	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+	//SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
 }
 
@@ -129,6 +127,7 @@ void StopEnemy::Monitoring()
 			Mode = Normal;
 		}
 	}
+	light->Update(GetPosition_X(), Getposition_Y(), GetFlont());
 }
 
 void StopEnemy::Update()
@@ -148,6 +147,7 @@ void StopEnemy::Draw()
 	if (GetDeath() == 0) {
 		Horizon();
 		DrawGraph(position_X, position_Y, StopEtexture, TRUE);
+		light->Draw();
 	}
 	//DebugLog();
 }

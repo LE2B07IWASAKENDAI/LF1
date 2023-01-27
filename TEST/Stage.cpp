@@ -107,6 +107,12 @@ void Stage::Release()
         stop_enemy.shrink_to_fit();
     }
 
+    for (int i = 0; i < bonfire.size(); i++) {
+        bonfire.clear();
+        //コンテナのサイズまでメモリを解放
+        bonfire.shrink_to_fit();
+    }
+
     for (int i = 0; i < vase.size(); i++) {
         vase.clear();
         //コンテナのサイズまでメモリを解放
@@ -119,11 +125,6 @@ void Stage::Release()
         chair.shrink_to_fit();
     }
 
-    for (int i = 0; i < bonfire.size(); i++) {
-        bonfire.clear();
-        //コンテナのサイズまでメモリを解放
-        bonfire.shrink_to_fit();
-    }
 }
 
 void Stage::Generate(int map)
@@ -214,8 +215,6 @@ void Stage::Generate(int map)
     }
 
 
-    light = new E_Light();
-    light->Initialize();
 }
 
 void Stage::Generate2(int map)
@@ -232,6 +231,7 @@ void Stage::Generate2(int map)
     SetItem_28(sty_eposx, sty_eposy, mapChip, 28);
     SetItem_28(vasex, vasey, mapChip, 10);
     SetItem_28(vasex, vasey, mapChip, 18);
+    SetItem_28(bonfirex, bonfirey, mapChip, 17);
 
     //エネミー生成
     //enemy push_backをしていく
@@ -294,10 +294,6 @@ void Stage::Generate2(int map)
     for (int i = 0; i < chair.size(); i++) {
         chair[i]->Initialize();
     }
-
-    light = new E_Light();
-    light->Initialize();
-
 }
 
 void Stage::SetMap(int map)
@@ -340,16 +336,22 @@ void Stage::Drow()
 
     player->Draw();
 
-    /*敵の懐中電灯描画処理*/
-    light->Draw();
 
     /*敵の描画処理*/
     for (int i = 0; i < enemy.size(); i++) {
         enemy[i]->Draw();
+        /*敵の懐中電灯描画処理*/
+        if (enemy[i]->GetDeath() == 0) {
+        }
     }
+
     /*敵の描画処理*/
     for (int i = 0; i < stop_enemy.size(); i++) {
         stop_enemy[i]->Draw();
+        /*敵の懐中電灯描画処理*/
+        //if (stop_enemy[i]->GetDeath() == 0) {
+        //    light->Draw();
+        //}
     }
     //かがり火の描画
     for (int i = 0; i < bonfire.size(); i++) {
@@ -391,7 +393,6 @@ void Stage::Update_01()
     for (int i = 0; i < enemy.size(); i++) {
         enemy[i]->Update();
 
-        light->Update(enemy[i]->GetPosition_X(), enemy[i]->Getposition_Y(), enemy[i]->GetFlont());
 
         //ナイフと敵との当たり判定
         if (collision->KnifetoEnemy(player->GetKnifePos(), enemy[i]->GetPosition_X())) {
@@ -524,6 +525,12 @@ void Stage::Update_02()
     /*敵の位置挿入*/
     for (int i = 0; i < enemy.size(); i++) {
         enemy[i]->Set_position(eposx[i] + mapChip->GetScroll(), eposy[i] + mapChip->GetScroll_Y());
+    }
+
+    if (bonfire.size() != 0) {
+        for (int i = 0; i < bonfire.size(); i++) {
+            bonfire[i]->SetPosition(bonfirex[i] + mapChip->GetScroll(), bonfirey[i] + mapChip->GetScroll_Y());
+        }
     }
     /*停止中の敵の位置挿入*/
     for (int i = 0; i < stop_enemy.size(); i++) {

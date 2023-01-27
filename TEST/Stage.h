@@ -64,7 +64,6 @@ private:
 	std::vector<Vase*> vase;
 	std::vector<Bonfire*> bonfire;
 	std::vector<Chair*>chair;
-	E_Light* light;
 
 	Collision* collision = new Collision();
 

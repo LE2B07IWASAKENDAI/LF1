@@ -5,6 +5,7 @@
 #include"knife.h"
 #include"Collision.h"
 #include"Vase.h"
+#include"E_Light.h"
 //#include"MapChip.h"
 
 using namespace std;
@@ -93,4 +94,5 @@ private:
 	Knife* knife;
 	Collision* collision;
 	Vase* vase;
+	E_Light* light;
 };

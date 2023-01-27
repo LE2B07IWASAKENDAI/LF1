@@ -98,9 +98,6 @@ int WINAPI WinMain(
         //裏画面を消す
         ClearDrawScreen();
       
-
-
-
         //ゲームループ
         switch (GameState)
         {
@@ -212,9 +209,9 @@ int WINAPI WinMain(
         case GamePlay4:
 
 #pragma region Stage4
+            stage->Update_01();
             //描画
             stage->Drow();
-            stage->Update_01();
 
             if (stage->SetGameOver() == 1)
             {
@@ -237,16 +234,16 @@ int WINAPI WinMain(
         case GamePlay5:
 
 #pragma region Stage5
+            stage->Update_02();
             //描画
             stage->Drow();
-            stage->Update_02();
 
             if (stage->SetGameOver() == 1)
             {
                 GameState = GameOver;
             }
 
-            //ステージ2へ
+            //ステージ6へ
             if (stage->SetGool() == 1)
             {
                 stage->Release();
@@ -262,9 +259,9 @@ int WINAPI WinMain(
         case GamePlay6:
 
 #pragma region Stage6
+            stage->Update_02();
             //描画
             stage->Drow();
-            stage->Update_02();
 
             if (stage->SetGameOver() == 1)
             {
@@ -288,9 +285,9 @@ int WINAPI WinMain(
         case GamePlay7:
 
 #pragma region Stage7
+            stage->Update_02();
             //描画
             stage->Drow();
-            stage->Update_02();
 
             if (stage->SetGameOver() == 1)
             {

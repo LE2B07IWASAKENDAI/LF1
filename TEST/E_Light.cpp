@@ -32,18 +32,17 @@ void E_Light::Update(float enemy_x, float enemy_y,int flont)
 
 void E_Light::Draw()
 {
-	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 150);
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 150);
 
-	if (flont == 0) {
-		//¶Œü‚«
-		DrawGraph(position_X - 150, position_Y + 30, ghandle, true);
-	}
-	else if(flont == 1)
-	{
-		//‰EŒü‚«
-		DrawGraph(position_X + 135, position_Y + 30, ghandle, true);
-	}
+		if (flont == 0) {
+			//¶Œü‚«
+			DrawGraph(position_X - 150, position_Y + 30, ghandle, true);
+		}
+		else if (flont == 1)
+		{
+			//‰EŒü‚«
+			DrawGraph(position_X + 135, position_Y + 30, ghandle, true);
+		}
 
-	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
-
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 }

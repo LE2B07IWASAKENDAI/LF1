@@ -1,6 +1,7 @@
 #pragma once
 
 #include"DxLib.h"
+#include"E_Light.h"
 
 class StopEnemy
 {
@@ -74,4 +75,7 @@ private:
 	float count = 0;
 	//チェック用カウント
 	float checkCount = 0;
+
+private:
+	E_Light* light;
 };

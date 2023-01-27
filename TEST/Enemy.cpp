@@ -20,6 +20,8 @@ void Enemy::Initialize()
 //オブジェクト生成
 	collision = new Collision();
 	vase = new Vase();
+	light = new E_Light();
+	light->Initialize();
 }
 
 void Enemy::Movement()
@@ -149,6 +151,7 @@ void Enemy::Movement()
 		}
 		break;
 	}
+	light->Update(GetPosition_X(), Getposition_Y(), flont);
 }
 
 void Enemy::Horizon()
@@ -204,7 +207,7 @@ void Enemy::Draw()
 		{
 			DrawGraph(position_X, position_Y, walk_L[walk_indec], TRUE);
 		}
-		
+		light->Draw();
 	}
 	DebugLog();
 }
