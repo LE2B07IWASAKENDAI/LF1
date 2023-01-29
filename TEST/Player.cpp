@@ -40,14 +40,25 @@ void Player::Update()
 				position_X = position_X - speed;
 				rl = 1;
 				stop_position = position_X;
-				walk_index++;
+				anime_time++;
+				if (anime_time > anime_max)
+				{
+					walk_index++;
+					anime_time = 0;
+				}
+				
 			}
 			else if (CheckHitKey(KEY_INPUT_D))
 			{
 				position_X = position_X + speed;
 				rl = 0;
 				stop_position = position_X;
-				walk_index++;
+				anime_time++;
+				if (anime_time > anime_max)
+				{
+					walk_index++;
+					anime_time = 0;
+				}
 			}
 		}
 		else

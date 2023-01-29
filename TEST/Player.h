@@ -88,6 +88,8 @@ private:
 	int max_index = 6;
 	int walk_index = -1;
 	float stop_position = 0.0f;
+	int anime_time = 0;
+	int anime_max = 5;
 
 	float return_Positin = 0.0f;
 	float center = 708.0f;//‰æ–Ê’†S
