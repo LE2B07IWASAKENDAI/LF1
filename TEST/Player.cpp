@@ -33,7 +33,7 @@ void Player::Initialize()
 void Player::Update()
 {
 	//移動処理(隠れていないとき)
-	if (!GetkeyPermission()) {
+	if (!GetkeyPermission() && death == 0) {
 		if (CheckHitKey(KEY_INPUT_A) || CheckHitKey(KEY_INPUT_D)) {
 			if (CheckHitKey(KEY_INPUT_A))
 			{
@@ -92,7 +92,7 @@ void Player::Update()
 ////////////////ナイフ投げ処理////////////////////////////////
 
 	//エンター押下時　ナイフ位置、トリガー更新
-	if (CheckHitKey(KEY_INPUT_RETURN) == 1 && hide == 0)
+	if (CheckHitKey(KEY_INPUT_RETURN) == 1 && hide == 0 && death == 0)
 	{
 		keyCounter_knife++;
 	}
@@ -243,7 +243,7 @@ void Player::SetHide(bool sethide)
 
 void Player::Hidding_R()
 {
-	if (heidCool == 0) {
+	if (heidCool == 0 && death == 0) {
 		//隠れる
 		if (CheckHitKey(KEY_INPUT_LSHIFT))
 		{
@@ -271,7 +271,7 @@ void Player::Hidding_R()
 
 void Player::Hidding_L()
 {
-	if (heidCool == 0) {
+	if (heidCool == 0 && death == 0) {
 		//隠れる
 		if (CheckHitKey(KEY_INPUT_LSHIFT))
 		{
@@ -299,7 +299,7 @@ void Player::Hidding_L()
 
 void Player::Hidding_Door()
 {
-	if (heidCool == 0) {
+	if (heidCool == 0 && death == 0) {
 		//隠れる
 		if (CheckHitKey(KEY_INPUT_LSHIFT))
 		{

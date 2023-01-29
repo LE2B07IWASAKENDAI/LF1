@@ -27,6 +27,8 @@ void Stage::Initialize()
     over = 0;
     BreakFlag = 0;
     gool = 0;
+    next_time = 0;
+    player_death = 0;
     
     dark_X = 0;
     dark_Y = 0;
@@ -510,10 +512,19 @@ void Stage::Update_01()
     }
 
     //ゲームオーバー画面へ遷移
-    if (player->death == 1)
+    if (player->death == 1 && player_death == 0 )
     {
         se->DiscoverSE_voice();
-        //over = 1;
+        player_death = 1;
+    }
+
+    if (player_death == 1)
+    {
+        next_time++;
+        if (next_time > next_max)
+        {
+            over = 1;
+        }
     }
 }
 
@@ -691,7 +702,16 @@ void Stage::Update_02()
     {
         //DrawFormatString(1607, 210, GetColor(255, 255, 255), "当たっている！！！");
         se->DiscoverSE_voice();
-        over = 1;
+        player_death = 1;
+    }
+
+    if (player_death == 1)
+    {
+        next_time++;
+        if (next_time > next_max)
+        {
+            over = 1;
+        }
     }
 }
 

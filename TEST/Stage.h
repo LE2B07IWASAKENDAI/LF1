@@ -110,6 +110,10 @@ private:
 	int ghandleBNF;
 	//‰e
 	int ghandleDRK;
+
+	int next_time = 0;
+	int next_max = 100;
+	int player_death = 0;
 	
 	// ‰Ô•rƒtƒ‰ƒO
 	int BreakFlag = 0;
