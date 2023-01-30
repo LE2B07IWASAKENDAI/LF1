@@ -142,6 +142,6 @@ float Knife::SetPosition(float x)
 
 void Knife::LoadTexture()
 {
-	knifetex[0] = LoadGraph("Resources/Player/ThrowingKnife.png");
-	knifetex[1] = LoadGraph("Resources/Player/ThrowingKnife_copy.png");
+	knifetex[0] = LoadGraph("Resources/Player/BeamSword.png");
+	knifetex[1] = LoadGraph("Resources/Player/BeamSwordCopy.png");
 }

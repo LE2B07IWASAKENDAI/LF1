@@ -36,7 +36,7 @@ void KnifeCounter::LoadTexture()
 	ghandle[4] = LoadGraph("Resources/Player/Number4.png");
 	ghandle[5] = LoadGraph("Resources/Player/Number5.png");
 
-	gh_knife = LoadGraph("Resources/Player/KnifeR.png");
+	gh_knife = LoadGraph("Resources/Player/BeamSwordCounter.png");
 	gh_x = LoadGraph("Resources/Player/x.png");
 }
 
