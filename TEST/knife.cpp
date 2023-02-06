@@ -126,8 +126,10 @@ void Knife::Update()
 
 void Knife::Draw()
 {	
+	SetDrawBlendMode(DX_BLENDMODE_ADD, 255);
 	//‰E•ûŒü
 	DrawRotaGraph(position_X, position_Y, 1.0f, PI * (1 / 4 * (float)direction), knifetex[front], TRUE);
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 0);
 }
 
 void Knife::Cariculate()

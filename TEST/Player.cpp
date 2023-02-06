@@ -27,7 +27,7 @@ void Player::Initialize()
 		//初期化
 		knife->Initialize();
 		hitFlag = 0;
-		diaspper_knife_trigger = 0;
+		//diaspper_knife_trigger = 0;
 }
 
 void Player::Update()
@@ -127,8 +127,6 @@ void Player::Update()
 
 void Player::Draw()
 {
-	//ナイフ更新処理
-	knife->Update();
 
 	//隠れている時以外は描画する
 	if (hide == 0 || !GetHide()) {
@@ -229,6 +227,10 @@ void Player::Draw()
 		DrawGraph(return_Positin + 45, position_Y - 90, hide_ghandleR, TRUE);
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	}
+
+	//ナイフ更新処理
+	knife->Update();
+
 }
 
 bool Player::GetHide()
