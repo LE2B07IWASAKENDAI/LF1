@@ -34,7 +34,7 @@ public:
 
 private:
 	//グラフィックハンドル
-	int gHandle[30];
+	int gHandle[31];
 
 	//隠れているかどうか
 	int hide; //1:隠れている　0:そうでない
@@ -98,6 +98,9 @@ public:
 	void DrawItem(int chipNumber,int drwaNumber);
 	//マップチップ描画
 	void DrawItem2(int chipNumber,int drwaNumber);
+
+	//マップチップ描画
+	void DrawItem2_(int chipNumber,int drwaNumber);
 
 	//マップスクロール
 	void Scroll(float position);
