@@ -27,6 +27,8 @@ public:
 	void Dead();
 	//毎フレーム更新
 	void Update();
+	void DeadAnime();
+	void DeadAnimeSet(float x, float y);
 
 	//画像読み込み
 	void LoadTexture();
@@ -38,6 +40,7 @@ public:
 /*Getter,Setter*/
 	//座標値
 	void Set_position(float position_x, float position_y);
+	void Set_map(float x);
 
 	float GetPosition_X() { return position_X; }
 	float Getposition_Y() { return position_Y; }
@@ -82,6 +85,21 @@ private:
 	int walk_indec = -1;
 	int anime_time = 0;
 	int anime_max = 5;
+
+	//死亡アニメーション
+	int death_anime = 0;
+	int death_indec = 0;
+	float death_x = 0.0f;
+	float death_y = 0.0f;
+	float death_X = 0.0f;
+	float death_Y = 0.0f;
+	float death_speedX = 0.1f;
+	float death_Xvector = 0;
+	float death_speedY = 0.5f;
+	float death_Yvector = 0;
+	int deathX_LR = 0;
+	float a = 100;
+
 
 	//生成された時の座標
 	float before_position_X;

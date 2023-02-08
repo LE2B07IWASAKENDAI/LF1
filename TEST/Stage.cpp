@@ -382,6 +382,7 @@ void Stage::Update_01()
     /*“G‚ÌXV*/
     for (int i = 0; i < eposx.size(); i++) {
         enemy[i]->Set_position(eposx[i] + mapChip->GetScroll(), eposy[i]);
+        enemy[i]->Set_map(mapChip->GetScroll());
     }
 
     /*~‚Ü‚Á‚Ä‚¢‚é“G‚ÌXV*/
@@ -536,6 +537,7 @@ void Stage::Update_02()
     /*“G‚ÌˆÊ’u‘}“ü*/
     for (int i = 0; i < enemy.size(); i++) {
         enemy[i]->Set_position(eposx[i] + mapChip->GetScroll(), eposy[i] + mapChip->GetScroll_Y());
+       
     }
 
     if (bonfire.size() != 0) {

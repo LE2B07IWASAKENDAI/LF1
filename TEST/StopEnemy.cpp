@@ -23,6 +23,12 @@ void StopEnemy::Initialize()
 	//position_Y = 500;
 	light = new E_Light();
 	light->Initialize();
+	death_indec = 0;
+	death_Xvector = 0;
+	death_Yvector = 0;
+	death_X = 0.0f;
+	death_Y = 0.0f;
+	a = 100;
 }
 
 void StopEnemy::Horizon()
@@ -130,24 +136,86 @@ void StopEnemy::Monitoring()
 	light->Update(GetPosition_X(), Getposition_Y(), GetFlont());
 }
 
+void StopEnemy::DeadAnime()
+{
+	if (death_Xvector > 5 && deathX_LR == 0)
+	{
+		deathX_LR = 1;
+	}
+	else if (death_Xvector < -5 && deathX_LR == 1)
+	{
+		deathX_LR = 0;
+	}
+
+	if (deathX_LR == 0)
+	{
+		death_Xvector += death_speedX;
+		death_X += death_speedX;
+		death_x += death_X;
+
+	}
+	else if (deathX_LR == 1)
+	{
+		death_Xvector -= death_speedX;
+		death_X -= death_speedX;
+		death_x -= death_X;
+	}
+
+	if (death_y < death_Yvector - 100)
+	{
+		death_indec = 0;
+	}
+
+	a--;
+	death_y -= death_speedY;
+}
+
+void StopEnemy::DeadAnimeSet(float x, float y)
+{
+	death_Yvector = y;
+	death_x = x;
+	death_y = y;
+}
+
 void StopEnemy::Update()
 {
 	if (GetDeath() == 0) {
 		Monitoring();
+		DeadAnimeSet(GetPosition_X(), Getposition_Y());
+	}
+	if (death == 1)
+	{
+
+		death_indec = 1;
+		death = 2;
+	}
+
+	if (death_indec == 1)
+	{
+
+		DeadAnime();
 	}
 }
 
 void StopEnemy::LoadTexture()
 {
 	StopEtexture = LoadGraph("Resources/Enemy/Yakuza2Light_R.png");
+	death_anime = LoadGraph("Resources/Enemy/Enemy2Dokuro.png");
 }
 
 void StopEnemy::Draw()
 {
 	if (GetDeath() == 0) {
 		Horizon();
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 		DrawGraph(position_X, position_Y, StopEtexture, TRUE);
 		light->Draw();
+	}
+
+	if (death_indec == 1)
+	{
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, a);
+		DrawGraph(death_x, death_y, death_anime, TRUE);
 	}
 	//DebugLog();
 }

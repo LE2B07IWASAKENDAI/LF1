@@ -19,6 +19,8 @@ public:
 	void Update();
 	//監視
 	void Monitoring();
+	void DeadAnime();
+	void DeadAnimeSet(float x, float y);
 
 	//画像読み込み
 	void LoadTexture();
@@ -75,6 +77,20 @@ private:
 	float count = 0;
 	//チェック用カウント
 	float checkCount = 0;
+
+	//死亡アニメーション
+	int death_anime = 0;
+	int death_indec = 0;
+	float death_x = 0.0f;
+	float death_y = 0.0f;
+	float death_X = 0.0f;
+	float death_Y = 0.0f;
+	float death_speedX = 0.1f;
+	float death_Xvector = 0;
+	float death_speedY = 0.5f;
+	float death_Yvector = 0;
+	int deathX_LR = 0;
+	float a = 100;
 
 private:
 	E_Light* light;
